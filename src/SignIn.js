@@ -56,7 +56,7 @@ class SignIn extends React.Component {
 
       email: '',
       password: '',
-      remember: false,
+      // remember: false,
 
     };
 
@@ -122,6 +122,7 @@ class SignIn extends React.Component {
           <FormControlLabel
             control={<Checkbox color="primary" />}
             label="Remember me"
+            name="remember"
             value={this.state.remember}
             onChange={this.handleChange}
           />
