@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: cintas--master
+build:
+  artifacts:
+  - image: react-test
+  tagPolicy:
+    gitCommit: {}
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/k8s_deploy.yaml

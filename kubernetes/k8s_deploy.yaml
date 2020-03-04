@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-frontend
+  namespace: react-frontend
+  labels:
+    istio-injection: enabled
+spec:
+  selector:
+    matchLabels:
+      app: react-frontend
+  template:
+    metadata:
+      namespace: react-frontend
+      labels:
+        app: react-frontend
+        istio-injection: enabled
+    spec:
+      containers:
+        - name: node-server
+          image: react-test
+          ports:
+          - containerPort: 80
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-frontend
+  namespace: react-frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: react-frontend
+  ports:
+    - port: 80
+      name: http
