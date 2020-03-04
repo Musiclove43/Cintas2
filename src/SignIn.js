@@ -15,8 +15,6 @@ import Container from '@material-ui/core/Container';
 import {Link} from "react-router-dom";
 import { useState } from "react";
 
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -52,6 +50,36 @@ const useStyles = theme => ({
 });
 
 class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      email: '',
+      password: '',
+      remember: false,
+
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    // alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+    console.log(this.state)
+
+  }
   render () {
   const { classes } = this.props;
       return (
@@ -64,7 +92,7 @@ class SignIn extends React.Component {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} method="POST" noValidate>
+        <form className={classes.form} method="POST" onSubmit={this.handleSubmit} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -75,6 +103,8 @@ class SignIn extends React.Component {
             name="email"
             autoComplete="email"
             autoFocus
+            value={this.state.email}
+            onChange={this.handleChange}
           />
           <TextField
             variant="outlined"
@@ -86,10 +116,14 @@ class SignIn extends React.Component {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={this.state.password}
+            onChange={this.handleChange}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox color="primary" />}
             label="Remember me"
+            value={this.state.remember}
+            onChange={this.handleChange}
           />
           <Button
             type="submit"
