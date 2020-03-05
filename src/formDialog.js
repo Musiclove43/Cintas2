@@ -1,11 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -21,30 +25,29 @@ export default function FormDialog() {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
+        Slide in alert dialog
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+          <DialogContentText id="alert-dialog-slide-description">
+            Let Google help apps determine location. This means sending anonymous location data to
+            Google, even when no apps are running.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Disagree
           </Button>
           <Button onClick={handleClose} color="primary">
-            Subscribe
+            Agree
           </Button>
         </DialogActions>
       </Dialog>

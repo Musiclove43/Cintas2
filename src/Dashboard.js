@@ -23,6 +23,15 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import Widgets from './Widget';
 import FormDialog from './formDialog';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+
+  useRouteMatch,
+  useParams,
+  browserHistory
+} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -172,9 +181,10 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+        <Route exact path="/about" component={Widgets}/>
+        <Route exact path="/about/widget" component={FormDialog}/>
 
-        <Widgets/>
-        <FormDialog/>
+
         </Container>
         <Copyright />
       </main>
