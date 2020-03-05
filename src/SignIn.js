@@ -12,24 +12,23 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import { useState } from "react";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+    {'Copyright © '}
+    <Link color="inherit" href="https://material-ui.com/">
+    Your Website
+    </Link>{' '}
+    {new Date().getFullYear()}
+    {'.'}
     </Typography>
   );
 }
 
 const useStyles = theme => ({
-
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -53,108 +52,130 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       email: '',
       password: '',
-      // remember: false,
-
+      remember: false,
+      redirect: false
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
   }
-
   handleSubmit(event) {
-    // alert('A name was submitted: ' + this.state.value);
+    alert('A name was submitted: ' + this.state);
+    this.setState({redirect: true});
     event.preventDefault();
-    console.log(this.state)
-
+    console.log(this.state);
+    // this.callGoogleVIsionApi()
   }
+
+  componentDidMount() {
+    fetch("http://rest.garmentvendor.app/user?username=test_user")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.items
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   render () {
-  const { classes } = this.props;
-      return (
-    <Container component="main" maxWidth="xs">
+    const { classes } = this.props;
+    if (this.state.redirect) {
+  return <Redirect push to="/about" />;
+}
+    return (
+      <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} method="POST" onSubmit={this.handleSubmit} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <FormControlLabel
-            control={<Checkbox color="primary" />}
-            label="Remember me"
-            name="remember"
-            value={this.state.remember}
-            onChange={this.handleChange}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+      <Avatar className={classes.avatar}>
+      <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+      Sign in
+      </Typography>
+      <form className={classes.form} method="POST" onSubmit={this.handleSubmit} noValidate>
+      <TextField
+      variant="outlined"
+      margin="normal"
+      required
+      fullWidth
+      id="email"
+      label="Email Address"
+      name="email"
+      autoComplete="email"
+      autoFocus
+      value={this.state.email}
+      onChange={this.handleChange}
+      />
+      <TextField
+      variant="outlined"
+      margin="normal"
+      required
+      fullWidth
+      name="password"
+      label="Password"
+      type="password"
+      id="password"
+      autoComplete="current-password"
+      value={this.state.password}
+      onChange={this.handleChange}
+      />
+      <FormControlLabel
+      control={<Checkbox color="primary" />}
+      label="Remember me"
+      name="remember"
+      value={this.state.remember}
+      onChange={this.handleChange}
+      />
+      <Button
+      type="submit"
+      fullWidth
+      variant="contained"
+      color="primary"
+      className={classes.submit}
 
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to={'/about'} href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
+      >
+      Sign In
+      </Button>
+      <Grid container>
+      <Grid item xs>
+      <Link to={'/about'} href="#" variant="body2">
+      Forgot password?
+      </Link>
+      </Grid>
+      <Grid item>
+      <Link href="#" to="/topics" variant="body2">
+      {"Don't have an account? Sign Up"}
+      </Link>
+      </Grid>
+      </Grid>
+      </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+      <Copyright />
       </Box>
-    </Container>
-  );
+      </Container>
+    );
   }
 }
 
