@@ -55,7 +55,9 @@ class SignIn extends React.Component {
       email: '',
       password: '',
       remember: false,
-      redirect: false
+      redirect: false,
+      isLoaded: false,
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -77,14 +79,15 @@ class SignIn extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://rest.garmentvendor.app/user?username=test_user")
+    fetch("https://rest.garmentvendor.app/user?username=test_user" )
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            items: result.items
-          });
+            items: result
+          })
+        console.log(this.state.items)
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -95,8 +98,11 @@ class SignIn extends React.Component {
             error
           });
         }
+
       )
+  // console.log(this.state.items.result);
   }
+
 
   render () {
     const { classes } = this.props;
