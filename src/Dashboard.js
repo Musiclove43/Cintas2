@@ -22,6 +22,8 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import Widgets from './Widget';
+import Inventory from './Inventory';
+import ControlledExpansionPanels from './Users'
 import FormDialog from './formDialog';
 import {
   BrowserRouter as Router,
@@ -182,8 +184,8 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>
-        <Route exact path="/about/widget" component={FormDialog}/>
-        <Route exact path="/about/users" component={Widgets}/>
+        <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
+        <Route exact path="/about/users" component={FormDialog}/>
 
 
         </Container>
