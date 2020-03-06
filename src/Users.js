@@ -1,110 +1,135 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Inventory from './Inventory';
+import Inventory from './Inventory'
+import Logo from './scrubShirt.jpg'
 
-const useStyles = makeStyles(theme => ({
+console.log(Logo); // /logo.84287d09.png
+
+
+const useStyles = makeStyles({
   root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-  expClass: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginBottom: 10
-  },
-}));
+    display: "flex",
+    flexDirection: "row",
+},
+spacing:{
+  marginRight: 15
+}
+});
 
-export default function ControlledExpansionPanels() {
+export default function ImgMediaCard() {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
 
   return (
-    <div className={classes.root}>
-    <Inventory/>
-      <ExpansionPanel className={classes.expClass} onChange={handleChange('panel1')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.heading}>General settings</Typography>
-          <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
+
+<div className={classes.root}>
+
+    <Card className={classes.spacing}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="200"
+          image={Logo}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Scrub Shirt
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography className={classes.heading}>Users</Typography>
-          <Typography className={classes.secondaryHeading}>
-            You are currently not an owner
+          <Typography variant="body2" color="textSecondary" component="p">
+            S, M, L, XL
           </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Edit
+        </Button>
+      </CardActions>
+    </Card>
+    <Card className={classes.spacing}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="200"
+          image={Logo}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Scrub Shirt
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.heading}>Advanced settings</Typography>
-          <Typography className={classes.secondaryHeading}>
-            Filtering has been entirely disabled for whole web server
+          <Typography variant="body2" color="textSecondary" component="p">
+            S, M, L, XL
           </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Edit
+        </Button>
+      </CardActions>
+    </Card>
+    <Card className={classes.spacing}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="200"
+          image={Logo}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Scrub Shirt
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography className={classes.heading}>Personal data</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
+          <Typography variant="body2" color="textSecondary" component="p">
+            S, M, L, XL
           </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Edit
+        </Button>
+      </CardActions>
+    </Card>
+    <Card className={classes.spacing}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="200"
+          image={Logo}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Scrub Shirt
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            S, M, L, XL
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Edit
+        </Button>
+      </CardActions>
+    </Card>
     </div>
+
+
+
+
   );
 }

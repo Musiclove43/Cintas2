@@ -27,15 +27,6 @@ export const mainListItems = (
     </ListItem>
     </NavLink>
 
-    <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/widget">
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText   primary="Inventory" />
-    </ListItem>
-    </NavLink>
-
     <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/users">
     <ListItem button>
       <ListItemIcon>
@@ -45,21 +36,30 @@ export const mainListItems = (
     </ListItem>
     </NavLink>
 
-    <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/">
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Configuration" />
-    </ListItem>
-    </NavLink>
-
     <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
       <ListItem to="/about/widget" button>
         <ListItemIcon>
           <HomeIcon />
         </ListItemIcon>
         <ListItemText primary="Locations" />
+      </ListItem>
+      </NavLink>
+
+      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/widget">
+      <ListItem button>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText   primary="Inventory" />
+      </ListItem>
+      </NavLink>
+
+      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/">
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Configuration" />
       </ListItem>
       </NavLink>
 
