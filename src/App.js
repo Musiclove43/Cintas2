@@ -19,6 +19,7 @@ export default function App() {
       <Route path="/about" component={Dashboard}/>
       <Route path="/about/widget" component={Dashboard}/>
       <Route path="/about/users" component={Dashboard}/>
+      <Route path="/about/location" component={Dashboard}/>
       <Route path="/topics" component={SignUp}/>
       <Route path="/" component={SignIn}/>
     </Switch>

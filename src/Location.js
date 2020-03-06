@@ -5,7 +5,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Inventory from './Inventory';
+import LocationCreate from './LocationCreate';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ControlledExpansionPanels() {
+export default function Location() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -37,7 +37,7 @@ export default function ControlledExpansionPanels() {
 
   return (
     <div className={classes.root}>
-    <Inventory/>
+    <LocationCreate/>
       <ExpansionPanel className={classes.expClass} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}

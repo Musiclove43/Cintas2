@@ -25,6 +25,7 @@ import Widgets from './Widget';
 import Inventory from './Inventory';
 import ControlledExpansionPanels from './Users'
 import FormDialog from './formDialog';
+import Location from './Location';
 import {
   BrowserRouter as Router,
   Switch,
@@ -186,6 +187,7 @@ export default function Dashboard() {
         <Route exact path="/about" component={Widgets}/>
         <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
         <Route exact path="/about/users" component={FormDialog}/>
+        <Route exact path="/about/locations" component={Location}/>
 
 
         </Container>
