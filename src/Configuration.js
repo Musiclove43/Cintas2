@@ -20,22 +20,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
+import Title from './Title';
 import Orders from './Orders';
-import Widgets from './Widget';
-import Inventory from './Inventory';
-import ControlledExpansionPanels from './Users'
-import FormDialog from './formDialog';
-import Location from './Location';
-import Configuration from './Configuration';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-
-  useRouteMatch,
-  useParams,
-  browserHistory
-} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -131,7 +117,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Configuration() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -143,58 +129,63 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
 
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-        <Route exact path="/about" component={Widgets}/>
-        <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
-        <Route exact path="/about/users" component={FormDialog}/>
-        <Route exact path="/about/locations" component={Location}/>
-        <Route exact path="/about/configurations" component={Configuration}/>
+          <Grid container spacing={3}>
 
+            <Grid item xs={6} md={3} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Title>Machine 1</Title>
 
-        </Container>
-        <Copyright />
-      </main>
-    </div>
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    Configure
+                  </Link>
+                </div>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} md={3} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Title>Machine 1</Title>
+
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    Configure
+                  </Link>
+                </div>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} md={3} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Title>Machine 1</Title>
+
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    Configure
+                  </Link>
+                </div>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} md={3} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Title>Machine 1</Title>
+
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    Configure
+                  </Link>
+                </div>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+          </Grid>
+
   );
 }

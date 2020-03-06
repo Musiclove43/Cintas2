@@ -44,13 +44,12 @@ export default function Location() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.heading}>General settings</Typography>
-          <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+          <Typography className={classes.heading}>St Joseph's Hospital</Typography>
+          <Typography className={classes.secondaryHeading}></Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
+            ADD ADMINS +
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -60,15 +59,14 @@ export default function Location() {
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
-          <Typography className={classes.heading}>Users</Typography>
+          <Typography className={classes.heading}>Denver Health</Typography>
           <Typography className={classes.secondaryHeading}>
-            You are currently not an owner
+
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
+            ADD ADMINS +
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -78,15 +76,14 @@ export default function Location() {
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
-          <Typography className={classes.heading}>Advanced settings</Typography>
+          <Typography className={classes.heading}>Intermountain Healthcare</Typography>
           <Typography className={classes.secondaryHeading}>
-            Filtering has been entirely disabled for whole web server
+
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
+          ADD ADMINS +
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

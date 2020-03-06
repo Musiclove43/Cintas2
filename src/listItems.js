@@ -54,7 +54,7 @@ export const mainListItems = (
       </ListItem>
       </NavLink>
 
-      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/">
+      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/configurations">
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
