@@ -183,6 +183,7 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>
         <Route exact path="/about/widget" component={FormDialog}/>
+        <Route exact path="/about/users" component={Widgets}/>
 
 
         </Container>

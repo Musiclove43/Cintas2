@@ -9,36 +9,47 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import {Link, Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
+
+
 
 export const mainListItems = (
   <div>
+  <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/">
     <ListItem to="/about/widget" button>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <Link to="/about/widget">
+    </NavLink>
+
+    <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/widget">
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary="Inventory" />
+      <ListItemText   primary="Inventory" />
     </ListItem>
-    </Link>
+    </NavLink>
+
+    <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/users">
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Users" />
     </ListItem>
+    </NavLink>
+
+    <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/widget">
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItem>
+    </NavLink>
 
   </div>
 );
