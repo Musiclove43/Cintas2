@@ -148,7 +148,7 @@ export default function Configuration() {
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
-                <Title>Machine 1</Title>
+                <Title>Machine 2</Title>
 
                 <div>
                   <Link color="primary" href="javascript:;">
@@ -161,7 +161,7 @@ export default function Configuration() {
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
-                <Title>Machine 1</Title>
+                <Title>Machine 3</Title>
 
                 <div>
                   <Link color="primary" href="javascript:;">
@@ -174,7 +174,7 @@ export default function Configuration() {
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
-                <Title>Machine 1</Title>
+                <Title>Machine 4</Title>
 
                 <div>
                   <Link color="primary" href="javascript:;">

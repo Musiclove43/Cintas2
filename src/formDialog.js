@@ -9,6 +9,9 @@ import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useState } from "react";
+
 
 
 
@@ -21,6 +24,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [email, setEmail] = useState('')
+  const [comment, setComment] = useState('')
+
+const handleSubmit = e => {
+  e.preventDefault();
+  // fetch(`https://hooks.zapier.com/hooks/catch/1239764/oo73gyz/`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({ email, comment }),
+  //   })
+  // if (!value) return;
+  // // addTodo(value);
+  // setValue("");
+  // console.log(data)
+  console.log(email, comment)
+};
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -57,13 +76,28 @@ export default function FormDialog() {
             Let Google help apps determine location. This means sending anonymous location data to
             Google, even when no apps are running.
           </DialogContentText>
+          <form method="POST" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+
           <Grid container spacing={3}>
           <Grid item xs={6} md={6} lg={6}>
+
+
+
           <TextField
           autoFocus
           margin="dense"
           id="name"
-          label="Email Address"
+          label="First Name"
+          type="email"
+          fullWidth
+          />
+          </Grid>
+          <Grid item xs={6} md={6} lg={6}>
+          <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Last Name"
           type="email"
           fullWidth
           />
@@ -76,6 +110,8 @@ export default function FormDialog() {
           label="Email Address"
           type="email"
           fullWidth
+          value={email}
+        onChange={e => setEmail(e.target.value)}
           />
           </Grid>
           <Grid item xs={6} md={6} lg={6}>
@@ -83,29 +119,24 @@ export default function FormDialog() {
           autoFocus
           margin="dense"
           id="name"
-          label="Email Address"
+          label="Password"
           type="email"
           fullWidth
+          value={comment}
+        onChange={e => setComment(e.target.value)}
           />
+
           </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-          <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Email Address"
-          type="email"
-          fullWidth
-          />
+
           </Grid>
-          </Grid>
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Agree
+          <Button onClick={handleClose} form="my-form-id" type="submit" color="primary">
+            Create
           </Button>
         </DialogActions>
       </Dialog>

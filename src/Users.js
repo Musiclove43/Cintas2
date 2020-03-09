@@ -28,7 +28,9 @@ export default function ImgMediaCard() {
 
   return (
 
+
 <div className={classes.root}>
+<Inventory/>
 
     <Card className={classes.spacing}>
       <CardActionArea>

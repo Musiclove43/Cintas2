@@ -59,7 +59,7 @@ export default function Inventory() {
     autoFocus
     margin="dense"
     id="name"
-    label="Email Address"
+    label="Title"
     type="email"
     fullWidth
     />
@@ -69,7 +69,7 @@ export default function Inventory() {
     autoFocus
     margin="dense"
     id="name"
-    label="Email Address"
+    label="Pick A Machine"
     type="email"
     fullWidth
     />
@@ -79,7 +79,7 @@ export default function Inventory() {
     autoFocus
     margin="dense"
     id="name"
-    label="Email Address"
+    label="Size"
     type="email"
     fullWidth
     />
@@ -89,7 +89,7 @@ export default function Inventory() {
     autoFocus
     margin="dense"
     id="name"
-    label="Email Address"
+    label="Stock #"
     type="email"
     fullWidth
     />
@@ -98,10 +98,10 @@ export default function Inventory() {
     </DialogContent>
     <DialogActions>
     <Button onClick={handleClose} color="primary">
-    Disagree
+    Cancel
     </Button>
     <Button onClick={handleClose} color="primary">
-    Agree
+    Create
     </Button>
     </DialogActions>
     </Dialog>
