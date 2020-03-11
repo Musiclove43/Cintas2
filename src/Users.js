@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import Inventory from './Inventory'
 import Logo from './scrubShirt.jpg'
 
-console.log(Logo); // /logo.84287d09.png
 
 
 const useStyles = makeStyles({

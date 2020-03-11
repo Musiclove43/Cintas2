@@ -10,10 +10,24 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import globalHook from 'use-global-hook';
 
 
 
+
+const initialState = {
+  email: '',
+};
+
+console.log(initialState)
+const actions = {
+  addToCounter: (store, email) => {
+    const newCounterValue = store.state.email + email;
+    store.setState({ email: email });
+  },
+};
+const useGlobal = globalHook(React, initialState, actions);
 
 
 // import Title from './Title';
@@ -23,22 +37,25 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = useState('')
-  const [comment, setComment] = useState('')
 
-const handleSubmit = e => {
-  e.preventDefault();
-  // fetch(`https://hooks.zapier.com/hooks/catch/1239764/oo73gyz/`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({ email, comment }),
-  //   })
-  // if (!value) return;
-  // // addTodo(value);
-  // setValue("");
-  // console.log(data)
-  console.log(email, comment)
-};
+
+  const [open, setOpen] = React.useState(false);
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('')
+  const [first, setFirst] = useState('')
+  const [last, setLast] = useState('')
+  const [globalState, globalActions] = useGlobal();
+
+
+
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    globalActions.addToCounter(email)
+
+    console.log(initialState)
+    console.log(globalState)
+  };
 
 
   const handleClickOpen = () => {
@@ -62,84 +79,88 @@ const handleSubmit = e => {
     </Button>
     </Grid>
     </Grid>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">{"CREATE USER"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
-          <form method="POST" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+    <Dialog
+    open={open}
+    TransitionComponent={Transition}
+    keepMounted
+    onClose={handleClose}
+    aria-labelledby="alert-dialog-slide-title"
+    aria-describedby="alert-dialog-slide-description"
+    >
+    <DialogTitle id="alert-dialog-slide-title">{"CREATE USER"}</DialogTitle>
+    <DialogContent>
+    <DialogContentText id="alert-dialog-slide-description">
+    Let Google help apps determine location. This means sending anonymous location data to
+    Google, even when no apps are running.
+    </DialogContentText>
+    <form  method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
 
-          <Grid container spacing={3}>
-          <Grid item xs={6} md={6} lg={6}>
+    <Grid container spacing={3}>
+    <Grid item xs={6} md={6} lg={6}>
 
 
 
-          <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="First Name"
-          type="email"
-          fullWidth
-          />
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-          <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Last Name"
-          type="email"
-          fullWidth
-          />
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-          <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Email Address"
-          type="email"
-          fullWidth
-          value={email}
-        onChange={e => setEmail(e.target.value)}
-          />
-          </Grid>
-          <Grid item xs={6} md={6} lg={6}>
-          <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Password"
-          type="email"
-          fullWidth
-          value={comment}
-        onChange={e => setComment(e.target.value)}
-          />
+    <TextField
+    autoFocus
+    margin="dense"
+    id="name"
+    label="First Name"
+    type="email"
+    fullWidth
+    value={first}
+    onChange={e => setFirst(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextField
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Last Name"
+    type="email"
+    fullWidth
+    value={last}
+    onChange={e => setLast(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextField
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Email Address"
+    type="email"
+    fullWidth
+    value={email}
+    onChange={e => setEmail(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextField
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Password"
+    type="email"
+    fullWidth
+    value={pass}
+    onChange={e => setPass(e.target.value)}
+    />
 
-          </Grid>
+    </Grid>
 
-          </Grid>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} form="my-form-id" type="submit" color="primary">
-            Create
-          </Button>
-        </DialogActions>
-      </Dialog>
+    </Grid>
+    </form>
+    </DialogContent>
+    <DialogActions>
+    <Button onClick={handleClose} color="primary">
+    Cancel
+    </Button>
+    <Button onClick={handleClose} form="my-form-id" type="submit" color="primary">
+    Create
+    </Button>
+    </DialogActions>
+    </Dialog>
     </div>
   );
 }
