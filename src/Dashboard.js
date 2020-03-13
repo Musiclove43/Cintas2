@@ -36,6 +36,12 @@ import {
   useParams,
   browserHistory
 } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import globalHook from 'use-global-hook'
+import useGlobal from "./store";
+
+
+
 
 
 function Copyright() {
@@ -131,8 +137,11 @@ const useStyles = makeStyles(theme => ({
     height: 240,
   },
 }));
+// const useGlobal = globalHook();
 
 export default function Dashboard() {
+  const [globalState, globalActions] = useGlobal();
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -142,6 +151,7 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
 
   return (
     <div className={classes.root}>
@@ -159,7 +169,9 @@ export default function Dashboard() {
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             St. Joseph's Hospital
+        {globalState.email}
           </Typography>
+
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />

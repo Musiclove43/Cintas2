@@ -12,22 +12,15 @@ import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { useState, useEffect } from "react";
 import globalHook from 'use-global-hook';
+import useGlobal from "./store";
 
 
 
 
-const initialState = {
-  email: '',
-};
 
-console.log(initialState)
-const actions = {
-  addToCounter: (store, email) => {
-    const newCounterValue = store.state.email + email;
-    store.setState({ email: email });
-  },
-};
-const useGlobal = globalHook(React, initialState, actions);
+
+
+
 
 
 // import Title from './Title';
@@ -53,7 +46,7 @@ export default function FormDialog() {
     e.preventDefault();
     globalActions.addToCounter(email)
 
-    console.log(initialState)
+
     console.log(globalState)
   };
 
