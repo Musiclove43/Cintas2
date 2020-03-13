@@ -20,7 +20,7 @@ import useGlobal from "./store";
 
 
 
-
+// console.log(globalState)
 
 
 // import Title from './Title';
