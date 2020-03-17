@@ -10,20 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 
-
-
-
-
-
-
-// console.log(globalState)
-
-
-// import Title from './Title';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -38,6 +28,7 @@ export default function FormDialog() {
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
   const [globalState, globalActions] = useGlobal();
+  // const forceUpdate = useCallback(() => updateState({}), []);
 
 
 
@@ -45,9 +36,11 @@ export default function FormDialog() {
   const handleSubmit = e => {
     e.preventDefault();
     globalActions.addToCounter(email)
+    // const [email, setEmail] = useState(globalState);
 
 
-    console.log(globalState)
+    console.log(globalState);
+
   };
 
 

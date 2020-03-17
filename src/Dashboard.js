@@ -23,8 +23,8 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import Widgets from './Widget';
 import Inventory from './Inventory';
-import ControlledExpansionPanels from './Users'
-import FormDialog from './formDialog';
+import ControlledExpansionPanels from './InventoryCreate'
+import Users from './Users';
 import Location from './Location';
 import Configuration from './Configuration';
 import {
@@ -169,7 +169,7 @@ export default function Dashboard() {
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             St. Joseph's Hospital
-        {globalState.email}
+
           </Typography>
 
           <IconButton color="inherit">
@@ -200,7 +200,7 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>
         <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
-        <Route exact path="/about/users" component={FormDialog}/>
+        <Route exact path="/about/users" component={Users}/>
         <Route exact path="/about/locations" component={Location}/>
         <Route exact path="/about/configurations" component={Configuration}/>
 
