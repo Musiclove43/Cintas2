@@ -27,17 +27,19 @@ export default function FormDialog() {
   const [pass, setPass] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
+
   const [globalState, globalActions] = useGlobal();
   // const forceUpdate = useCallback(() => updateState({}), []);
-
+// const data2 = {email, pass, first,last};
 
 
 
   const handleSubmit = e => {
     e.preventDefault();
-    globalActions.addToCounter(email)
+    const data = {email, last, first, pass}
+    globalActions.addToUsers(data)
     // const [email, setEmail] = useState(globalState);
-
+  // console.log("emailararayyyyy" + email, last, first, pass)
 
     console.log(globalState);
 
@@ -57,7 +59,7 @@ export default function FormDialog() {
     <Grid container spacing={3}>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
 
-    <Typography style={{paddingTop: 5}} component="h2" variant="h5" >USERS</Typography>
+    <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >USERS</Typography>
     </Grid>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>

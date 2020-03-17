@@ -37,19 +37,12 @@ export default function Users() {
 
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
-  const [email, setEmail] = useGlobal(
-   state => state.email,
+  const [user, setUser] = useGlobal(
+   state => state.user,
    // actions => actions.addToCounterA
  );
   const [expanded, setExpanded] = React.useState(false);
-  // const [email, setEmail] = useState(globalState.email);
-  // const onChangeData = (key, value, id) => {
- //  const nextState = email.map(a => a.id === id ? { ...a, [key]: value } : a);
- //  const [email, setEmail] = useState(nextState);
- // };
-  const forceUpdate = useCallback(() => updateState({}), []);
-
-
+  // const forceUpdate = useCallback(() => updateState({}), []);
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -61,7 +54,7 @@ export default function Users() {
   return (
     <div className={classes.root}>
     <FormDialog/>
-      {email.map((email, i) => (
+      {user.map((user, i) => (
       <ExpansionPanel className={classes.expClass} key={i} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -69,8 +62,8 @@ export default function Users() {
           id="panel1bh-header"
           key={i}
         >
-          <Typography className={classes.heading} key={i}>{email}</Typography>
-          <Typography className={classes.secondaryHeading}></Typography>
+          <Typography className={classes.heading} key={i}>{user.first} {user.last}</Typography>
+          <Typography className={classes.secondaryHeading}>{user.email}</Typography>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
@@ -79,7 +72,7 @@ export default function Users() {
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-))};
+))}
     </div>
   )
   };

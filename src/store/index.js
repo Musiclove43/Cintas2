@@ -4,7 +4,11 @@ import useGlobalHook from "use-global-hook";
 import * as actions from "../actions";
 
 const initialState = {
-  email: []
+  user: [],
+  location: [],
+  inventory: [],
+
+
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

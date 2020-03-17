@@ -1,9 +1,9 @@
 
 
 
-export const addToCounter = (store, email) => {
-  const newCounterValue = store.state.email.push(email);
-  store.setState({ newCounterValue });
+export const addToUsers = (store, data) => {
+  const newUserValue = store.state.user.push(data);
+  store.setState({ newUserValue });
 };
 
 
