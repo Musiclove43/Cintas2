@@ -10,6 +10,9 @@ import FormDialog from './formDialog';
 import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -46,8 +49,16 @@ export default function Users() {
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
- console.log("this is a state" + globalState.email)
+ // console.log("this is a state" + globalState);
 
+
+
+function deleteUser (user) {
+
+   console.log("this is the key "+ user);
+   globalActions.deleteUsers(user);
+// console.log("this state" + globalState.user)
+ };
 
 
 
@@ -62,8 +73,18 @@ export default function Users() {
           id="panel1bh-header"
           key={i}
         >
-          <Typography className={classes.heading} key={i}>{user.first} {user.last}</Typography>
+          <Typography className={classes.heading} >{user.first} {user.last}</Typography>
           <Typography className={classes.secondaryHeading}>{user.email}</Typography>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            style={{marginLeft: "auto", zIndex:1000}}
+
+            onClick={() => deleteUser(user)}
+          >
+            <HighlightOffIcon style={{marginLeft: "auto", zIndex:1000}} />
+          </IconButton>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
@@ -71,6 +92,7 @@ export default function Users() {
             ADD ADMINS +
           </Typography>
         </ExpansionPanelDetails>
+
       </ExpansionPanel>
 ))}
     </div>
