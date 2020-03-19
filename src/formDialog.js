@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useState, useEffect, useCallback, updateState} from "react";
+import { useState, useEffect, useCallback, updateState, clearState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 
@@ -30,6 +30,8 @@ export default function FormDialog() {
   const [open, setOpen] = useGlobal(
    state => state.open,
  );
+
+
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
@@ -38,7 +40,16 @@ export default function FormDialog() {
     const data = {guid, email, last, first, pass}
     globalActions.addToUsers(data)
     console.log(globalState);
+    // document.getElementById("my-form-id").reset();
+    handleClear();
   };
+
+  const handleClear = () => {
+      setEmail('');
+      setPass('')
+      setFirst('')
+      setLast('')
+    }
 
 
   const handleClickOpen = () => {
@@ -82,7 +93,7 @@ export default function FormDialog() {
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <form  method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+    <form method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
