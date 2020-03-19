@@ -8,6 +8,7 @@ const initialState = {
   location: [],
   inventory: [],
   open:false,
+  highlighted: [],
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LocationCreate from './LocationCreate';
 import FormDialog from './formDialog';
+import EditDialog from './editDialog';
 import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
@@ -61,7 +62,7 @@ function deleteUser (user) {
     globalActions.editUsers(user);
     const open = true
     globalActions.openDialog(open);
-    console.log(globalState);
+    console.log(globalState.highlighted);
 
   };
 
@@ -70,6 +71,7 @@ function deleteUser (user) {
   return (
     <div className={classes.root}>
     <FormDialog/>
+    <EditDialog/>
       {user.map((user, i) => (
       <ExpansionPanel className={classes.expClass} key={i} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary

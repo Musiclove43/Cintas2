@@ -19,17 +19,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FormDialog() {
-  const [open, setOpen] = useState(false);
+export default function EditDialog() {
+  const [globalState, globalActions] = useGlobal();
+
+  // const [open, setOpen] = useGlobal(false);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
 
-  const [globalState, globalActions] = useGlobal();
- //  const [open, setOpen] = useGlobal(
- //   state => state.open,
- // );
+  const [open, setOpen] = useGlobal(
+   state => state.open,
+ );
+
+//  const [state, setHighlight] = useGlobal(
+//   state => state.open,
+//
+// );
 
 
   // const forceUpdate = useCallback(() => updateState({}), []);
@@ -52,23 +58,25 @@ export default function FormDialog() {
     }
 
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  const handleClickOpen = () => {
+    const open = true
+    globalActions.openDialog(open);
+    console.log(globalState);
+  };
 
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClose = () => {
+    // setOpen(false);
+
+    const open = false
+    globalActions.openDialog(open)
+    console.log(globalState);
+  };
 
   return (
     <div>
     <Grid container spacing={3}>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
-
-    <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >USERS</Typography>
-    </Grid>
-    <Grid item xs={1.25} md={1.25} lg={1.25}>
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <Button style={{display: 'none'}}variant="outlined" color="primary" onClick={handleClickOpen}>
     ADD USER +
     </Button>
     </Grid>
@@ -81,7 +89,7 @@ export default function FormDialog() {
     aria-labelledby="alert-dialog-slide-title"
     aria-describedby="alert-dialog-slide-description"
     >
-    <DialogTitle id="alert-dialog-slide-title">{"CREATE USER"}</DialogTitle>
+    <DialogTitle id="alert-dialog-slide-title">{"EDIT USER"}</DialogTitle>
     <DialogContent>
     <DialogContentText id="alert-dialog-slide-description">
     Let Google help apps determine location. This means sending anonymous location data to
@@ -148,7 +156,7 @@ export default function FormDialog() {
     Cancel
     </Button>
     <Button onClick={handleClose} form="my-form-id" type="submit" color="primary">
-    Create
+    Update User
     </Button>
     </DialogActions>
     </Dialog>
