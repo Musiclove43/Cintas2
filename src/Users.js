@@ -38,7 +38,9 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function Users() {
-
+  const [open, setOpen] = useGlobal(
+   state => state.open,
+ );
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [user, setUser] = useGlobal(
@@ -57,6 +59,10 @@ function deleteUser (user) {
 
  function editUser (user) {
     globalActions.editUsers(user);
+    const open = true
+    globalActions.openDialog(open);
+    console.log(globalState);
+
   };
 
 
@@ -86,7 +92,7 @@ function deleteUser (user) {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={() => deleteUser(user.guid)}
+            onClick={() => deleteUser(user)}
           >
             <HighlightOffIcon style={{ zIndex:2000}} />
           </IconButton>

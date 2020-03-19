@@ -19,3 +19,9 @@ export const editUsers = (store, user) =>  {
     store.state.user[foundIndex] = user;
     console.log(user);
 }
+
+
+export const openDialog = (store, open) =>  {
+  const openStatus = open;
+  store.setState({ open: openStatus });
+}

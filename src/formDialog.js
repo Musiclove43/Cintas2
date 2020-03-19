@@ -20,13 +20,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = useGlobal(false);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
 
   const [globalState, globalActions] = useGlobal();
+  const [open, setOpen] = useGlobal(
+   state => state.open,
+ );
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
@@ -39,11 +42,17 @@ export default function FormDialog() {
 
 
   const handleClickOpen = () => {
-    setOpen(true);
+    const open = true
+    globalActions.openDialog(open);
+    console.log(globalState);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    // setOpen(false);
+
+    const open = false
+    globalActions.openDialog(open)
+    console.log(globalState);
   };
 
   return (
