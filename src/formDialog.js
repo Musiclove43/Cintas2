@@ -20,8 +20,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function FormDialog() {
-
-
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('')
@@ -30,19 +28,13 @@ export default function FormDialog() {
 
   const [globalState, globalActions] = useGlobal();
   // const forceUpdate = useCallback(() => updateState({}), []);
-// const data2 = {email, pass, first,last};
-
-
 
   const handleSubmit = e => {
     e.preventDefault();
-    const data = {email, last, first, pass}
+    const guid = Math.floor(Math.random() * Date.now())
+    const data = {guid, email, last, first, pass}
     globalActions.addToUsers(data)
-    // const [email, setEmail] = useState(globalState);
-  // console.log("emailararayyyyy" + email, last, first, pass)
-
     console.log(globalState);
-
   };
 
 
@@ -85,8 +77,6 @@ export default function FormDialog() {
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
-
-
 
     <TextField
     autoFocus
@@ -134,7 +124,6 @@ export default function FormDialog() {
     value={pass}
     onChange={e => setPass(e.target.value)}
     />
-
     </Grid>
 
     </Grid>

@@ -7,8 +7,6 @@ const initialState = {
   user: [],
   location: [],
   inventory: [],
-
-
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

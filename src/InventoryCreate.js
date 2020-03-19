@@ -11,7 +11,6 @@ import Inventory from './Inventory'
 import Logo from './scrubShirt.jpg'
 
 
-
 const useStyles = makeStyles({
   root: {
     display: "flex",

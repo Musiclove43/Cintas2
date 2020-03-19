@@ -49,7 +49,17 @@ export default function Location() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            ADD ADMINS +
+            Global Reporting
+          </Typography>
+        </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>
+            Machines Onsite
+          </Typography>
+        </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>
+            ADD USERS TO THIS LOCATION
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -66,7 +76,17 @@ export default function Location() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            ADD ADMINS +
+            Global Reporting
+          </Typography>
+        </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>
+            Machines Onsite
+          </Typography>
+        </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>
+            ADD USERS TO THIS LOCATION
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -83,7 +103,17 @@ export default function Location() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-          ADD ADMINS +
+          Global Reporting
+          </Typography>
+        </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>
+            Machines Onsite
+          </Typography>
+        </ExpansionPanelDetails>
+        <ExpansionPanelDetails>
+          <Typography>
+            ADD USERS TO THIS LOCATION
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

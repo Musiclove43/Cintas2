@@ -12,6 +12,7 @@ import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 
@@ -50,15 +51,13 @@ export default function Users() {
     setExpanded(isExpanded ? panel : false);
   };
  // console.log("this is a state" + globalState);
-
-
-
 function deleteUser (user) {
-
-   console.log("this is the key "+ user);
    globalActions.deleteUsers(user);
-// console.log("this state" + globalState.user)
  };
+
+ function editUser (user) {
+    globalActions.editUsers(user);
+  };
 
 
 
@@ -68,31 +67,31 @@ function deleteUser (user) {
       {user.map((user, i) => (
       <ExpansionPanel className={classes.expClass} key={i} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
           key={i}
         >
           <Typography className={classes.heading} >{user.first} {user.last}</Typography>
           <Typography className={classes.secondaryHeading}>{user.email}</Typography>
+          <div style={{marginLeft: "auto", zIndex:2000}}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            style={{marginLeft: "auto", zIndex:1000}}
-
-            onClick={() => deleteUser(user)}
+            onClick={() => editUser(user)}
           >
-            <HighlightOffIcon style={{marginLeft: "auto", zIndex:1000}} />
+            <EditIcon style={{ zIndex:2000}} />
           </IconButton>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={() => deleteUser(user.guid)}
+          >
+            <HighlightOffIcon style={{ zIndex:2000}} />
+          </IconButton>
+          </div>
         </ExpansionPanelSummary>
-
-        <ExpansionPanelDetails>
-          <Typography>
-            ADD ADMINS +
-          </Typography>
-        </ExpansionPanelDetails>
-
       </ExpansionPanel>
 ))}
     </div>
