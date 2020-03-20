@@ -25,23 +25,25 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
+    paddingTop: 13
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+    paddingTop: 13
+
   },
   expClass: {
-    paddingTop: 10,
-    paddingBottom: 10,
+
     marginBottom: 10
   },
 }));
 
 
 export default function Users() {
-  const [open, setOpen] = useGlobal(
-   state => state.open,
- );
+ //  const [open, setOpen] = useGlobal(
+ //   state => state.open,
+ // );
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [user, setUser] = useGlobal(
@@ -59,10 +61,10 @@ function deleteUser (user) {
  };
 
  function editUser (user) {
-    globalActions.editUsers(user);
+    // globalActions.editUsers(user);
     const open = true
     globalActions.openDialog(open);
-    console.log(globalState.highlighted);
+    console.log(globalState);
 
   };
 

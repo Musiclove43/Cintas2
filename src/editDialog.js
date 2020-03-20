@@ -20,16 +20,22 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EditDialog() {
-  const [globalState, globalActions] = useGlobal();
 
+  // useEffect(() => {
+  //   setEmail(globalState.highlighted);
+  //    // code to run on component mount
+  //  }, [])
   // const [open, setOpen] = useGlobal(false);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
 
+  const [globalState, globalActions] = useGlobal();
+
   const [open, setOpen] = useGlobal(
    state => state.open,
+
  );
 
 //  const [state, setHighlight] = useGlobal(
@@ -38,12 +44,14 @@ export default function EditDialog() {
 // );
 
 
+
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
     e.preventDefault();
-    const guid = Math.floor(Math.random() * Date.now())
-    const data = {guid, email, last, first, pass}
+    console.log("email, last, first, pass")
+    // const guid = Math.floor(Math.random() * Date.now())
+    const data = {email, last, first, pass}
     globalActions.addToUsers(data)
     console.log(globalState);
     // document.getElementById("my-form-id").reset();
@@ -95,7 +103,7 @@ export default function EditDialog() {
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <form method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+    <form method="post" id="my-form" onSubmit={handleSubmit}  noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
@@ -155,7 +163,7 @@ export default function EditDialog() {
     <Button onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button onClick={handleClose} form="my-form-id" type="submit" color="primary">
+    <Button onClick={handleClose} form="my-form" type="submit" color="primary">
     Update User
     </Button>
     </DialogActions>

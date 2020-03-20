@@ -8,7 +8,14 @@ const initialState = {
   location: [],
   inventory: [],
   open:false,
-  highlighted: [],
+  // highlighted: {
+  //   guid: '',
+  //   email: '',
+  //   last: '',
+  //   first: '',
+  //   pass: '',
+  // },
+  highlighted: ''
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

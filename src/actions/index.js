@@ -12,13 +12,13 @@ export const deleteUsers = (store, user) =>  {
     }
 }
 
-export const editUsers = (store, user) =>  {
-  var foundIndex =  store.state.user.findIndex(x => x.user == user);
-    store.state.user[foundIndex] = user;
-    console.log(user);
-    const highlightUser =  store.state.highlighted.push(user);
-    store.setState({  highlightUser });
-}
+// export const editUsers = (store, user) =>  {
+//   var foundIndex =  store.state.user.findIndex(x => x.user == user);
+//     store.state.user[foundIndex] = user;
+//     console.log(user);
+//     // const highlightUser = user;
+//     // store.setState({ highlighted: highlightUser });
+// }
 
 
 export const openDialog = (store, open) =>  {
