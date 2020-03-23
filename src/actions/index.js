@@ -24,10 +24,13 @@ export const updateUsers = (store, data) =>  {
   // const newEmail = store.state.highlighted.email = data.email;
 
   // console.log(newProp)
-  console.log(store.state)
+  // console.log(store.state)
   var activeUser = store.state.highlighted;
   var foundIndex =  store.state.user.findIndex(x => x.id == activeUser.id);
-  store.setState(store.state.user[foundIndex].email = data.email )
+  const updatedUser = store.state.user[foundIndex].email = data.email;
+
+
+  store.setState({  updatedUser });
 // console.log(newProp)
   //   // const highlightUser = user;
   //   store.setState({ highlighted: highlightUser });

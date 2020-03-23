@@ -81,7 +81,7 @@ export default function EditDialog() {
 
     const open = false
     globalActions.openDialog(open)
-    console.log(globalState);
+    // console.log(globalState);
   };
 
   return (

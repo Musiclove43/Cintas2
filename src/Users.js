@@ -48,7 +48,7 @@ export default function Users() {
   const [globalState, globalActions] = useGlobal();
   const [user, setUser] = useGlobal(
    state => state.user,
-   state => state.highlighted,
+   // state => state.highlighted,
    // actions => actions.addToCounterA
  );
   const [expanded, setExpanded] = React.useState(false);
@@ -65,7 +65,7 @@ function deleteUser (user) {
    const open = true
    globalActions.openDialog(open);
     globalActions.editUsers(user);
-    // console.log(globalState);
+    console.log(globalState);
 
 
 
