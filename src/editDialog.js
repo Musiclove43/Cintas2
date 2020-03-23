@@ -32,6 +32,10 @@ export default function EditDialog() {
   const [last, setLast] = useState('')
 
   const [globalState, globalActions] = useGlobal();
+  const [user, setUser] = useGlobal(
+   state => state.user,
+   // actions => actions.addToCounterA
+ );
 
   const [open, setOpen] = useGlobal(
    state => state.open,
@@ -52,8 +56,8 @@ export default function EditDialog() {
     console.log("email, last, first, pass")
     // const guid = Math.floor(Math.random() * Date.now())
     const data = {email, last, first, pass}
-    globalActions.addToUsers(data)
-    console.log(globalState);
+    globalActions.updateUsers(data)
+    // console.log(globalState);
     // document.getElementById("my-form-id").reset();
     handleClear();
   };
@@ -69,7 +73,7 @@ export default function EditDialog() {
   const handleClickOpen = () => {
     const open = true
     globalActions.openDialog(open);
-    console.log(globalState);
+    // console.log(globalState);
   };
 
   const handleClose = () => {

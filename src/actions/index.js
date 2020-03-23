@@ -12,13 +12,26 @@ export const deleteUsers = (store, user) =>  {
     }
 }
 
-// export const editUsers = (store, user) =>  {
-//   var foundIndex =  store.state.user.findIndex(x => x.user == user);
-//     store.state.user[foundIndex] = user;
-//     console.log(user);
-//     // const highlightUser = user;
-//     // store.setState({ highlighted: highlightUser });
-// }
+export const editUsers = (store, user) =>  {
+  var foundIndex =  store.state.user.findIndex(x => x.id == user.id);
+  const highlightUser = store.state.user[foundIndex] = user;
+
+    // const highlightUser = user;
+    store.setState({ highlighted: highlightUser });
+}
+
+export const updateUsers = (store, data) =>  {
+  // const newEmail = store.state.highlighted.email = data.email;
+
+  // console.log(newProp)
+  console.log(store.state)
+  var activeUser = store.state.highlighted;
+  var foundIndex =  store.state.user.findIndex(x => x.id == activeUser.id);
+  store.setState(store.state.user[foundIndex].email = data.email )
+// console.log(newProp)
+  //   // const highlightUser = user;
+  //   store.setState({ highlighted: highlightUser });
+}
 
 
 export const openDialog = (store, open) =>  {

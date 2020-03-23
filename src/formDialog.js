@@ -36,8 +36,8 @@ export default function FormDialog() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const guid = Math.floor(Math.random() * Date.now())
-    const data = {guid, email, last, first, pass}
+    const id = Math.floor(Math.random() * Date.now())
+    const data = {id, email, last, first, pass}
     globalActions.addToUsers(data)
     console.log(globalState);
     // document.getElementById("my-form-id").reset();

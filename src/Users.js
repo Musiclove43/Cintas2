@@ -48,6 +48,7 @@ export default function Users() {
   const [globalState, globalActions] = useGlobal();
   const [user, setUser] = useGlobal(
    state => state.user,
+   state => state.highlighted,
    // actions => actions.addToCounterA
  );
   const [expanded, setExpanded] = React.useState(false);
@@ -61,10 +62,12 @@ function deleteUser (user) {
  };
 
  function editUser (user) {
-    // globalActions.editUsers(user);
-    const open = true
-    globalActions.openDialog(open);
-    console.log(globalState);
+   const open = true
+   globalActions.openDialog(open);
+    globalActions.editUsers(user);
+    // console.log(globalState);
+
+
 
   };
 
@@ -87,7 +90,7 @@ function deleteUser (user) {
           <IconButton
             edge="start"
             color="inherit"
-            aria-label="open drawer"
+
             onClick={() => editUser(user)}
           >
             <EditIcon style={{ zIndex:2000}} />
@@ -95,7 +98,7 @@ function deleteUser (user) {
           <IconButton
             edge="start"
             color="inherit"
-            aria-label="open drawer"
+
             onClick={() => deleteUser(user)}
           >
             <HighlightOffIcon style={{ zIndex:2000}} />
