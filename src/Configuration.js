@@ -139,7 +139,7 @@ export default function Configuration() {
 
                 <div>
                   <Link color="primary" href="javascript:;">
-                    Configure
+                    Assign Items
                   </Link>
                 </div>
               </React.Fragment>
@@ -152,7 +152,7 @@ export default function Configuration() {
 
                 <div>
                   <Link color="primary" href="javascript:;">
-                    Configure
+                    Assign Items
                   </Link>
                 </div>
               </React.Fragment>
@@ -165,7 +165,7 @@ export default function Configuration() {
 
                 <div>
                   <Link color="primary" href="javascript:;">
-                    Configure
+                    Assign Items
                   </Link>
                 </div>
               </React.Fragment>
@@ -178,7 +178,7 @@ export default function Configuration() {
 
                 <div>
                   <Link color="primary" href="javascript:;">
-                    Configure
+                    Assign Items
                   </Link>
                 </div>
               </React.Fragment>

@@ -36,15 +36,6 @@ export const mainListItems = (
     </ListItem>
     </NavLink>
 
-    <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
-      <ListItem to="/about/widget" button>
-        <ListItemIcon>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText primary="Locations" />
-      </ListItem>
-      </NavLink>
-
       <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/widget">
       <ListItem button>
         <ListItemIcon>
@@ -63,5 +54,13 @@ export const mainListItems = (
       </ListItem>
       </NavLink>
 
+      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
+        <ListItem to="/about/widget" button>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Locations" />
+        </ListItem>
+        </NavLink>
   </div>
 );

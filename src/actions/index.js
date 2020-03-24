@@ -21,13 +21,16 @@ export const editUsers = (store, user) =>  {
 }
 
 export const updateUsers = (store, data) =>  {
-  // const newEmail = store.state.highlighted.email = data.email;
+  const newEmail = store.state.highlighted.email = data.email;
+  const newFirst = store.state.highlighted.first = data.first;
+  const newLast = store.state.highlighted.last = data.last;
+  const newPass = store.state.highlighted.pass = data.pass;
 
   // console.log(newProp)
   // console.log(store.state)
   var activeUser = store.state.highlighted;
   var foundIndex =  store.state.user.findIndex(x => x.id == activeUser.id);
-  const updatedUser = store.state.user[foundIndex].email = data.email;
+  const updatedUser = store.state.user[foundIndex] = activeUser;
 
 
   store.setState({  updatedUser });

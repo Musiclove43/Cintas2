@@ -15,10 +15,10 @@ const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "row",
-},
-spacing:{
-  marginRight: 15
-}
+  },
+  spacing:{
+    marginRight: 15
+  }
 });
 
 export default function ImgMediaCard() {
@@ -27,105 +27,106 @@ export default function ImgMediaCard() {
   return (
 
 
+    <div>
+    <Inventory/>
 <div className={classes.root}>
-<Inventory/>
-
     <Card className={classes.spacing}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="200"
-          image={Logo}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Scrub Shirt
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            S, M, L, XL
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Edit
-        </Button>
-      </CardActions>
+    <CardActionArea>
+    <CardMedia
+    component="img"
+    alt="Contemplative Reptile"
+    height="200"
+    image={Logo}
+    title="Contemplative Reptile"
+    />
+    <CardContent>
+    <Typography gutterBottom variant="h5" component="h2">
+    Scrub Shirt
+    </Typography>
+    <Typography variant="body2" color="textSecondary" component="p">
+    S, M, L, XL
+    </Typography>
+    </CardContent>
+    </CardActionArea>
+    <CardActions>
+    <Button size="small" color="primary">
+    Edit
+    </Button>
+    </CardActions>
     </Card>
     <Card className={classes.spacing}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="200"
-          image={Logo}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Scrub Shirt
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            S, M, L, XL
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Edit
-        </Button>
-      </CardActions>
+    <CardActionArea>
+    <CardMedia
+    component="img"
+    alt="Contemplative Reptile"
+    height="200"
+    image={Logo}
+    title="Contemplative Reptile"
+    />
+    <CardContent>
+    <Typography gutterBottom variant="h5" component="h2">
+    Scrub Shirt
+    </Typography>
+    <Typography variant="body2" color="textSecondary" component="p">
+    S, M, L, XL
+    </Typography>
+    </CardContent>
+    </CardActionArea>
+    <CardActions>
+    <Button size="small" color="primary">
+    Edit
+    </Button>
+    </CardActions>
     </Card>
     <Card className={classes.spacing}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="200"
-          image={Logo}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Scrub Shirt
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            S, M, L, XL
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Edit
-        </Button>
-      </CardActions>
+    <CardActionArea>
+    <CardMedia
+    component="img"
+    alt="Contemplative Reptile"
+    height="200"
+    image={Logo}
+    title="Contemplative Reptile"
+    />
+    <CardContent>
+    <Typography gutterBottom variant="h5" component="h2">
+    Scrub Shirt
+    </Typography>
+    <Typography variant="body2" color="textSecondary" component="p">
+    S, M, L, XL
+    </Typography>
+    </CardContent>
+    </CardActionArea>
+    <CardActions>
+    <Button size="small" color="primary">
+    Edit
+    </Button>
+    </CardActions>
     </Card>
     <Card className={classes.spacing}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="200"
-          image={Logo}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Scrub Shirt
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            S, M, L, XL
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Edit
-        </Button>
-      </CardActions>
+    <CardActionArea>
+    <CardMedia
+    component="img"
+    alt="Contemplative Reptile"
+    height="200"
+    image={Logo}
+    title="Contemplative Reptile"
+    />
+    <CardContent>
+    <Typography gutterBottom variant="h5" component="h2">
+    Scrub Shirt
+    </Typography>
+    <Typography variant="body2" color="textSecondary" component="p">
+    S, M, L, XL
+    </Typography>
+    </CardContent>
+    </CardActionArea>
+    <CardActions>
+    <Button size="small" color="primary">
+    Edit
+    </Button>
+    </CardActions>
     </Card>
+    </div>
     </div>
 
 
