@@ -21,6 +21,7 @@ export default function App() {
       <Route path="/about/users" component={Dashboard}/>
       <Route path="/about/location" component={Dashboard}/>
       <Route path="/about/configurations" component={Dashboard}/>
+      <Route path="/about/swipe" component={Dashboard}/>
       <Route path="/topics" component={SignUp}/>
       <Route path="/" component={SignIn}/>
     </Switch>

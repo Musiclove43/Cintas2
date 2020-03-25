@@ -15,8 +15,6 @@ export const deleteUsers = (store, user) =>  {
 export const editUsers = (store, user) =>  {
   var foundIndex =  store.state.user.findIndex(x => x.id == user.id);
   const highlightUser = store.state.user[foundIndex] = user;
-
-    // const highlightUser = user;
     store.setState({ highlighted: highlightUser });
 }
 
@@ -43,4 +41,20 @@ export const updateUsers = (store, data) =>  {
 export const openDialog = (store, open) =>  {
   const openStatus = open;
   store.setState({ open: openStatus });
+
+}
+
+
+export const addToInventory = (store, data) => {
+  const newInventory = store.state.inventory.push(data);
+  store.setState({ newInventory });
+  console.log(store.state.inventory)
+};
+
+export const deleteInventory= (store, inventory) =>  {
+    var index = store.state.inventory.indexOf(inventory);
+    if (index > -1) {
+        store.state.inventory.splice(index, 1);
+    }
+    store.setState({ inventory: store.state.inventory });
 }

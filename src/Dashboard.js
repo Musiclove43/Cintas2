@@ -39,6 +39,7 @@ import {
 import { useState, useEffect } from "react";
 // import globalHook from 'use-global-hook'
 import useGlobal from "./store";
+import TabPanel from './swipe'
 
 
 
@@ -197,12 +198,14 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <Route exact path="/about/swipe" component={TabPanel}/>
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>
         <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
         <Route exact path="/about/users" component={Users}/>
         <Route exact path="/about/locations" component={Location}/>
         <Route exact path="/about/configurations" component={Configuration}/>
+
 
 
         </Container>
