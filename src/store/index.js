@@ -15,7 +15,8 @@ const initialState = {
   //   first: '',
   //   pass: '',
   // },
-  highlighted: ''
+  highlighted: '',
+  value: 0
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

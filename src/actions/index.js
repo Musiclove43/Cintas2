@@ -58,3 +58,9 @@ export const deleteInventory= (store, inventory) =>  {
     }
     store.setState({ inventory: store.state.inventory });
 }
+
+export const addValue= (store, data) =>  {
+    var index = store.state.value + (data);
+
+    store.setState({ value: index });
+}

@@ -8,6 +8,11 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Location from './Location';
+import Button from '@material-ui/core/Button';
+import { useState, useEffect, useCallback, updateState} from "react";
+import globalHook from 'use-global-hook';
+import useGlobal from "./store";
+
 
 
 function TabPanel(props) {
@@ -50,9 +55,16 @@ const useStyles = makeStyles(theme => ({
 export default function FullWidthTabs() {
   const classes = useStyles();
   const theme = useTheme();
+  const [globalState, globalActions] = useGlobal();
   const [value, setValue] = React.useState(0);
+  const [index, setIndex] = useGlobal(
+   state => state.value,
+   // state => state.highlighted,
+   // actions => actions.addToCounterA
+ );
 
   const handleChange = (event, newValue) => {
+    console.log(newValue);
     setValue(newValue);
   };
 
@@ -62,7 +74,7 @@ export default function FullWidthTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar style={{display: "none"}} position="static" color="default">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -71,25 +83,23 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Item One"  />
+          <Tab label="Item Two" />
+          <Tab label="Item Three" />
         </Tabs>
       </AppBar>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
+        index={index}
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Location/>
+        <Location/>
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={index} index={1} dir={theme.direction}>
           Item Two
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
+
       </SwipeableViews>
     </div>
   );

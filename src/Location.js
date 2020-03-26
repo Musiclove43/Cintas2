@@ -6,6 +6,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LocationCreate from './LocationCreate';
+import { useState, useEffect, useCallback, updateState} from "react";
+import globalHook from 'use-global-hook';
+import useGlobal from "./store";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,15 +33,22 @@ const useStyles = makeStyles(theme => ({
 export default function Location() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [globalState, globalActions] = useGlobal();
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const handleClick = () => (event) => {
+    var data = 1;
+    globalActions.addValue(data)
+    console.log("thisssss")
+  };
+
   return (
     <div className={classes.root}>
     <LocationCreate/>
-      <ExpansionPanel className={classes.expClass} onChange={handleChange('panel1')}>
+      <ExpansionPanel onClick={handleClick()} className={classes.expClass} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
