@@ -22,6 +22,9 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Title from './Title';
 import Orders from './Orders';
+import { useState, useEffect, useCallback, updateState} from "react";
+import globalHook from 'use-global-hook';
+import useGlobal from "./store";
 
 function Copyright() {
   return (
@@ -120,12 +123,20 @@ const useStyles = makeStyles(theme => ({
 export default function Configuration() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+    const [globalState, globalActions] = useGlobal();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleClick = () => (event) => {
+    var data = 1;
+    globalActions.addValue(data)
+    console.log("thisssss")
+  };
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -138,7 +149,7 @@ export default function Configuration() {
                 <Title>Machine 1</Title>
 
                 <div>
-                  <Link color="primary" href="javascript:;">
+                  <Link color="primary" onClick={handleClick()} href="javascript:;">
                     Assign Items
                   </Link>
                 </div>
