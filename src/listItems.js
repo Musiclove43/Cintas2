@@ -8,6 +8,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import globalHook from 'use-global-hook';
+import useGlobal from "./store";
 
 import HomeIcon from '@material-ui/icons/Home';
 
@@ -16,7 +18,17 @@ import {NavLink, Redirect} from "react-router-dom";
 
 
 
-export const mainListItems = (
+export default function MainListItems() {
+  const [globalState, globalActions] = useGlobal();
+
+  const handleClick = () => (event) => {
+    var data = 0;
+    globalActions.addValue(data)
+
+    console.log(globalState)
+  };
+
+return (
   <div>
   <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/">
     <ListItem to="/about/widget" button>
@@ -45,7 +57,7 @@ export const mainListItems = (
       </ListItem>
       </NavLink>
 
-      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/configurations">
+      <NavLink onClick={handleClick()} style={{textDecoration: 'none', color: '#202020'}} to="/about/swipe">
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
@@ -63,4 +75,5 @@ export const mainListItems = (
         </ListItem>
         </NavLink>
   </div>
-);
+)
+};

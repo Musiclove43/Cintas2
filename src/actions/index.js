@@ -60,7 +60,7 @@ export const deleteInventory= (store, inventory) =>  {
 }
 
 export const addValue= (store, data) =>  {
-    var index = store.state.value + (data);
+    var index = store.state.value = data;
 
     store.setState({ value: index });
 }

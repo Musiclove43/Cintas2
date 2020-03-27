@@ -49,7 +49,7 @@ export default function ImgMediaCard() {
 
  function deleteInventory(inventory) {
     globalActions.deleteInventory(inventory)
-  
+
   };
 
   function editInventory(inventory) {

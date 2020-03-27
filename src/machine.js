@@ -108,7 +108,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 2
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL
@@ -149,7 +149,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 3
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL
@@ -190,7 +190,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 4
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL
@@ -231,7 +231,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 5
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL
@@ -272,7 +272,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 6
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL
@@ -313,7 +313,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 7
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL
@@ -354,7 +354,7 @@ export default function Machine() {
     />
     <CardContent >
     <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+    SLOT 8
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
     S, M, L, XL

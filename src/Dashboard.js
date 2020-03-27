@@ -17,7 +17,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems } from './listItems';
+import MainListItems from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
@@ -193,7 +193,7 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <MainListItems/>
 
       </Drawer>
       <main className={classes.content}>
@@ -204,7 +204,7 @@ export default function Dashboard() {
         <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
         <Route exact path="/about/users" component={Users}/>
         <Route exact path="/about/locations" component={Location}/>
-        <Route exact path="/about/configurations" component={Configuration}/>
+        <Route exact path="/about/configurations" component={TabPanel}/>
         <Route exact path="/about/swipe" component={TabPanel}/>
 
         </Container>

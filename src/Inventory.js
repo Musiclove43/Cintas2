@@ -16,7 +16,24 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import { useState, useEffect, useCallback, updateState, clearState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import { Input } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import {DropzoneArea} from 'material-ui-dropzone'
 
+
+
+
+
+const useStyles = makeStyles({
+
+  input:{
+    marginRight: 15,
+    flexBasis: "22%",
+    marginTop: 15,
+
+  },
+
+});
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -24,11 +41,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function Inventory() {
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = useState('');
   const [qty, setQty] = useState('')
   const [credits, setCredits] = useState('')
   const [sku, setSku] = useState('')
+  const [file, setFile] = useState('')
 
   const [globalState, globalActions] = useGlobal();
  //  const [open, setOpen] = useGlobal(
@@ -41,7 +60,7 @@ export default function Inventory() {
   const handleSubmit = e => {
     e.preventDefault();
     const id = Math.floor(Math.random() * Date.now())
-    const data = {id, title, qty, credits, sku}
+    const data = {id, title, qty, credits, sku, file}
     globalActions.addToInventory(data)
     console.log(globalState);
     // document.getElementById("my-form-id").reset();
@@ -53,6 +72,7 @@ export default function Inventory() {
       setQty('')
       setCredits('')
       setSku('')
+      setFile('')
     }
 
   const handleClickOpen = () => {
@@ -63,6 +83,10 @@ export default function Inventory() {
     setOpen(false);
   };
 
+const  handleChange = (files)=> {
+  setFile(file)
+  console.log(file)
+}
   return (
     <div>
     <Grid container spacing={3}>
@@ -135,6 +159,21 @@ export default function Inventory() {
     onChange={e => setSku(e.target.value)}
     fullWidth
     />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+
+           <Button
+         variant="contained"
+         component="label"
+       >
+         Upload File
+         <input
+           type="file"
+           style={{ display: "none" }}
+           value={file}
+          onChange={e => setFile(e.target.value)}
+         />
+       </Button>
     </Grid>
     </Grid>
     </form>
