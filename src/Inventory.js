@@ -83,34 +83,37 @@ export default function Inventory() {
     setOpen(false);
   };
 
-  const getBase64 = (formData) => {
-  return new Promise((resolve,reject) => {
-     const reader = new FileReader();
-     reader.onload = () => resolve(reader.result);
+  const getBase64 = file2 => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file2);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+//
+//   const imageUpload = (file) => {
+//     console.log(file)
+//     // const file = e.target.value[0];
+//     const file = new FormData();
+//             file.append('file', file);
+//             console.log(file)
+//   getBase64(file).then(base64 => {
+//     localStorage["fileBase64"] = base64;
+//     console.debug("file stored",base64);
+//   });
+//
+//
 
-     reader.onerror = error => reject(error);
-     reader.readAsDataURL(formData);
-  });
-}
+// };
 
-  const imageUpload = (file) => {
-    console.log(file)
-    // const file = e.target.value[0];
-    const formData = new FormData();
-            formData.append('file', file);
-            console.log(formData)
-  getBase64(formData).then(base64 => {
-    localStorage["fileBase64"] = base64;
-    console.debug("file stored",base64);
-  });
+const  handleChange = (file)=> {
+  var file2 = file[0]
+    getBase64(file2).then(base64 => {
+      localStorage["fileBase64"] = base64;
+      console.debug("file stored",base64);
+        setFile(localStorage.fileBase64)
+    });
 
-
-
-};
-
-const  handleChange = (files)=> {
-  setFile(file)
-  console.log(file)
+  console.log(file2)
 }
   return (
     <div>
@@ -188,18 +191,10 @@ const  handleChange = (files)=> {
     <Grid item xs={6} md={6} lg={6}>
     <img id="target" src={file}/>
 
-           <Button
-         variant="contained"
-         component="label"
-       >
-         Upload File
-         <input
-           type="file"
-           style={{ display: "none" }}
-           value={file}
-          onChange={(e) => imageUpload(e.target.value)}
-         />
-       </Button>
+    <DropzoneArea
+    showPreviews={true}
+           onChange={handleChange.bind(this)}
+           />
     </Grid>
     </Grid>
     </form>

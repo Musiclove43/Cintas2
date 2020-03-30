@@ -11,9 +11,26 @@ import {
 import Dashboard from './Dashboard';
 import SignIn from './SignIn';
 import SignUp from './sign-up';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+        main: '#00152C'
+      },
+    secondary: {
+          main: '#18ADDA'
+        }
+    }
+  },
+)
 
 export default function App() {
   return (
+    <MuiThemeProvider theme={theme}>
+
     <Router >
     <Switch>
       <Route path="/about" component={Dashboard}/>
@@ -26,5 +43,6 @@ export default function App() {
       <Route path="/" component={SignIn}/>
     </Switch>
     </Router>
+     </MuiThemeProvider>
   );
 }

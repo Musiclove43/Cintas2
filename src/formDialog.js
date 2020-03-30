@@ -72,6 +72,11 @@ export default function FormDialog() {
     ADD USER +
     </Button>
     </Grid>
+    <Grid style={{marginLeft: "auto"}} item >
+    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    Import CSV
+    </Button>
+    </Grid>
     </Grid>
     <Dialog
     open={open}

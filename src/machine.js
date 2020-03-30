@@ -16,6 +16,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import SimpleDialog from './productDialog'
+import Paper from '@material-ui/core/Paper';
+
 
 
 
@@ -30,6 +32,7 @@ const useStyles = makeStyles({
     marginRight: 15,
     flexBasis: "22%",
     marginTop: 15,
+    padding: 20,
 
   },
 
@@ -68,8 +71,11 @@ export default function Machine() {
     MACHINE 1  >  ASSIGN ITEMS
     </Typography>
     <div className={classes.root}>
-
-    <Card className={classes.spacing} >
+<Paper className={classes.spacing} elevation={3} >
+<Typography gutterBottom variant="h5"  component="h2" >
+SLOT 1
+</Typography>
+    <Card  >
     <CardActionArea >
     <CardMedia
 
@@ -81,11 +87,12 @@ export default function Machine() {
     title="Contemplative Reptile"
     />
     <CardContent >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
+
+    <Typography  variant="body2" color="textSecondary" component="p">
+    QTY: 12
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
+    SIZE: S
     </Typography>
     </CardContent>
     </CardActionArea>
@@ -95,6 +102,7 @@ export default function Machine() {
     </div>
     </CardActions>
     </Card>
+    </Paper>
     <Card className={classes.spacing} >
     <CardActionArea >
     <CardMedia

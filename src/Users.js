@@ -82,7 +82,7 @@ function deleteUser (user) {
         <ExpansionPanelSummary
           aria-controls="panel1bh-content"
           id="panel1bh-header"
-      
+
         >
           <Typography className={classes.heading} >{user.first} {user.last}</Typography>
           <Typography className={classes.secondaryHeading}>{user.email}</Typography>

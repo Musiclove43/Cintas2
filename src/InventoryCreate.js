@@ -61,11 +61,16 @@ export default function ImgMediaCard() {
 
    };
 
-  function getRandomImg(){
+  function getRandomImg(inventory){
+    console.log(inventory)
+    if (inventory.title == "pants") {
+      return Pants
+    } else {
     var arr = []
     arr.push(Logo,Pants)
     console.log(arr)
     return arr[Math.floor(Math.random() * arr.length)]
+  };
   }
 
   return (
@@ -81,7 +86,7 @@ export default function ImgMediaCard() {
     alt="Contemplative Reptile"
     height="200"
 
-    image={getRandomImg()}
+    image={inventory.file}
     title="Contemplative Reptile"
     />
     <CardContent >

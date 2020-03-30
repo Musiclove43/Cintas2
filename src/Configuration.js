@@ -149,7 +149,7 @@ export default function Configuration() {
                 <Title>Machine 1</Title>
 
                 <div>
-                  <Link color="primary" onClick={handleClick()} href="javascript:;">
+                  <Link color="secondary" onClick={handleClick()} href="javascript:;">
                     Assign Items
                   </Link>
                 </div>
@@ -162,7 +162,7 @@ export default function Configuration() {
                 <Title>Machine 2</Title>
 
                 <div>
-                  <Link color="primary" href="javascript:;">
+                  <Link color="secondary" href="javascript:;">
                     Assign Items
                   </Link>
                 </div>
@@ -175,7 +175,7 @@ export default function Configuration() {
                 <Title>Machine 3</Title>
 
                 <div>
-                  <Link color="primary" href="javascript:;">
+                  <Link color="secondary" href="javascript:;">
                     Assign Items
                   </Link>
                 </div>
@@ -188,7 +188,7 @@ export default function Configuration() {
                 <Title>Machine 4</Title>
 
                 <div>
-                  <Link color="primary" href="javascript:;">
+                  <Link color="secondary" href="javascript:;">
                     Assign Items
                   </Link>
                 </div>
