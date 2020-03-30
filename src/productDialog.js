@@ -19,9 +19,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Inventory from './Inventory'
-import Logo from './scrubShirt.jpg'
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import Logo from './scrubShirt.jpg'
+
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles({
@@ -58,17 +59,16 @@ function SimpleDialog(props) {
     onClose(selectedValue);
   };
 
-  const handleListItemClick = value => {
-    onClose(value);
+  const handleListItemClick = (inventory) => {
+    onClose(inventory);
   };
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+      <DialogTitle id="simple-dialog-title">Select Inventory</DialogTitle>
        <div className={classes.root}>
         {inventory.map((inventory, i) => (
-
-          <Card  button onClick={() => handleListItemClick(inventory.title)} className={classes.spacing} key={i} >
+          <Card button key={i} onClick={() => handleListItemClick(inventory)} className={classes.spacing} >
           <CardActionArea key={i} >
           <CardMedia
           key={i}
@@ -76,7 +76,7 @@ function SimpleDialog(props) {
           alt="Contemplative Reptile"
           height="100"
 
-          image={Logo}
+          image={inventory.file}
           title="Contemplative Reptile"
           />
           <CardContent >
@@ -88,9 +88,7 @@ function SimpleDialog(props) {
           </Typography>
           </CardContent>
           </CardActionArea>
-
           </Card>
-
         ))}
 
 </div>
@@ -119,9 +117,28 @@ export default function SimpleDialogDemo() {
 
   return (
     <div>
-      <Typography variant="subtitle1">Selected: {selectedValue}</Typography>
+    <CardActionArea>
+    <CardMedia
+    component="img"
+    alt="Contemplative Reptile"
+    height="200"
+
+    image={selectedValue.file}
+    title="Contemplative Reptile"
+    />
+    <CardContent >
+
+    <Typography  variant="body2" color="textSecondary" component="p">
+    QTY: {selectedValue.qty}
+    </Typography>
+    <Typography  variant="body2" color="textSecondary" component="p">
+    SIZE: {selectedValue.size}
+    </Typography>
+    </CardContent>
+    </CardActionArea>
+      <Typography variant="subtitle1">Selected: {selectedValue.title}</Typography>
       <br />
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
         Assign Item To Slot
       </Button>
       <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />

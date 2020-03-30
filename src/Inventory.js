@@ -18,23 +18,20 @@ import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import { Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {DropzoneArea} from 'material-ui-dropzone'
-
-
-
-
+import {DropzoneArea} from 'material-ui-dropzone';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 
 const useStyles = makeStyles({
-
-  input:{
-    marginRight: 15,
-    flexBasis: "22%",
-    marginTop: 15,
-
+  formControl: {
+    // margin: theme.spacing(1),
+    minWidth: 120,
   },
-
+  selectEmpty: {
+    // marginTop: theme.spacing(2),
+  },
 });
 
 
@@ -52,21 +49,13 @@ export default function Inventory() {
   const [file, setFile] = useState('')
   const [topic, setTopic] = useState(0)
   const [globalState, globalActions] = useGlobal();
+  const [size, setSize] = React.useState('');
 
-
-
-
- //  const [open, setOpen] = useGlobal(
- //   state => state.open,
- // );
-
-
-  // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
     e.preventDefault();
     const id = Math.floor(Math.random() * Date.now())
-    const data = {id, title, qty, credits, sku, file}
+    const data = {id, title, qty, credits, sku, file, size}
     globalActions.addToInventory(data)
     console.log(globalState);
     // document.getElementById("my-form-id").reset();
@@ -79,7 +68,8 @@ export default function Inventory() {
       setCredits('')
       setSku('')
       setFile('')
-      setTopic(topic+1 )
+      setSize('')
+      setTopic(topic + 1)
 
     }
 
@@ -112,8 +102,6 @@ export default function Inventory() {
 //
 
 // };
-
-
 const  handleChange = (file)=> {
 
   var file2 = file[0]
@@ -123,16 +111,11 @@ const  handleChange = (file)=> {
     getBase64(file2).then(base64 => {
       localStorage["fileBase64"] = base64;
       console.debug("file stored",base64);
-        setFile(localStorage.fileBase64)
-
+      setFile(localStorage.fileBase64)
     })
   }
-
   console.log(file2)
 }
-
-
-
 
   return (
     <div>
@@ -208,14 +191,27 @@ const  handleChange = (file)=> {
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
-
-
     <DropzoneArea
     showPreviews={true}
             filesLimit={1}
             key={topic}
            onChange={handleChange.bind(this)}
            />
+    </Grid>
+    <Grid item >
+    <FormControl className={classes.formControl}>
+         <InputLabel id="demo-simple-select-label">Size</InputLabel>
+         <Select
+           labelId="demo-simple-select-label"
+           id="demo-simple-select"
+           value={size}
+           onChange={e => setSize(e.target.value)}
+         >
+           <MenuItem value={"Small"}>Small</MenuItem>
+           <MenuItem value={"Medium"}>Medium</MenuItem>
+           <MenuItem value={"Large"}>Large</MenuItem>
+         </Select>
+       </FormControl>
     </Grid>
     </Grid>
     </form>

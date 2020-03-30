@@ -44,14 +44,14 @@ export default function Machine() {
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const [inventory, setInventory] = useGlobal(
-   state => state.inventory
-   // state => state.highlighted,
-   // actions => actions.addToCounterA
- )
+    state => state.inventory
+    // state => state.highlighted,
+    // actions => actions.addToCounterA
+  )
   const forceUpdate = useCallback(() => updateState({}), []);
- console.log("Here we are"+ inventory)
+  console.log("Here we are"+ inventory)
 
- function deleteInventory(inventory) {
+  function deleteInventory(inventory) {
     globalActions.deleteInventory(inventory)
 
   };
@@ -62,7 +62,7 @@ export default function Machine() {
     //  globalActions.editUsers(user);
     //  console.log(globalState);
 
-   };
+  };
 
   return (
     <div>
@@ -71,31 +71,12 @@ export default function Machine() {
     MACHINE 1  >  ASSIGN ITEMS
     </Typography>
     <div className={classes.root}>
-<Paper className={classes.spacing} elevation={3} >
-<Typography gutterBottom variant="h5"  component="h2" >
-SLOT 1
-</Typography>
-    <Card  >
-    <CardActionArea >
-    <CardMedia
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
-
-    <Typography  variant="body2" color="textSecondary" component="p">
-    QTY: 12
+    <Paper className={classes.spacing} elevation={3} >
+    <Typography gutterBottom variant="h5"  component="h2" >
+    SLOT 1
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    SIZE: S
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
@@ -103,293 +84,99 @@ SLOT 1
     </CardActions>
     </Card>
     </Paper>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
 
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 2
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
+    </Paper>
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
 
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 3
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
+    </Paper>
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 4
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
+    </Paper>
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 5
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
+    </Paper>
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 6
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
+    </Paper>
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 7
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
-    <Card className={classes.spacing} >
-    <CardActionArea >
-    <CardMedia
+    </Paper>
 
-    component="img"
-    alt="Contemplative Reptile"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-    <CardContent >
+    <Paper className={classes.spacing} elevation={3} >
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 8
     </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
-    </Typography>
-    </CardContent>
-    </CardActionArea>
+    <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <IconButton
-      edge="start"
-      color="inherit"
-      //
-      onClick={() => editInventory(inventory)}
-    >
-      <EditIcon />
-    </IconButton>
-    <IconButton
-      edge="start"
-      color="inherit"
-//
-      onClick={() => deleteInventory(inventory)}
-    >
-      <HighlightOffIcon  />
-    </IconButton>
+    <SimpleDialog/>
     </div>
     </CardActions>
     </Card>
+    </Paper>
 
 
     </div>

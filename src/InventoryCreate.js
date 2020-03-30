@@ -8,8 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Inventory from './Inventory'
-import Logo from './scrubShirt.jpg'
-import Pants from './pants.png'
 import { useState, useEffect, useCallback, updateState, clearState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
@@ -61,17 +59,17 @@ export default function ImgMediaCard() {
 
    };
 
-  function getRandomImg(inventory){
-    console.log(inventory)
-    if (inventory.title == "pants") {
-      return Pants
-    } else {
-    var arr = []
-    arr.push(Logo,Pants)
-    console.log(arr)
-    return arr[Math.floor(Math.random() * arr.length)]
-  };
-  }
+  // function getRandomImg(inventory){
+  //   console.log(inventory)
+  //   if (inventory.title == "pants") {
+  //     return Pants
+  //   } else {
+  //   var arr = []
+  //   arr.push(Logo,Pants)
+  //   console.log(arr)
+  //   return arr[Math.floor(Math.random() * arr.length)]
+  // };
+  // }
 
   return (
     <div>
@@ -94,7 +92,10 @@ export default function ImgMediaCard() {
     {inventory.title}
     </Typography>
     <Typography  variant="body2" color="textSecondary" component="p">
-    S, M, L, XL
+    QTY: {inventory.qty}
+    </Typography>
+    <Typography  variant="body2" color="textSecondary" component="p">
+    Size: {inventory.size}
     </Typography>
     </CardContent>
     </CardActionArea>
