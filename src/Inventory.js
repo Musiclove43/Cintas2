@@ -24,6 +24,8 @@ import {DropzoneArea} from 'material-ui-dropzone'
 
 
 
+
+
 const useStyles = makeStyles({
 
   input:{
@@ -48,8 +50,12 @@ export default function Inventory() {
   const [credits, setCredits] = useState('')
   const [sku, setSku] = useState('')
   const [file, setFile] = useState('')
-
+  const [topic, setTopic] = useState(0)
   const [globalState, globalActions] = useGlobal();
+
+
+
+
  //  const [open, setOpen] = useGlobal(
  //   state => state.open,
  // );
@@ -73,6 +79,8 @@ export default function Inventory() {
       setCredits('')
       setSku('')
       setFile('')
+      setTopic(topic+1 )
+
     }
 
   const handleClickOpen = () => {
@@ -105,16 +113,27 @@ export default function Inventory() {
 
 // };
 
+
 const  handleChange = (file)=> {
+
   var file2 = file[0]
+  if (file2 == undefined){
+    console.log("nothing here")
+  } else {
     getBase64(file2).then(base64 => {
       localStorage["fileBase64"] = base64;
       console.debug("file stored",base64);
         setFile(localStorage.fileBase64)
-    });
+
+    })
+  }
 
   console.log(file2)
 }
+
+
+
+
   return (
     <div>
     <Grid container spacing={3}>
@@ -189,10 +208,12 @@ const  handleChange = (file)=> {
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
-    <img id="target" src={file}/>
+
 
     <DropzoneArea
     showPreviews={true}
+            filesLimit={1}
+            key={topic}
            onChange={handleChange.bind(this)}
            />
     </Grid>
