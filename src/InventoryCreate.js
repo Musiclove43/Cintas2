@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Inventory from './Inventory'
 import Logo from './scrubShirt.jpg'
+import Pants from './pants.png'
 import { useState, useEffect, useCallback, updateState, clearState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
@@ -60,6 +61,13 @@ export default function ImgMediaCard() {
 
    };
 
+  function getRandomImg(){
+    var arr = []
+    arr.push(Logo,Pants)
+    console.log(arr)
+    return arr[Math.floor(Math.random() * arr.length)]
+  }
+
   return (
     <div>
     <Inventory/>
@@ -73,7 +81,7 @@ export default function ImgMediaCard() {
     alt="Contemplative Reptile"
     height="200"
 
-    image={Logo}
+    image={getRandomImg()}
     title="Contemplative Reptile"
     />
     <CardContent >

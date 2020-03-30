@@ -83,6 +83,31 @@ export default function Inventory() {
     setOpen(false);
   };
 
+  const getBase64 = (formData) => {
+  return new Promise((resolve,reject) => {
+     const reader = new FileReader();
+     reader.onload = () => resolve(reader.result);
+
+     reader.onerror = error => reject(error);
+     reader.readAsDataURL(formData);
+  });
+}
+
+  const imageUpload = (file) => {
+    console.log(file)
+    // const file = e.target.value[0];
+    const formData = new FormData();
+            formData.append('file', file);
+            console.log(formData)
+  getBase64(formData).then(base64 => {
+    localStorage["fileBase64"] = base64;
+    console.debug("file stored",base64);
+  });
+
+
+
+};
+
 const  handleChange = (files)=> {
   setFile(file)
   console.log(file)
@@ -161,6 +186,7 @@ const  handleChange = (files)=> {
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
+    <img id="target" src={file}/>
 
            <Button
          variant="contained"
@@ -171,7 +197,7 @@ const  handleChange = (files)=> {
            type="file"
            style={{ display: "none" }}
            value={file}
-          onChange={e => setFile(e.target.value)}
+          onChange={(e) => imageUpload(e.target.value)}
          />
        </Button>
     </Grid>
