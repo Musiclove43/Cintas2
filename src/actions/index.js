@@ -59,6 +59,34 @@ export const deleteInventory= (store, inventory) =>  {
     store.setState({ inventory: store.state.inventory });
 }
 
+export const editInventory = (store, inventory) =>  {
+  var foundIndex =  store.state.inventory.findIndex(x => x.id == inventory.id);
+  const highlightInventory = store.state.inventory[foundIndex] = inventory;
+    store.setState({ highlighted: highlightInventory});
+    console.log(store.state.highlighted)
+}
+
+export const updateInventory = (store, data) =>  {
+  const newTitle = store.state.highlighted.title = data.title;
+  const newQty = store.state.highlighted.qty = data.qty;
+  const newCredits = store.state.highlighted.credits = data.credits;
+  const newSku = store.state.highlighted.sku = data.sku;
+  const newFile = store.state.highlighted.file = data.file;
+  const newSize = store.state.highlighted.size = data.size;
+
+  // console.log(newProp)
+  console.log(store.state.highlighted)
+  var activeInventory = store.state.highlighted;
+  var foundIndex =  store.state.inventory.findIndex(x => x.id == activeInventory.id);
+  const updatedInventory = store.state.inventory[foundIndex] = activeInventory;
+
+
+  store.setState({  updatedInventory });
+// console.log(newProp)
+  //   // const highlightUser = user;
+  //   store.setState({ highlighted: highlightUser });
+}
+
 export const addValue= (store, data) =>  {
     var index = store.state.value = data;
 

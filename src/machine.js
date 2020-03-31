@@ -41,6 +41,10 @@ const useStyles = makeStyles({
 export default function Machine() {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
+  const [slot1, setSlot] = useState("slot1")
+  const [slot2, setSlot2] = useState("slot2")
+  const [slot3, setSlot3] = useState("slot3")
+  const [machine, setMachine] = useState("Machine1")
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const [inventory, setInventory] = useGlobal(
@@ -61,14 +65,17 @@ export default function Machine() {
     // globalActions.openDialog(open);
     //  globalActions.editUsers(user);
     //  console.log(globalState);
-
   };
+
+function passMachineSlot(machine, slot1) {
+  console.log(slot1)
+}
 
   return (
     <div>
 
     <Typography gutterBottom variant="h5"  component="h2" >
-    MACHINE 1  >  ASSIGN ITEMS
+    MACHINE 1 >  ASSIGN ITEMS
     </Typography>
     <div className={classes.root}>
 
@@ -77,7 +84,7 @@ export default function Machine() {
     SLOT 1
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot(machine, slot1)} >
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -91,7 +98,7 @@ export default function Machine() {
     SLOT 2
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot(machine, slot2)}>
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>

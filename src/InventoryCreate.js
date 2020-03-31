@@ -14,6 +14,8 @@ import useGlobal from "./store";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import EditInventory from './editInventory';
+
 
 
 
@@ -43,8 +45,8 @@ export default function ImgMediaCard() {
    // state => state.highlighted,
    // actions => actions.addToCounterA
  )
-  const forceUpdate = useCallback(() => updateState({}), []);
- console.log("Here we are"+ inventory)
+ //  const forceUpdate = useCallback(() => updateState({}), []);
+ // console.log("Here we are"+ inventory)
 
  function deleteInventory(inventory) {
     globalActions.deleteInventory(inventory)
@@ -52,9 +54,10 @@ export default function ImgMediaCard() {
   };
 
   function editInventory(inventory) {
-    // const open = true
-    // globalActions.openDialog(open);
-    //  globalActions.editUsers(user);
+    console.log("clicked")
+    const open = true
+    globalActions.openDialog(open);
+     globalActions.editInventory(inventory);
     //  console.log(globalState);
 
    };
@@ -74,6 +77,7 @@ export default function ImgMediaCard() {
   return (
     <div>
     <Inventory/>
+    <EditInventory/>
     <div className={classes.root}>
     {inventory.map((inventory, i) => (
     <Card className={classes.spacing} key={i} >

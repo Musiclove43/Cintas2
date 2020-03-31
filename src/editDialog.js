@@ -39,7 +39,6 @@ export default function EditDialog() {
 
   const [open, setOpen] = useGlobal(
    state => state.open,
-
  );
 
 //  const [state, setHighlight] = useGlobal(

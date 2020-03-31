@@ -22,6 +22,8 @@ import Inventory from './Inventory'
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import Logo from './scrubShirt.jpg'
+import Skeleton from '@material-ui/lab/Skeleton';
+
 
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -84,7 +86,7 @@ function SimpleDialog(props) {
           {inventory.title}
           </Typography>
           <Typography  variant="body2" color="textSecondary" component="p">
-          S, M, L, XL
+          {inventory.size}
           </Typography>
           </CardContent>
           </CardActionArea>
@@ -118,15 +120,21 @@ export default function SimpleDialogDemo() {
   return (
     <div>
     <CardActionArea>
+    {selectedValue.file ? (
+
     <CardMedia
     component="img"
-    alt="Contemplative Reptile"
+    alt={Logo}
     height="200"
 
     image={selectedValue.file}
     title="Contemplative Reptile"
     />
+    ) : (
+      <Skeleton image={Logo} variant="rect" width={200} height={118} />
+)}
     <CardContent >
+    <Typography variant="subtitle1">Name:{selectedValue.title}</Typography>
 
     <Typography  variant="body2" color="textSecondary" component="p">
     QTY: {selectedValue.qty}
@@ -136,10 +144,9 @@ export default function SimpleDialogDemo() {
     </Typography>
     </CardContent>
     </CardActionArea>
-      <Typography variant="subtitle1">Selected: {selectedValue.title}</Typography>
       <br />
       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        Assign Item To Slot
+        Assign Item
       </Button>
       <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
     </div>
