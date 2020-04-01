@@ -68,12 +68,12 @@ return (
       </ListItem>
       </NavLink>
 
-      <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
+      <NavLink onClick={handleClick()} style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
         <ListItem to="/about/widget" button>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Locations" />
+          <ListItemText primary="Global Admin" />
         </ListItem>
         </NavLink>
 

@@ -37,9 +37,7 @@ export default function LocationCreate() {
     <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >LOCATION</Typography>
     </Grid>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-    +
-    </Button>
+
     </Grid>
     </Grid>
     <Dialog

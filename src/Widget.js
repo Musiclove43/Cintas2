@@ -22,6 +22,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Title from './Title';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Orders from './Orders';
 
 function Copyright() {
@@ -116,6 +117,13 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  direction: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  depositContext: {
+    flex: 1,
+  },
 }));
 
 export default function Widgets() {
@@ -147,15 +155,15 @@ export default function Widgets() {
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
-                <Title>Machine 13</Title>
+                <Title>Machine 2</Title>
                 <div className={classes.direction}>
-                <ArrowDropDownIcon/>
+                <ArrowDropDownIcon style={{color: "#ff3838"}}/>
                 <Typography component="p" variant="h4">
-                  14%
+                  23%
                 </Typography>
                 </div>
                 <Typography color="textSecondary" className={classes.depositContext}>
-                  on Lab Coats
+                  on Goggles
                 </Typography>
                 <div>
                   <Link color="primary" href="javascript:;">
@@ -167,17 +175,65 @@ export default function Widgets() {
             </Grid>
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+              <React.Fragment>
+                <Title>Machine 3</Title>
+                <div className={classes.direction}>
+                <ArrowDropUpIcon />
+                <Typography component="p" variant="h4">
+                  50%
+                </Typography>
+                </div>
+                <Typography color="textSecondary" className={classes.depositContext}>
+                  on Masks
+                </Typography>
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    View balance
+                  </Link>
+                </div>
+              </React.Fragment>
               </Paper>
             </Grid>
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+              <React.Fragment>
+                <Title>Machine 4</Title>
+                <div className={classes.direction}>
+                <ArrowDropUpIcon />
+                <Typography component="p" variant="h4">
+                  75%
+                </Typography>
+                </div>
+                <Typography color="textSecondary" className={classes.depositContext}>
+                  on Shields
+                </Typography>
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    View balance
+                  </Link>
+                </div>
+              </React.Fragment>
               </Paper>
             </Grid>
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+              <React.Fragment>
+                <Title>Machine 5</Title>
+                <div className={classes.direction}>
+                <ArrowDropDownIcon style={{color: "#ff3838"}}/>
+                <Typography component="p" variant="h4">
+                  40%
+                </Typography>
+                </div>
+                <Typography color="textSecondary" className={classes.depositContext}>
+                  on Scrub Pants
+                </Typography>
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    View balance
+                  </Link>
+                </div>
+              </React.Fragment>
               </Paper>
             </Grid>
             {/* Recent Orders */}

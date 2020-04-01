@@ -9,6 +9,7 @@ import LocationCreate from './LocationCreate';
 import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
+    paddingTop: 5
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -36,7 +38,7 @@ export default function Location() {
   const [globalState, globalActions] = useGlobal();
 
   const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded(false);
   };
 
   const handleClick = () => (event) => {
@@ -47,35 +49,21 @@ export default function Location() {
 
   return (
     <div className={classes.root}>
-    <LocationCreate/>
+    <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >LOCATION</Typography>
       <ExpansionPanel onClick={handleClick()} className={classes.expClass} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
           <Typography className={classes.heading}>St Joseph's Hospital</Typography>
           <Typography className={classes.secondaryHeading}></Typography>
+          <div style={{marginLeft: "auto", zIndex:2000, paddingTop: 5}}>
+            <ChevronRightIcon style={{ zIndex:2000}} />
+          </div>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Global Reporting
-          </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography>
-            Machines Onsite
-          </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography>
-            ADD USERS TO THIS LOCATION
-          </Typography>
-        </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
@@ -83,26 +71,13 @@ export default function Location() {
           <Typography className={classes.secondaryHeading}>
 
           </Typography>
+          <div style={{marginLeft: "auto", zIndex:2000}}>
+            <ChevronRightIcon style={{ zIndex:2000}} />
+          </div>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Global Reporting
-          </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography>
-            Machines Onsite
-          </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography>
-            ADD USERS TO THIS LOCATION
-          </Typography>
-        </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
@@ -110,38 +85,12 @@ export default function Location() {
           <Typography className={classes.secondaryHeading}>
 
           </Typography>
+          <div style={{marginLeft: "auto", zIndex:2000}}>
+            <ChevronRightIcon style={{ zIndex:2000}} />
+          </div>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-          Global Reporting
-          </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography>
-            Machines Onsite
-          </Typography>
-        </ExpansionPanelDetails>
-        <ExpansionPanelDetails>
-          <Typography>
-            ADD USERS TO THIS LOCATION
-          </Typography>
-        </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon/>}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography className={classes.heading}>Personal data</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+
     </div>
   );
 }

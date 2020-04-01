@@ -23,7 +23,7 @@ export default function Deposits() {
     <React.Fragment>
       <Title>Machine 1</Title>
       <div className={classes.direction}>
-      <ArrowDropDownIcon/>
+      <ArrowDropDownIcon style={{color: "#ff3838"}}/>
       <Typography component="p" variant="h4">
         14%
       </Typography>

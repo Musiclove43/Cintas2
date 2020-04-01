@@ -16,11 +16,11 @@ function createData(id, date, name, shipTo, paymentMethod, amount) {
 }
 
 const rows = [
-  createData(0, '16 Mar, 2019', 'Presley, Anna', 'Tupelo, MS', 'R2-D2', 'Labcoat'),
-  createData(1, '16 Mar, 2019', 'Paul, John', 'London, UK', 'BattleShip 1', 'Goggles'),
-  createData(2, '16 Mar, 2019', 'Scholz, Mike', 'Boston, MA', 'BattleShip 2', 'Scrubs'),
-  createData(3, '16 Mar, 2019', 'Thomas, Jackson', 'Gary, IN', 'IANA', 'Protective Gear'),
-  createData(4, '15 Mar, 2019', 'Michealis, Sara', 'Long Branch, NJ', 'Android X', 'Mask'),
+  createData(0, '16 Mar, 2019', 'Presley, Anna', 'St. Joseph Hospital', 'R2-D2', 'Labcoat'),
+  createData(1, '16 Mar, 2019', 'Paul, John', 'St. Joseph Hospital', 'BattleShip 1', 'Goggles'),
+  createData(2, '16 Mar, 2019', 'Scholz, Mike', 'St. Joseph Hospital', 'BattleShip 2', 'Scrubs'),
+  createData(3, '16 Mar, 2019', 'Thomas, Jackson', 'St. Joseph Hospital', 'IANA', 'Protective Gear'),
+  createData(4, '15 Mar, 2019', 'Michealis, Sara', 'St. Joseph Hospital', 'Android 11', 'Mask'),
 ];
 
 const useStyles = makeStyles(theme => ({

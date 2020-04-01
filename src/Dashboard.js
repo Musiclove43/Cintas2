@@ -25,7 +25,7 @@ import Widgets from './Widget';
 import Inventory from './Inventory';
 import ControlledExpansionPanels from './InventoryCreate'
 import Users from './Users';
-import Location from './Location';
+import LocationReport from './locationReport';
 import Configuration from './Configuration';
 import {
   BrowserRouter as Router,
@@ -201,7 +201,7 @@ export default function Dashboard() {
         <Route exact path="/about" component={Widgets}/>
         <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
         <Route exact path="/about/users" component={Users}/>
-        <Route exact path="/about/locations" component={Location}/>
+        <Route exact path="/about/locations" component={LocationReport}/>
         <Route exact path="/about/configurations" component={TabPanel}/>
         <Route exact path="/about/swipe" component={TabPanel}/>
 
