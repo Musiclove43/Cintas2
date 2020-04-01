@@ -17,8 +17,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import SimpleDialog from './productDialog'
 import Paper from '@material-ui/core/Paper';
-
-
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 
 const useStyles = makeStyles({
@@ -26,16 +25,22 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-
   },
   spacing:{
     marginRight: 15,
     flexBasis: "22%",
     marginTop: 15,
     padding: 20,
-
   },
-
+  header: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  button:{
+    marginLeft: "auto",
+    marginRight: 100,
+    marginTop: -5
+  },
 });
 
 export default function Machine() {
@@ -52,8 +57,8 @@ export default function Machine() {
     // state => state.highlighted,
     // actions => actions.addToCounterA
   )
-  const forceUpdate = useCallback(() => updateState({}), []);
-  console.log("Here we are"+ inventory)
+  // const forceUpdate = useCallback(() => updateState({}), []);
+  // console.log("Here we are"+ inventory)
 
   function deleteInventory(inventory) {
     globalActions.deleteInventory(inventory)
@@ -73,10 +78,18 @@ function passMachineSlot(machine, slot1) {
 
   return (
     <div>
-
+    <div className={classes.header}>
     <Typography gutterBottom variant="h5"  component="h2" >
-    MACHINE 1 >  ASSIGN ITEMS
+    MACHINE 1
     </Typography>
+    <ChevronRightIcon/>
+    <Typography gutterBottom variant="h5"  component="h2" >
+    ASSIGN ITEMS
+    </Typography>
+    <Button className={classes.button} variant="outlined" color="primary">
+    Apply Changes
+    </Button>
+    </div>
     <div className={classes.root}>
 
     <Paper className={classes.spacing} elevation={3} >

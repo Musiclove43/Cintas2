@@ -20,6 +20,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
+import Title from './Title';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Orders from './Orders';
 
 function Copyright() {
@@ -144,7 +146,23 @@ export default function Widgets() {
             </Grid>
             <Grid item xs={6} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+              <React.Fragment>
+                <Title>Machine 13</Title>
+                <div className={classes.direction}>
+                <ArrowDropDownIcon/>
+                <Typography component="p" variant="h4">
+                  14%
+                </Typography>
+                </div>
+                <Typography color="textSecondary" className={classes.depositContext}>
+                  on Lab Coats
+                </Typography>
+                <div>
+                  <Link color="primary" href="javascript:;">
+                    View balance
+                  </Link>
+                </div>
+              </React.Fragment>
               </Paper>
             </Grid>
             <Grid item xs={6} md={3} lg={3}>

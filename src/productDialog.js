@@ -124,7 +124,7 @@ export default function SimpleDialogDemo() {
 
     <CardMedia
     component="img"
-    alt={Logo}
+    alt="shirt"
     height="200"
 
     image={selectedValue.file}

@@ -16,11 +16,11 @@ function createData(id, date, name, shipTo, paymentMethod, amount) {
 }
 
 const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
+  createData(0, '16 Mar, 2019', 'Presley, Anna', 'Tupelo, MS', 'R2-D2', 'Labcoat'),
+  createData(1, '16 Mar, 2019', 'Paul, John', 'London, UK', 'BattleShip 1', 'Goggles'),
+  createData(2, '16 Mar, 2019', 'Scholz, Mike', 'Boston, MA', 'BattleShip 2', 'Scrubs'),
+  createData(3, '16 Mar, 2019', 'Thomas, Jackson', 'Gary, IN', 'IANA', 'Protective Gear'),
+  createData(4, '15 Mar, 2019', 'Michealis, Sara', 'Long Branch, NJ', 'Android X', 'Mask'),
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -33,15 +33,15 @@ export default function Orders() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Recent Transactions</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>User</TableCell>
+            <TableCell>Location</TableCell>
+            <TableCell>Machine</TableCell>
+            <TableCell align="right">Item</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

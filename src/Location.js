@@ -129,7 +129,7 @@ export default function Location() {
       </ExpansionPanel>
       <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
         <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel4bh-content"
           id="panel4bh-header"
         >

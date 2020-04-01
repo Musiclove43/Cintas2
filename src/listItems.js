@@ -8,6 +8,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 
@@ -74,6 +76,15 @@ return (
           <ListItemText primary="Locations" />
         </ListItem>
         </NavLink>
+
+        <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
+          <ListItem to="/about/widget" button>
+            <ListItemIcon>
+              <LocalShippingIcon />
+            </ListItemIcon>
+            <ListItemText primary="Truck" />
+          </ListItem>
+          </NavLink>
   </div>
 )
 };
