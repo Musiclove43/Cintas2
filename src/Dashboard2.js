@@ -31,6 +31,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import SwipeLocation from './swipeLocation';
+import {NavLink, Redirect} from "react-router-dom";
 
 
 import {
@@ -78,6 +80,11 @@ export default function Dashboard2() {
     globalActions.addValue(data)
     console.log(globalState)
   };
+  const handleClickUser = (num) => (event) => {
+    var data = num;
+    globalActions.swipeUser(data)
+    console.log(globalState)
+  };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
 
@@ -88,19 +95,22 @@ export default function Dashboard2() {
     <div style={{display: 'flex', flexDirection: 'row', paddingBottom: 8}}>
     <Typography style={{paddingTop: 5, paddingBottom: 20, marginRight: 25}} component="h2" variant="h5" >St. Joseph's Hospital</Typography>
     <div style={{marginTop: -7}}>
+
     <IconButton
     edge="start"
     color="inherit"
-    style={{ marginRight: 15}}
+    style={{ marginRight: 10}}
+
     >
 
-    <PersonAddIcon style={{ zIndex:2000, fontSize: 30}} />
+    <PersonAddIcon onClick={handleClickUser(1)}  color="secondary" style={{ zIndex:2000, fontSize: 30}} />
     </IconButton>
+
     <IconButton
     edge="start"
     color="inherit"
     >
-    <StoreMallDirectoryIcon style={{ zIndex:2000, fontSize: 30}} />
+    <StoreMallDirectoryIcon onClick={handleClickUser(2)} color="secondary"  style={{ zIndex:2000, fontSize: 30}} />
     </IconButton>
 
     </div>
@@ -110,7 +120,7 @@ export default function Dashboard2() {
     </Button>
     </div>
 
-    <Widgets/>
+    <SwipeLocation/>
 
 
 

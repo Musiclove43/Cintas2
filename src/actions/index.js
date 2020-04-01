@@ -89,6 +89,10 @@ export const updateInventory = (store, data) =>  {
 
 export const addValue= (store, data) =>  {
     var index = store.state.value = data;
-
     store.setState({ value: index });
+}
+
+export const swipeUser= (store, data) =>  {
+    var index = store.state.swipeUser = data;
+    store.setState({ swipeUser: index });
 }

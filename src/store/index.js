@@ -19,7 +19,8 @@ const initialState = {
     Slot8: '',
   },
   // highlighted: '',
-  value: 0
+  value: 0,
+  userSwipe: 0
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

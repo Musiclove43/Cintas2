@@ -38,7 +38,7 @@ export default function Location() {
   const [globalState, globalActions] = useGlobal();
 
   const handleChange = panel => (event, isExpanded) => {
-    setExpanded(false);
+    setExpanded(isExpanded ? panel : false);
   };
 
   const handleClick = () => (event) => {
@@ -50,7 +50,7 @@ export default function Location() {
   return (
     <div className={classes.root}>
     <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >LOCATION</Typography>
-      <ExpansionPanel onClick={handleClick()} className={classes.expClass} onChange={handleChange('panel1')}>
+      <ExpansionPanel onClick={handleClick()} className={classes.expClass} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary
           aria-controls="panel1bh-content"
           id="panel1bh-header"
