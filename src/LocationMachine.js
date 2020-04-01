@@ -15,9 +15,7 @@ import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import Widgets from './Widget';
 import Users from './Users.js'
-
-
-
+import Location from './Location';
 
 
 function TabPanel(props) {
@@ -57,13 +55,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SwipeLocation() {
+export default function LocationMachine() {
   const classes = useStyles();
   const theme = useTheme();
   const [globalState, globalActions] = useGlobal();
   const [value, setValue] = React.useState(0);
   const [index, setIndex] = useGlobal(
-   state => state.swipeUser,
+   state => state.value,
    // actions => actions.addToCounterA
  );
 
@@ -98,12 +96,10 @@ export default function SwipeLocation() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-        <Widgets />
+        <Location/>
         </TabPanel>
+
         <TabPanel value={index} index={1} dir={theme.direction}>
-          <Users/>
-        </TabPanel>
-        <TabPanel value={index} index={2} dir={theme.direction}>
           <Configuration />
         </TabPanel>
 

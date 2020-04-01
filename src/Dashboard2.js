@@ -33,6 +33,7 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SwipeLocation from './swipeLocation';
 import {NavLink, Redirect} from "react-router-dom";
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 
 import {
@@ -95,12 +96,16 @@ export default function Dashboard2() {
     <div style={{display: 'flex', flexDirection: 'row', paddingBottom: 8}}>
     <Typography style={{paddingTop: 5, paddingBottom: 20, marginRight: 25}} component="h2" variant="h5" >St. Joseph's Hospital</Typography>
     <div style={{marginTop: -7}}>
-
+    <IconButton
+    edge="start"
+    color="inherit"
+    >
+    <AssignmentIcon onClick={handleClickUser(0)} color="secondary"  style={{ zIndex:2000, fontSize: 30}} />
+    </IconButton>
     <IconButton
     edge="start"
     color="inherit"
     style={{ marginRight: 10}}
-
     >
 
     <PersonAddIcon onClick={handleClickUser(1)}  color="secondary" style={{ zIndex:2000, fontSize: 30}} />
@@ -112,6 +117,7 @@ export default function Dashboard2() {
     >
     <StoreMallDirectoryIcon onClick={handleClickUser(2)} color="secondary"  style={{ zIndex:2000, fontSize: 30}} />
     </IconButton>
+
 
     </div>
     <Button onClick={handleClick()} style={{marginLeft: "auto", marginTop: -9, marginBottom: 10, paddingTop: 1, paddingBottom: 1}} variant="outlined" color="primary" >

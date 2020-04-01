@@ -77,8 +77,8 @@ return (
         </ListItem>
         </NavLink>
 
-        <NavLink style={{textDecoration: 'none', color: '#202020'}} to="/about/locations">
-          <ListItem to="/about/widget" button>
+        <NavLink onClick={handleClick()}  style={{textDecoration: 'none', color: '#202020'}} to="/about/truck">
+          <ListItem to="/about/truck" button>
             <ListItemIcon>
               <LocalShippingIcon />
             </ListItemIcon>

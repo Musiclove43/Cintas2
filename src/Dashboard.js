@@ -27,6 +27,8 @@ import ControlledExpansionPanels from './InventoryCreate'
 import Users from './Users';
 import LocationReport from './locationReport';
 import Configuration from './Configuration';
+import LocationMachine from './LocationMachine';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -204,6 +206,7 @@ export default function Dashboard() {
         <Route exact path="/about/locations" component={LocationReport}/>
         <Route exact path="/about/configurations" component={TabPanel}/>
         <Route exact path="/about/swipe" component={TabPanel}/>
+        <Route exact path="/about/truck" component={LocationMachine}/>
 
         </Container>
         <Copyright />
