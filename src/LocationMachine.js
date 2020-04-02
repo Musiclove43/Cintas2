@@ -102,6 +102,9 @@ export default function LocationMachine() {
         <TabPanel value={index} index={1} dir={theme.direction}>
           <Configuration />
         </TabPanel>
+        <TabPanel value={index} index={2} dir={theme.direction}>
+          <Configuration />
+        </TabPanel>
 
       </SwipeableViews>
     </div>

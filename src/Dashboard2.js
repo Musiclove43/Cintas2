@@ -95,7 +95,7 @@ export default function Dashboard2() {
     <main className={classes.content}>
     <div style={{display: 'flex', flexDirection: 'row', paddingBottom: 8}}>
     <Typography style={{paddingTop: 5, paddingBottom: 20, marginRight: 25}} component="h2" variant="h5" >St. Joseph's Hospital</Typography>
-    <div style={{marginTop: -7}}>
+    <div style={{  marginTop: -7}}>
     <IconButton
     edge="start"
     color="inherit"

@@ -18,6 +18,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import SimpleDialog from './productDialog'
 import Paper from '@material-ui/core/Paper';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 const useStyles = makeStyles({
@@ -86,9 +87,15 @@ function passMachineSlot(machine, slot1) {
     <Typography gutterBottom variant="h5"  component="h2" >
     ASSIGN ITEMS
     </Typography>
-    <Button className={classes.button} variant="outlined" color="primary">
+    <div className={classes.button} >
+    <Button style={{marginRight: 5}} variant="outlined" color="primary" >
+    <ArrowBackIcon />
+  
+    </Button>
+    <Button variant="outlined" color="primary">
     Apply Changes
     </Button>
+      </div>
     </div>
     <div className={classes.root}>
 
