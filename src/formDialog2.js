@@ -87,7 +87,7 @@ export default function FormDialog() {
     </Grid>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-    +
+    ADD USER +
     </Button>
     </Grid>
     <Grid style={{marginLeft: "auto"}} item >

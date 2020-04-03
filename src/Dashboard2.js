@@ -111,6 +111,7 @@ export default function Dashboard2() {
     ) : (
       <div style={{  display: "flex",
       flexDirection: "row", paddingTop: 3}}>
+
       <Typography style={{ marginRight: 5}} gutterBottom variant="h5"  component="h2" >
       {location}
       </Typography>
@@ -120,7 +121,8 @@ export default function Dashboard2() {
       ) : (
         <Typography style={{ paddingBottom: 20}} component="h2" variant="h5" >MACHINES</Typography>
       )}
-      <div style={{ marginLeft: "auto", marginRight: 5}} >
+
+      <div style={{ marginLeft: "auto", marginRight: 5, marginTop: -5}} >
       <Button onClick={handleClick()} variant="outlined" color="primary" >
       <ArrowBackIcon style={{ marginRight: 7, fontSize: 20}}/>
       Back

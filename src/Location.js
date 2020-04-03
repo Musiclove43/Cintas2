@@ -102,6 +102,8 @@ export default function Location() {
     expandIcon={<ExpandMoreIcon />}
     aria-controls="panel2bh-content"
     id="panel2bh-header"
+    onClick={handleLocation('DENVER HEALTH')}
+
     >
     <Typography className={classes.heading}>Denver Health</Typography>
     <Typography className={classes.secondaryHeading}>
@@ -137,6 +139,7 @@ export default function Location() {
     expandIcon={<ExpandMoreIcon />}
     aria-controls="panel3bh-content"
     id="panel3bh-header"
+    onClick={handleLocation('INTERMOUNTAIN HEALTHCARE')}
     >
     <Typography className={classes.heading}>Intermountain Healthcare</Typography>
     <Typography className={classes.secondaryHeading}>
