@@ -50,7 +50,8 @@ export default function Machine() {
   const [slot1, setSlot] = useState("slot1")
   const [slot2, setSlot2] = useState("slot2")
   const [slot3, setSlot3] = useState("slot3")
-  const [machine, setMachine] = useState("Machine1")
+  const [machine, setMachine] = useState("machine1")
+
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const [inventory, setInventory] = useGlobal(
@@ -73,8 +74,11 @@ export default function Machine() {
     //  console.log(globalState);
   };
 
-function passMachineSlot(machine, slot1) {
-  console.log(slot1)
+function passMachineSlot(slot) {
+  console.log(slot)
+  var data = {machine, slot}
+  globalActions.setMachine(data);
+
 }
 
   return (
@@ -90,7 +94,7 @@ function passMachineSlot(machine, slot1) {
     <div className={classes.button} >
     <Button style={{marginRight: 5}} variant="outlined" color="primary" >
     <ArrowBackIcon />
-  
+
     </Button>
     <Button variant="outlined" color="primary">
     Apply Changes
@@ -103,8 +107,30 @@ function passMachineSlot(machine, slot1) {
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 1
     </Typography>
+    <CardActionArea>
+
+    <CardMedia
+    component="img"
+    alt="shirt"
+    height="200"
+
+    image={Logo}
+    title="Contemplative Reptile"
+    />
+
+    <CardContent >
+    <Typography variant="subtitle1">Name:</Typography>
+
+    <Typography  variant="body2" color="textSecondary" component="p">
+    QTY:
+    </Typography>
+    <Typography  variant="body2" color="textSecondary" component="p">
+    SIZE:
+    </Typography>
+    </CardContent>
+    </CardActionArea>
     <Card>
-    <CardActions onClick={() => passMachineSlot(machine, slot1)} >
+    <CardActions  onClick={() => passMachineSlot("slot1")} >
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -118,7 +144,7 @@ function passMachineSlot(machine, slot1) {
     SLOT 2
     </Typography>
     <Card>
-    <CardActions onClick={() => passMachineSlot(machine, slot2)}>
+    <CardActions onClick={() => passMachineSlot("slot2")}>
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>

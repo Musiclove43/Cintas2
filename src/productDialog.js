@@ -23,6 +23,8 @@ import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import Logo from './scrubShirt.jpg'
 import Skeleton from '@material-ui/lab/Skeleton';
+import { useState, useEffect, useCallback, updateState, clearState} from "react";
+
 
 
 
@@ -49,20 +51,37 @@ const useStyles = makeStyles({
 
 function SimpleDialog(props) {
   const [globalState, globalActions] = useGlobal();
+
   const [inventory, setInventory] = useGlobal(
    state => state.inventory
    // state => state.highlighted,
    // actions => actions.addToCounterA
   )
+  const [machine, setMachine] = useGlobal(
+   state => state.setMachine
+   // state => state.highlighted,
+   // actions => actions.addToCounterA
+  )
+  const [data, setData] = useState({['']: ''})
   const classes = useStyles();
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
+
+    // globalActions.setProduct(data);
   };
 
   const handleListItemClick = (inventory) => {
     onClose(inventory);
+    var slot = machine.slot
+    var mainMachine = machine.machine
+    var newKey = {[slot]:inventory};
+    var data = {mainMachine,newKey}
+    // console.log(newKey)
+
+
+    globalActions.setProduct(mainMachine,newKey,slot);
   };
 
   return (
