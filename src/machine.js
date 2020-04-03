@@ -107,28 +107,7 @@ function passMachineSlot(slot) {
     <Typography gutterBottom variant="h5"  component="h2" >
     SLOT 1
     </Typography>
-    <CardActionArea>
 
-    <CardMedia
-    component="img"
-    alt="shirt"
-    height="200"
-
-    image={Logo}
-    title="Contemplative Reptile"
-    />
-
-    <CardContent >
-    <Typography variant="subtitle1">Name:</Typography>
-
-    <Typography  variant="body2" color="textSecondary" component="p">
-    QTY:
-    </Typography>
-    <Typography  variant="body2" color="textSecondary" component="p">
-    SIZE:
-    </Typography>
-    </CardContent>
-    </CardActionArea>
     <Card>
     <CardActions  onClick={() => passMachineSlot("slot1")} >
     <div style={{marginLeft: "auto"}}>

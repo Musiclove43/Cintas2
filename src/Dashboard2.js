@@ -34,6 +34,10 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SwipeLocation from './swipeLocation';
 import {NavLink, Redirect} from "react-router-dom";
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import Skeleton from '@material-ui/lab/Skeleton';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+
 
 
 import {
@@ -53,7 +57,8 @@ import TabPanel from './swipe'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    // display: 'flex',
+    // flexDirection: "row"
   },
 
   title: {
@@ -74,6 +79,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function Dashboard2() {
   const [globalState, globalActions] = useGlobal();
+  const [swipeUser, setSwipeUser] = useGlobal(
+    state => state.swipeUser
+  );
+  const [location, setLocation] = useGlobal(
+    state => state.location,
+    // state => state.highlighted,
+    // actions => actions.addToCounterA
+  );
 
   const classes = useStyles();
   const handleClick = () => (event) => {
@@ -92,45 +105,31 @@ export default function Dashboard2() {
   return (
     <div className={classes.root}>
 
-    <main className={classes.content}>
-    <div style={{display: 'flex', flexDirection: 'row', paddingBottom: 8}}>
-    <Typography style={{paddingTop: 5, paddingBottom: 20, marginRight: 25}} component="h2" variant="h5" >St. Joseph's Hospital</Typography>
-    <div style={{  marginTop: -7}}>
-    <IconButton
-    edge="start"
-    color="inherit"
-    >
-    <AssignmentIcon onClick={handleClickUser(0)} color="secondary"  style={{ zIndex:2000, fontSize: 30}} />
-    </IconButton>
-    <IconButton
-    edge="start"
-    color="inherit"
-    style={{ marginRight: 10}}
-    >
+    {swipeUser === 1 ? (
+      <Skeleton style={{ display: "none"}} variant="rect" width={200} height={118} />
 
-    <PersonAddIcon onClick={handleClickUser(1)}  color="secondary" style={{ zIndex:2000, fontSize: 30}} />
-    </IconButton>
-
-    <IconButton
-    edge="start"
-    color="inherit"
-    >
-    <StoreMallDirectoryIcon onClick={handleClickUser(2)} color="secondary"  style={{ zIndex:2000, fontSize: 30}} />
-    </IconButton>
-
-
-    </div>
-    <Button onClick={handleClick()} style={{marginLeft: "auto", marginTop: -9, marginBottom: 10, paddingTop: 1, paddingBottom: 1}} variant="outlined" color="primary" >
-    <ArrowBackIcon style={{ marginRight: 7, fontSize: 20}}/>
-    Back
-    </Button>
-    </div>
+    ) : (
+      <div style={{  display: "flex",
+      flexDirection: "row", paddingTop: 3}}>
+      <Typography style={{ marginRight: 5}} gutterBottom variant="h5"  component="h2" >
+      {location}
+      </Typography>
+      <ChevronRightIcon style={{ marginRight: 5}} />
+      {swipeUser === 0 ? (
+        <Typography style={{ paddingBottom: 20}} component="h2" variant="h5" >REPORTING</Typography>
+      ) : (
+        <Typography style={{ paddingBottom: 20}} component="h2" variant="h5" >MACHINES</Typography>
+      )}
+      <div style={{ marginLeft: "auto", marginRight: 5}} >
+      <Button onClick={handleClick()} variant="outlined" color="primary" >
+      <ArrowBackIcon style={{ marginRight: 7, fontSize: 20}}/>
+      Back
+      </Button>
+      </div>
+      </div>
+    )}
 
     <SwipeLocation/>
-
-
-
-    </main>
     </div>
   );
 }

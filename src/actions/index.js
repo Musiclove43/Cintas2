@@ -83,15 +83,20 @@ export const addValue= (store, data) =>  {
     store.setState({ value: index });
 }
 
-export const swipeUser= (store, data) =>  {
-    var index = store.state.swipeUser = data;
+export const swipeUser= (store, value) =>  {
+    var index = store.state.swipeUser = value;
     store.setState({ swipeUser: index });
 }
 
 export const setMachine= (store, data) =>  {
     var index = store.state.setMachine = data;
     store.setState({ setMachine: index });
+    console.log(store.state)
+}
 
+export const handleLocation= (store, value) =>  {
+    var index = store.state.location = value;
+    store.setState({ location: index});
     console.log(store.state)
 }
 
@@ -101,10 +106,6 @@ export const setProduct= (store, mainMachine, newKey, slot) =>  {
 
     var foundIndex =  store.state.machines.findIndex(x => x.machine == mainMachine.machine);
     const foundMachine = store.state.machines[foundIndex] ;
-
-    // console.log(foundMachine)
-
-
     var obj = foundMachine;
     var keys = obj[Object.keys(obj)[0]]; //get keys from object as an array
 
@@ -113,8 +114,12 @@ console.log(keys);
       console.log(key, key == slot)
 
       if (key == slot) {
-       key = newKey
-       console.log("equal" + key)
+        // key.splice
+        // obj['New key'] = obj['old key'];
+       console.log(key)
+       Object.defineProperty(keys, key, newKey)
+       console.log(keys)
+
       }
     }
 

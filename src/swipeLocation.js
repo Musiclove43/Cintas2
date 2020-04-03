@@ -14,7 +14,7 @@ import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import Widgets from './Widget';
-import Users from './Users.js'
+import Users2 from './Users2.js'
 
 
 
@@ -25,14 +25,14 @@ function TabPanel(props) {
 
   return (
     <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
+    component="div"
+    role="tabpanel"
+    hidden={value !== index}
+    id={`full-width-tabpanel-${index}`}
+    aria-labelledby={`full-width-tab-${index}`}
+    {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+    {value === index && <Box p={3}>{children}</Box>}
     </Typography>
   );
 }
@@ -63,9 +63,9 @@ export default function SwipeLocation() {
   const [globalState, globalActions] = useGlobal();
   const [value, setValue] = React.useState(0);
   const [index, setIndex] = useGlobal(
-   state => state.swipeUser,
-   // actions => actions.addToCounterA
- );
+    state => state.swipeUser,
+    // actions => actions.addToCounterA
+  );
 
   const handleChange = (event, newValue) => {
     console.log(newValue);
@@ -78,36 +78,35 @@ export default function SwipeLocation() {
 
   return (
     <div className={classes.root}>
-      <AppBar style={{display: "none"}} position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Item One"  />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={index}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-        <Widgets />
-        </TabPanel>
-        <TabPanel value={index} index={1} dir={theme.direction}>
-          <Users/>
-        </TabPanel>
-        <TabPanel value={index} index={2} dir={theme.direction}>
-          <Configuration />
-        </TabPanel>
-
-      </SwipeableViews>
+    <AppBar style={{display: "none"}} position="static" color="default">
+    <Tabs
+    value={value}
+    onChange={handleChange}
+    indicatorColor="primary"
+    textColor="primary"
+    variant="fullWidth"
+    aria-label="full width tabs example"
+    >
+    <Tab label="Item One"  />
+    <Tab label="Item Two" />
+    <Tab label="Item Three" />
+    </Tabs>
+    </AppBar>
+    <SwipeableViews
+    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+    index={index}
+    onChangeIndex={handleChangeIndex}
+    >
+    <TabPanel value={value} index={0} dir={theme.direction}>
+    <Widgets />
+    </TabPanel>
+    <TabPanel value={index} index={1} dir={theme.direction}>
+    <Users2/>
+    </TabPanel>
+    <TabPanel value={index} index={2} dir={theme.direction}>
+    <Configuration />
+    </TabPanel>
+    </SwipeableViews>
     </div>
   );
 }

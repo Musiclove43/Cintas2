@@ -10,6 +10,10 @@ import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,55 +45,129 @@ export default function Location() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleClick = () => (event) => {
+  const handleClick = (value) => (event) => {
     var data = 1;
     globalActions.addValue(data)
-    console.log("thisssss")
+      globalActions.swipeUser(value)
+
+  };
+
+  const handleLocation = (value) => (event) => {
+
+      globalActions.handleLocation(value)
+      console.log(globalState.location)
+
   };
 
   return (
     <div className={classes.root}>
     <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >LOCATION</Typography>
-      <ExpansionPanel onClick={handleClick()} className={classes.expClass} onChange={handleChange('panel2')}>
-        <ExpansionPanelSummary
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.heading}>St Joseph's Hospital</Typography>
-          <Typography className={classes.secondaryHeading}></Typography>
-          <div style={{marginLeft: "auto", zIndex:2000, paddingTop: 5}}>
-            <ChevronRightIcon style={{ zIndex:2000}} />
-          </div>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
-      <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <ExpansionPanelSummary
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography className={classes.heading}>Denver Health</Typography>
-          <Typography className={classes.secondaryHeading}>
+    <ExpansionPanel  className={classes.expClass} onChange={handleChange('panel1')}>
+    <ExpansionPanelSummary
+    expandIcon={<ExpandMoreIcon />}
+    aria-controls="panel1bh-content"
+    id="panel1bh-header"
+    onClick={handleLocation('ST. JOSEPHS HOSPITAL')}
+    >
+    <Typography  className={classes.heading}>ST. JOSEPH'S HOSPITAL</Typography>
+    <Typography className={classes.secondaryHeading}></Typography>
 
-          </Typography>
-          <div style={{marginLeft: "auto", zIndex:2000}}>
-            <ChevronRightIcon style={{ zIndex:2000}} />
-          </div>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
-      <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <ExpansionPanelSummary
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.heading}>Intermountain Healthcare</Typography>
-          <Typography className={classes.secondaryHeading}>
+    </ExpansionPanelSummary>
+    <ExpansionPanelDetails>
+    <List component="nav" className={classes.root} aria-label="mailbox folders">
+    <ListItem onClick={handleClick(0)} button>
+    <ListItemText primary="View Reporting" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    <Divider />
+    <ListItem onClick={handleClick(1)} button divider>
+    <ListItemText primary="Manage Users" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    <ListItem onClick={handleClick(2)}  button>
+    <ListItemText primary="Machines Onsite" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    </List>
+    </ExpansionPanelDetails>
+    </ExpansionPanel>
+    <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+    <ExpansionPanelSummary
+    expandIcon={<ExpandMoreIcon />}
+    aria-controls="panel2bh-content"
+    id="panel2bh-header"
+    >
+    <Typography className={classes.heading}>Denver Health</Typography>
+    <Typography className={classes.secondaryHeading}>
+    </Typography>
 
-          </Typography>
-          <div style={{marginLeft: "auto", zIndex:2000}}>
-            <ChevronRightIcon style={{ zIndex:2000}} />
-          </div>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
+    </ExpansionPanelSummary>
+    <ExpansionPanelDetails>
+    <List component="nav" className={classes.root} aria-label="mailbox folders">
+    <ListItem onClick={handleClick(0)} button>
+    <ListItemText primary="Reporting" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    <Divider />
+    <ListItem onClick={handleClick(1)} button divider>
+    <ListItemText primary="Manage Users" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    <ListItem onClick={handleClick(2)}  button>
+    <ListItemText primary="Machines Onsite" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    </List>
+    </ExpansionPanelDetails>
+    </ExpansionPanel>
+    <ExpansionPanel className={classes.expClass} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+    <ExpansionPanelSummary
+    expandIcon={<ExpandMoreIcon />}
+    aria-controls="panel3bh-content"
+    id="panel3bh-header"
+    >
+    <Typography className={classes.heading}>Intermountain Healthcare</Typography>
+    <Typography className={classes.secondaryHeading}>
+
+    </Typography>
+
+    </ExpansionPanelSummary>
+    <ExpansionPanelDetails>
+    <List component="nav" className={classes.root} aria-label="mailbox folders">
+    <ListItem onClick={handleClick()} button>
+    <ListItemText primary="Reporting" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    <Divider />
+    <ListItem onClick={handleClick()} button divider>
+    <ListItemText primary="Manage Users" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    <ListItem onClick={handleClick()}  button>
+    <ListItemText primary="Machines Onsite" />
+    <div style={{marginLeft: "auto", zIndex:2000}}>
+    <ChevronRightIcon style={{ zIndex:2000}} />
+    </div>
+    </ListItem>
+    </List>
+    </ExpansionPanelDetails>
+    </ExpansionPanel>
 
     </div>
   );

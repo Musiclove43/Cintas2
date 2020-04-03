@@ -36,7 +36,8 @@ size: "Small"}],
 
   // setMachine: '',
   value: 0,
-  userSwipe: 0
+  userSwipe: 0,
+  location: ''
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

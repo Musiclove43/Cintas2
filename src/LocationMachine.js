@@ -15,7 +15,7 @@ import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import Widgets from './Widget';
 import Users from './Users.js'
-import Location from './Location';
+import Location2 from './Location2';
 
 
 function TabPanel(props) {
@@ -96,7 +96,7 @@ export default function LocationMachine() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-        <Location/>
+        <Location2/>
         </TabPanel>
 
         <TabPanel value={index} index={1} dir={theme.direction}>
