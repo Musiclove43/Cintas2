@@ -116,6 +116,8 @@ export default function Dashboard2() {
       {location}
       </Typography>
       <ChevronRightIcon style={{ marginRight: 5}} />
+
+      
       {swipeUser === 0 ? (
         <Typography style={{ paddingBottom: 20}} component="h2" variant="h5" >REPORTING</Typography>
       ) : (

@@ -105,6 +105,7 @@ export default function LocationReport() {
         <TabPanel value={index} index={1} dir={theme.direction}>
         <Dashboard2/>
         </TabPanel>
+        
 
       </SwipeableViews>
     </div>

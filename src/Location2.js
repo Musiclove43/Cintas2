@@ -46,6 +46,12 @@ export default function Location2() {
     globalActions.addValue(data)
     console.log("thisssss")
   };
+  const handleLocation = (value) => (event) => {
+
+      globalActions.handleLocation(value)
+      console.log(globalState.location)
+
+  };
 
   return (
     <div className={classes.root}>
@@ -54,6 +60,7 @@ export default function Location2() {
         <ExpansionPanelSummary
           aria-controls="panel1bh-content"
           id="panel1bh-header"
+          onClick={handleLocation('ST. JOSEPHS HOSPITAL')}
         >
           <Typography className={classes.heading}>St Joseph's Hospital</Typography>
           <Typography className={classes.secondaryHeading}></Typography>

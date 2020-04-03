@@ -7,8 +7,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Configuration from './Configuration';
-import Machine from './machine';
+import Configuration2 from './Configuration2';
+import Machine2 from './MachineOnsite';
 import Button from '@material-ui/core/Button';
 import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
@@ -100,10 +100,10 @@ export default function LocationMachine() {
         </TabPanel>
 
         <TabPanel value={index} index={1} dir={theme.direction}>
-          <Configuration />
+          <Configuration2 />
         </TabPanel>
         <TabPanel value={index} index={2} dir={theme.direction}>
-          <Configuration />
+          <Machine2 />
         </TabPanel>
 
       </SwipeableViews>

@@ -15,7 +15,7 @@ import useGlobal from "./store";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import SimpleDialog from './productDialog'
+import SimpleDialog2 from './productDialog2'
 import Paper from '@material-ui/core/Paper';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Machine() {
+export default function Machine2() {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [slot1, setSlot] = useState("slot1")
@@ -56,6 +56,11 @@ export default function Machine() {
 
   const [inventory, setInventory] = useGlobal(
     state => state.inventory
+    // state => state.highlighted,
+    // actions => actions.addToCounterA
+  )
+  const [location, setLocation] = useGlobal(
+    state => state.location
     // state => state.highlighted,
     // actions => actions.addToCounterA
   )
@@ -91,12 +96,13 @@ const handleClick = () => (event) => {
     <div>
     <div className={classes.header}>
     <Typography gutterBottom variant="h5"  component="h2" >
-    MACHINE 1
+  {location}
     </Typography>
     <ChevronRightIcon/>
     <Typography gutterBottom variant="h5"  component="h2" >
-    ASSIGN ITEMS
+    MACHINE 1
     </Typography>
+
     <div className={classes.button} >
     <Button onClick={handleClick()}  style={{marginRight: 5}} variant="outlined" color="primary" >
     <ArrowBackIcon />
@@ -117,7 +123,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions  onClick={() => passMachineSlot("slot1")} >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -131,7 +137,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions onClick={() => passMachineSlot("slot2")}>
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -145,7 +151,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -158,7 +164,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -171,7 +177,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -184,7 +190,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -197,7 +203,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>
@@ -210,7 +216,7 @@ const handleClick = () => (event) => {
     <Card>
     <CardActions >
     <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
+    <SimpleDialog2/>
     </div>
     </CardActions>
     </Card>

@@ -105,7 +105,7 @@ export default function Location() {
     onClick={handleLocation('DENVER HEALTH')}
 
     >
-    <Typography className={classes.heading}>Denver Health</Typography>
+    <Typography className={classes.heading}>DENVER HEALTH</Typography>
     <Typography className={classes.secondaryHeading}>
     </Typography>
 
@@ -141,7 +141,7 @@ export default function Location() {
     id="panel3bh-header"
     onClick={handleLocation('INTERMOUNTAIN HEALTHCARE')}
     >
-    <Typography className={classes.heading}>Intermountain Healthcare</Typography>
+    <Typography className={classes.heading}>INTERMOUNTAIN HEALTHCARE</Typography>
     <Typography className={classes.secondaryHeading}>
 
     </Typography>
@@ -149,20 +149,20 @@ export default function Location() {
     </ExpansionPanelSummary>
     <ExpansionPanelDetails>
     <List component="nav" className={classes.root} aria-label="mailbox folders">
-    <ListItem onClick={handleClick()} button>
+    <ListItem onClick={handleClick(0)} button>
     <ListItemText primary="Reporting" />
     <div style={{marginLeft: "auto", zIndex:2000}}>
     <ChevronRightIcon style={{ zIndex:2000}} />
     </div>
     </ListItem>
     <Divider />
-    <ListItem onClick={handleClick()} button divider>
+    <ListItem onClick={handleClick(1)} button divider>
     <ListItemText primary="Manage Users" />
     <div style={{marginLeft: "auto", zIndex:2000}}>
     <ChevronRightIcon style={{ zIndex:2000}} />
     </div>
     </ListItem>
-    <ListItem onClick={handleClick()}  button>
+    <ListItem onClick={handleClick(2)}  button>
     <ListItemText primary="Machines Onsite" />
     <div style={{marginLeft: "auto", zIndex:2000}}>
     <ChevronRightIcon style={{ zIndex:2000}} />
