@@ -94,6 +94,13 @@ export const setMachine= (store, data) =>  {
     console.log(store.state)
 }
 
+export const globalMachine= (store, data) =>  {
+    var index = store.state.globalMachine = data;
+    store.setState({ globalMachine: index });
+    console.log(store.state)
+}
+
+
 export const handleLocation= (store, value) =>  {
     var index = store.state.location = value;
     store.setState({ location: index});

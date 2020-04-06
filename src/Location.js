@@ -48,7 +48,10 @@ export default function Location() {
   const handleClick = (value) => (event) => {
     var data = 1;
     globalActions.addValue(data)
-      globalActions.swipeUser(value)
+    globalActions.swipeUser(value)
+    if (value == 2) {
+      globalActions.globalMachine(0)
+    }
 
   };
 

@@ -151,7 +151,7 @@ export default function SimpleDialogDemo() {
     title="Contemplative Reptile"
     />
     ) : (
-      <Skeleton image={Logo} variant="rect" width={200} height={118} />
+      <Skeleton image={Logo} variant="rect" width={190} height={118} />
 )}
     <CardContent >
     <Typography variant="subtitle1">Name:{selectedValue.title}</Typography>
