@@ -126,7 +126,13 @@ SimpleDialog2.propTypes = {
 
 export default function SimpleDialogDemo() {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+  const [selectedValue, setSelectedValue] = React.useState({id: 1387568269588,
+title: "Scrub Shirt",
+qty: "23",
+credits: "1",
+sku: "098098",
+file: Logo,
+size: "Small"});
 
   const handleClickOpen = () => {
     setOpen(true);

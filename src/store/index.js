@@ -7,7 +7,7 @@ const initialState = {
   user: [],
   location: [],
   inventory: [{id: 1387568269588,
-title: "dsjhjksd",
+title: "Scrub Shirt",
 qty: "98098",
 credits: "98098",
 sku: "098098",

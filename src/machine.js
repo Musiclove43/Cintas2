@@ -16,6 +16,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import SimpleDialog from './productDialog'
+import SubmitDiag from './submitDiag'
+
 import Paper from '@material-ui/core/Paper';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -81,6 +83,16 @@ function passMachineSlot(slot) {
 
 }
 
+const submitDiag = () => (event) => {
+  const open = true
+  globalActions.openDialog(open)
+  setTimeout(function(){
+    var data = 0;
+  globalActions.addValue(data)
+globalActions.openDialog(false)
+}, 2000);
+  console.log(globalState)
+};
 const handleClick = () => (event) => {
   var data = 0;
   globalActions.addValue(data)
@@ -90,6 +102,7 @@ const handleClick = () => (event) => {
   return (
     <div>
     <div className={classes.header}>
+    <SubmitDiag style={{display: "none"}}/>
     <Typography gutterBottom variant="h5"  component="h2" >
     MACHINE 1
     </Typography>
@@ -102,7 +115,7 @@ const handleClick = () => (event) => {
     <ArrowBackIcon />
 
     </Button>
-    <Button variant="outlined" color="primary">
+    <Button onClick={submitDiag()} variant="outlined" color="primary">
     Apply Changes
     </Button>
       </div>
