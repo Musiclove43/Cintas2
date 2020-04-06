@@ -82,7 +82,7 @@ function SimpleDialog(props) {
     // console.log(newKey)
 
 
-    globalActions.setProduct(mainMachine,newKey,slot);
+    globalActions.setProduct(mainMachine,newKey,slot, inventory);
   };
 
   return (

@@ -107,28 +107,56 @@ export const handleLocation= (store, value) =>  {
     console.log(store.state)
 }
 
-export const setProduct= (store, mainMachine, newKey, slot) =>  {
+export const setProduct= (store, mainMachine, newKey, slot, inventory) =>  {
 
     var index = store.state.selectedValue = {[mainMachine]:newKey};
 
     var foundIndex =  store.state.machines.findIndex(x => x.machine == mainMachine.machine);
     const foundMachine = store.state.machines[foundIndex] ;
-    var obj = foundMachine;
-    var keys = obj[Object.keys(obj)[0]]; //get keys from object as an array
+    // var obj = foundMachine;
+     // console.log(obj)
 
-console.log(keys);
-    for (var key in keys) {
-      console.log(key, key == slot)
 
-      if (key == slot) {
-        // key.splice
-        // obj['New key'] = obj['old key'];
-       console.log(key)
-       Object.defineProperty(keys, key, newKey)
-       console.log(keys)
 
-      }
-    }
+     for (var key in foundMachine) {
+         // skip loop if the property is from prototype
+         if (!foundMachine.hasOwnProperty(key)) continue;
+
+         // var obj = foundMachine[key];
+         // for (var prop in obj) {
+         //     // skip loop if the property is from prototype
+         //     if (prop == slot) {
+         //        prop = inventory
+         //     }
+         //
+         //     // your code
+         //
+         // }
+         Object.keys(foundMachine[key]).forEach(i => {
+	if(i == slot) {
+		// you have to do this to affect the actual object :)
+		foundMachine[key][i] = inventory;
+	}
+});
+     }
+
+
+
+//     var keys = obj[Object.keys(obj)[0]]; //get keys from object as an array
+//
+// console.log(keys);
+//     for (var key in keys) {
+//       console.log(key, key == slot)
+//
+//       if (key == slot) {
+//         // key.splice
+//         // obj['New key'] = obj['old key'];
+//        console.log(key)
+//        selector[key] = newKey
+//        console.log(keys)
+//
+//       }
+//     }
 
 
 //     for (var i = 0; i < keys.length; i++) {
@@ -157,5 +185,5 @@ console.log(keys);
     //     console.log("this a result"+result)
     // }
 
-    console.log(store.state.machines[0])
+    console.log(store.state)
 }

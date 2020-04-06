@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
+    marginTop: -40
   },
   spacing:{
     marginRight: 15,

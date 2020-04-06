@@ -13,6 +13,8 @@ credits: "98098",
 sku: "098098",
 file: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAr4A",
 size: "Small"}],
+
+
   machines: [{machine1: {
       slot1: '',
       slot2: 'this has info',
@@ -32,6 +34,10 @@ size: "Small"}],
         slot7: '',
         slot8: '',
       }}],
+
+
+
+
   open:false,
 
   // setMachine: '',
