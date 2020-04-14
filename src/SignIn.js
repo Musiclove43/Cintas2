@@ -57,6 +57,8 @@ class SignIn extends React.Component {
       remember: false,
       redirect: false,
       isLoaded: false,
+      loading: false,
+      googleVisionDetetion: ''
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -79,7 +81,35 @@ class SignIn extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://rest.garmentvendor.app/user?username=test_user" )
+fetch( "https://rest.garmentvendor.app/auth" , {
+        method: 'post',
+        contentType: 'application/json',
+        body: JSON.stringify({
+          "userID":     "tito",
+          "username":   "puentes",
+          "accessRole": "Basic",
+          "exp" : ""
+
+        })
+      })
+
+    // await googleVisionRes.json()
+    //          .then(googleVisionRes => {
+    //
+    //               console.log(googleVisionRes);
+    //              if (googleVisionRes) {
+    //                  this.setState(
+    //                      {
+    //                          loading: false,
+    //                          googleVisionDetetion: googleVisionRes.payload[0]
+    //                      }
+    //                  )
+    //                  console.log('this.is response', this.state.googleVisionDetetion);
+    //              }
+    //          }).catch((error) => { console.log("last" + error) })
+    //          console.log(this.state)
+// }
+  //   fetch("https://rest.garmentvendor.app/user?username=test_user" )
       .then(res => res.json())
       .then(
         (result) => {

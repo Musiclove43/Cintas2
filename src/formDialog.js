@@ -25,49 +25,118 @@ export default function FormDialog() {
   const [pass, setPass] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
-
+  const [lastError, setLastError] = useState('')
+  const [firstError, setFirstError] = useState('')
+  const [passError, setPassError] = useState('')
+  const [emailError, setEmailError] = useState('')
   const [globalState, globalActions] = useGlobal();
- //  const [open, setOpen] = useGlobal(
- //   state => state.open,
- // );
+  const [allErr, setErr] = useState('')
+// const errors = []
+  // useEffect(() => {
+  //        setErr(firstError, passError, emailError, lastError);
+  //        console.log(allErr)
+  //  }, [
+  //     firstError//here you could pass dependencies, or leave it empty to call this effect only on first render
+  //  ]);
+   // console.log(errors)
 
+const validateForm = e => {
+  e.preventDefault();
+  // if (first==null || first==""){
+  //   setFirstError("Name can't be blank");
+  // } else {
+  //   setFirstError("");
+  // }
+  if (last==null || last==""){
+    setLastError("Name can't be blank");
+  } else {
+    setLastError("");
+  }
+  if(email.length<8){
+    setEmailError("Password must be at least 8 characters long.");
+  } else {
+    setEmailError("");
+  }
+  if(pass.length<8){
+    setPassError("Password must be at least 8 characters long.");
+    // return false;
+  }
+  console.log(firstError)
+
+
+// console.log("errors" + errors)
+// errors.forEach(element => console.log(element));
+
+// var err = 0;
+//   for (var i = 0; i < errors.length; i++) {
+// console.log(errors[i])
+//     //Checks fields in the array making sure they are not empty.
+//     // if(errors[i] != "") {
+//     //     // err++;
+//     //     // setErr(err++)
+//     //     // console.log(generalErr)
+//     //     // return false;
+//     //       console.log(errors[i])
+//     // }
+// }
+  handleSubmit()
+}
 
   // const forceUpdate = useCallback(() => updateState({}), []);
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = () => {
+// console.log(errors)
+// console.log(firstError)
+//
+// if (first==null || first==""){
+//   setFirstError("Name can't be blank");
+//
+// }
+// if (last==null || last==""){
+//   setLastError("Name can't be blank");
+//
+// }
+// if(email.length<8){
+//   setEmailError("Password must be at least 8 characters long.");
+//
+// }
+// if(pass.length<8){
+//   setPassError("Password must be at least 8 characters long.");
+//
+// }
+
     const id = Math.floor(Math.random() * Date.now())
     const data = {id, email, last, first, pass}
     globalActions.addToUsers(data)
-    console.log(globalState);
+    // console.log(globalState);
     // document.getElementById("my-form-id").reset();
     handleClear();
   };
 
   const handleClear = () => {
-      setEmail('');
-      setPass('')
-      setFirst('')
-      setLast('')
-    }
+    setEmail('');
+    setPass('')
+    setFirst('')
+    setLast('')
+  }
 
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
     <Grid container spacing={3}>
-    <Grid item xs={1.25} md={1.25} lg={1.25}>
+    <Grid item>
 
     <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >USERS</Typography>
     </Grid>
-    <Grid item xs={1.25} md={1.25} lg={1.25}>
+    <Grid item>
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
     ADD USER +
     </Button>
@@ -92,7 +161,7 @@ export default function FormDialog() {
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <form method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+    <form method="post" id="my-form-id" onSubmit={validateForm}  noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
@@ -103,6 +172,9 @@ export default function FormDialog() {
     id="name"
     label="First Name"
     type="email"
+    error={first === ""}
+    helperText={first === "" ? 'Empty field!' : ' '}
+
     fullWidth
     value={first}
     onChange={e => setFirst(e.target.value)}
@@ -114,6 +186,9 @@ export default function FormDialog() {
     margin="dense"
     id="name"
     label="Last Name"
+    error={lastError}
+    helperText={lastError}
+
     type="email"
     fullWidth
     value={last}
@@ -126,6 +201,9 @@ export default function FormDialog() {
     margin="dense"
     id="name"
     label="Email Address"
+    error={emailError}
+    helperText={emailError}
+
     type="email"
     fullWidth
     value={email}
@@ -138,6 +216,9 @@ export default function FormDialog() {
     margin="dense"
     id="name"
     label="Password"
+    error={passError}
+    helperText={passError}
+
     type="email"
     fullWidth
     value={pass}
@@ -152,7 +233,7 @@ export default function FormDialog() {
     <Button onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button onClick={handleClose} form="my-form-id" type="submit" color="primary">
+    <Button form="my-form-id" type="submit" color="primary">
     Create
     </Button>
     </DialogActions>

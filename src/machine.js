@@ -93,6 +93,7 @@ globalActions.openDialog(false)
 }, 2000);
   console.log(globalState)
 };
+
 const handleClick = () => (event) => {
   var data = 0;
   globalActions.addValue(data)
@@ -156,7 +157,7 @@ const handleClick = () => (event) => {
     SLOT 3
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot("slot3")}>
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -169,7 +170,7 @@ const handleClick = () => (event) => {
     SLOT 4
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot("slot4")} >
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -182,7 +183,7 @@ const handleClick = () => (event) => {
     SLOT 5
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot("slot5")} >
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -195,7 +196,7 @@ const handleClick = () => (event) => {
     SLOT 6
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot("slot6")}>
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -208,7 +209,7 @@ const handleClick = () => (event) => {
     SLOT 7
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot("slot7")} >
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>
@@ -221,7 +222,7 @@ const handleClick = () => (event) => {
     SLOT 8
     </Typography>
     <Card>
-    <CardActions >
+    <CardActions onClick={() => passMachineSlot("slot8")}>
     <div style={{marginLeft: "auto"}}>
     <SimpleDialog/>
     </div>

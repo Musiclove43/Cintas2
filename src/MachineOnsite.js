@@ -79,6 +79,17 @@ export default function Machine2() {
     //  console.log(globalState);
   };
 
+  const submitDiag = () => (event) => {
+    const open = true
+    globalActions.openDialog(open)
+    setTimeout(function(){
+      var data = 0;
+    globalActions.addValue(data)
+  globalActions.openDialog(false)
+  }, 2000);
+    console.log(globalState)
+  };
+
 function passMachineSlot(slot) {
   console.log(slot)
   var data = {machine, slot}
