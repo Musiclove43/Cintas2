@@ -31,82 +31,114 @@ export default function FormDialog() {
   const [emailError, setEmailError] = useState('')
   const [globalState, globalActions] = useGlobal();
   const [allErr, setErr] = useState('')
-// const errors = []
+  // const errors = []
   // useEffect(() => {
   //        setErr(firstError, passError, emailError, lastError);
   //        console.log(allErr)
   //  }, [
   //     firstError//here you could pass dependencies, or leave it empty to call this effect only on first render
   //  ]);
-   // console.log(errors)
+  // console.log(errors)
 
-const validateForm = e => {
-  e.preventDefault();
-  // if (first==null || first==""){
-  //   setFirstError("Name can't be blank");
-  // } else {
-  //   setFirstError("");
-  // }
-  if (last==null || last==""){
-    setLastError("Name can't be blank");
-  } else {
-    setLastError("");
+  const validateForm = e => {
+    e.preventDefault();
+    // if (first==null || first==""){
+    //   setFirstError("Name can't be blank");
+    // } else {
+    //   setFirstError("");
+    // }
+    if (last==null || last==""){
+      setLastError("Name can't be blank");
+    } else {
+      setLastError("");
+    }
+    if(email.length<8){
+      setEmailError("Password must be at least 8 characters long.");
+    } else {
+      setEmailError("");
+    }
+    if(pass.length<8){
+      setPassError("Password must be at least 8 characters long.");
+      // return false;
+    }
+    console.log(firstError)
+
+
+    // console.log("errors" + errors)
+    // errors.forEach(element => console.log(element));
+
+    // var err = 0;
+    //   for (var i = 0; i < errors.length; i++) {
+    // console.log(errors[i])
+    //     //Checks fields in the array making sure they are not empty.
+    //     // if(errors[i] != "") {
+    //     //     // err++;
+    //     //     // setErr(err++)
+    //     //     // console.log(generalErr)
+    //     //     // return false;
+    //     //       console.log(errors[i])
+    //     // }
+    // }
+    handleSubmit()
   }
-  if(email.length<8){
-    setEmailError("Password must be at least 8 characters long.");
-  } else {
-    setEmailError("");
-  }
-  if(pass.length<8){
-    setPassError("Password must be at least 8 characters long.");
-    // return false;
-  }
-  console.log(firstError)
-
-
-// console.log("errors" + errors)
-// errors.forEach(element => console.log(element));
-
-// var err = 0;
-//   for (var i = 0; i < errors.length; i++) {
-// console.log(errors[i])
-//     //Checks fields in the array making sure they are not empty.
-//     // if(errors[i] != "") {
-//     //     // err++;
-//     //     // setErr(err++)
-//     //     // console.log(generalErr)
-//     //     // return false;
-//     //       console.log(errors[i])
-//     // }
-// }
-  handleSubmit()
-}
 
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = () => {
-// console.log(errors)
-// console.log(firstError)
-//
-// if (first==null || first==""){
-//   setFirstError("Name can't be blank");
-//
-// }
-// if (last==null || last==""){
-//   setLastError("Name can't be blank");
-//
-// }
-// if(email.length<8){
-//   setEmailError("Password must be at least 8 characters long.");
-//
-// }
-// if(pass.length<8){
-//   setPassError("Password must be at least 8 characters long.");
-//
-// }
+
+    // console.log(errors)
+    // console.log(firstError)
+    //
+    // if (first==null || first==""){
+    //   setFirstError("Name can't be blank");
+    //
+    // }
+    // if (last==null || last==""){
+    //   setLastError("Name can't be blank");
+    //
+    // }
+    // if(email.length<8){
+    //   setEmailError("Password must be at least 8 characters long.");
+    //
+    // }
+    // if(pass.length<8){
+    //   setPassError("Password must be at least 8 characters long.");
+    //
+    // }
 
     const id = Math.floor(Math.random() * Date.now())
     const data = {id, email, last, first, pass}
+    fetch( "https://rest.garmentvendor.app/user" , {
+      method: 'post',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer' + token,
+      },
+      body: JSON.stringify({
+        "username":   "katie",
+        "password": "jdskdjslk",
+        "accessRole": "Basic",
+        "location" : "st.louis"
+      })
+    })
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+
+        console.log(result)
+      },
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        console.log(error)
+      }
+
+    )
+    // console.log(this.state.items.result);
+
     globalActions.addToUsers(data)
     // console.log(globalState);
     // document.getElementById("my-form-id").reset();
@@ -172,8 +204,8 @@ const validateForm = e => {
     id="name"
     label="First Name"
     type="email"
-    error={first === ""}
-    helperText={first === "" ? 'Empty field!' : ' '}
+    error={firstError}
+    helperText={firstError}
 
     fullWidth
     value={first}

@@ -5,15 +5,16 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link, Redirect} from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useCallback, updateState} from "react";
+import globalHook from 'use-global-hook';
+import useGlobal from "./store";
 
 function Copyright() {
   return (
@@ -28,7 +29,7 @@ function Copyright() {
   );
 }
 
-const useStyles = theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -46,173 +47,133 @@ const useStyles = theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-});
+}));
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      remember: false,
-      redirect: false,
-      isLoaded: false,
-      loading: false,
-      googleVisionDetetion: ''
+export default function SignIn() {
+  const [globalState, globalActions] = useGlobal();
+  const [email, setEmail] = useState('');
+  const [passcode, setPasscode] = useState('')
+  const [token, setToken] = useState('')
+  const classes = useStyles();
+  // useEffect(() => {
 
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
-  }
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state);
-    this.setState({redirect: true});
-    event.preventDefault();
-    console.log(this.state);
-    // this.callGoogleVIsionApi()
-  }
+  // }, [])
 
-  componentDidMount() {
-fetch( "https://rest.garmentvendor.app/auth" , {
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(email, passcode)
+    fetch( "https://rest.garmentvendor.app/auth" , {
+      method: 'post',
+      contentType: 'application/json',
+      body: JSON.stringify({
+        "email": email,
+        "password": passcode
+      })
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        setToken(result.Token)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+    fetch( "https://rest.garmentvendor.app/auth" , {
         method: 'post',
         contentType: 'application/json',
+             headers: {
+          Authorization:
+                 'Bearer' + token,
+},
         body: JSON.stringify({
-          "userID":     "tito",
-          "username":   "puentes",
-          "accessRole": "Basic",
-          "exp" : ""
+          "email": email,
+          "password": passcode
 
         })
       })
-
-    // await googleVisionRes.json()
-    //          .then(googleVisionRes => {
-    //
-    //               console.log(googleVisionRes);
-    //              if (googleVisionRes) {
-    //                  this.setState(
-    //                      {
-    //                          loading: false,
-    //                          googleVisionDetetion: googleVisionRes.payload[0]
-    //                      }
-    //                  )
-    //                  console.log('this.is response', this.state.googleVisionDetetion);
-    //              }
-    //          }).catch((error) => { console.log("last" + error) })
-    //          console.log(this.state)
-// }
-  //   fetch("https://rest.garmentvendor.app/user?username=test_user" )
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result
-          })
-        console.log(this.state.items)
+          console.log(result)
+          // setToken(result.Token)
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          console.log(error)
         }
-
       )
-  // console.log(this.state.items.result);
-  }
 
+  };
 
-  render () {
-    const { classes } = this.props;
-    if (this.state.redirect) {
-  return <Redirect push to="/about" />;
+  return (
+    <Container component="main" maxWidth="xs">
+    <CssBaseline />
+    <div className={classes.paper}>
+    <Avatar className={classes.avatar}>
+    <LockOutlinedIcon />
+    </Avatar>
+    <Typography component="h1" variant="h5">
+    Sign in
+    </Typography>
+    <form id="signin-form" onSubmit={handleSubmit} className={classes.form} noValidate>
+    <TextField
+    variant="outlined"
+    margin="normal"
+    required
+    fullWidth
+    id="email"
+    label="Email Address"
+    name="email"
+    autoComplete="email"
+    value={email}
+    onChange={e => setEmail(e.target.value)}
+    autoFocus
+    />
+    <TextField
+    variant="outlined"
+    margin="normal"
+    required
+    fullWidth
+    name="password"
+    label="Password"
+    type="password"
+    id="password"
+    autoComplete="current-password"
+    value={passcode}
+    onChange={e => setPasscode(e.target.value)}
+    />
+    <FormControlLabel
+    control={<Checkbox value="remember" color="primary" />}
+    label="Remember me"
+    />
+    <Button
+    type="submit"
+    fullWidth
+    variant="contained"
+    color="primary"
+    form="signin-form"
+    className={classes.submit}
+    >
+    Sign In
+    </Button>
+    <Grid container>
+    <Grid item xs>
+    <Link href="#" variant="body2">
+    Forgot password?
+    </Link>
+    </Grid>
+    <Grid item>
+    <Link href="#" variant="body2">
+    {"Don't have an account? Sign Up"}
+    </Link>
+    </Grid>
+    </Grid>
+    </form>
+    </div>
+    <Box mt={8}>
+    <Copyright />
+    </Box>
+    </Container>
+  );
 }
-    return (
-      <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
-      <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-      Sign in
-      </Typography>
-      <form className={classes.form} method="POST" onSubmit={this.handleSubmit} noValidate>
-      <TextField
-      variant="outlined"
-      margin="normal"
-      required
-      fullWidth
-      id="email"
-      label="Email Address"
-      name="email"
-      autoComplete="email"
-      autoFocus
-      value={this.state.email}
-      onChange={this.handleChange}
-      />
-      <TextField
-      variant="outlined"
-      margin="normal"
-      required
-      fullWidth
-      name="password"
-      label="Password"
-      type="password"
-      id="password"
-      autoComplete="current-password"
-      value={this.state.password}
-      onChange={this.handleChange}
-      />
-      <FormControlLabel
-      control={<Checkbox color="primary" />}
-      label="Remember me"
-      name="remember"
-      value={this.state.remember}
-      onChange={this.handleChange}
-      />
-      <Button
-      type="submit"
-      fullWidth
-      variant="contained"
-      color="primary"
-      className={classes.submit}
-
-      >
-      Sign In
-      </Button>
-      <Grid container>
-      <Grid item xs>
-      <Link to={'/about'} href="#" variant="body2">
-      Forgot password?
-      </Link>
-      </Grid>
-      <Grid item>
-      <Link href="#" to="/topics" variant="body2">
-      {"Don't have an account? Sign Up"}
-      </Link>
-      </Grid>
-      </Grid>
-      </form>
-      </div>
-      <Box mt={8}>
-      <Copyright />
-      </Box>
-      </Container>
-    );
-  }
-}
-
-export default withStyles(useStyles)(SignIn);
