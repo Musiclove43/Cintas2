@@ -32,7 +32,7 @@ const initialState = {
       slot7: '',
       slot8: '',
     }}],
-
+    token:'',
     open:false,
 
     // setMachine: '',

@@ -15,6 +15,16 @@ import Container from '@material-ui/core/Container';
 import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useRouteMatch,
+  useParams,
+  browserHistory
+} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -54,14 +64,20 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [passcode, setPasscode] = useState('')
   const [token, setToken] = useState('')
+  const [access, setAccess] = useState(false)
   const classes = useStyles();
-  // useEffect(() => {
-
-  // }, [])
+  useEffect(() => {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== "12345678") {
+                return false;
+            }
+            return true;
+        });
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(email, passcode)
+
     fetch( "https://rest.garmentvendor.app/auth" , {
       method: 'post',
       contentType: 'application/json',
@@ -75,6 +91,8 @@ export default function SignIn() {
       (result) => {
         console.log(result)
         setToken(result.Token)
+        globalActions.addToken(result.Token)
+
       },
       (error) => {
         console.log(error)
@@ -97,15 +115,20 @@ export default function SignIn() {
       .then(
         (result) => {
           console.log(result)
+
           // setToken(result.Token)
         },
         (error) => {
           console.log(error)
         }
       )
-
+        setAccess(true)
   };
+  // console.log(globalState)
 
+      if (access === true) {
+        return <Redirect to='/about/' />
+      }
   return (
     <Container component="main" maxWidth="xs">
     <CssBaseline />
@@ -116,8 +139,8 @@ export default function SignIn() {
     <Typography component="h1" variant="h5">
     Sign in
     </Typography>
-    <form id="signin-form" onSubmit={handleSubmit} className={classes.form} noValidate>
-    <TextField
+    <ValidatorForm id="signin-form" onSubmit={handleSubmit} className={classes.form} noValidate>
+    <TextValidator
     variant="outlined"
     margin="normal"
     required
@@ -126,11 +149,15 @@ export default function SignIn() {
     label="Email Address"
     name="email"
     autoComplete="email"
+
+
+    validators={['required', 'isEmail']}
+    errorMessages={['this field is required', 'email is not valid']}
     value={email}
     onChange={e => setEmail(e.target.value)}
     autoFocus
     />
-    <TextField
+    <TextValidator
     variant="outlined"
     margin="normal"
     required
@@ -142,6 +169,8 @@ export default function SignIn() {
     autoComplete="current-password"
     value={passcode}
     onChange={e => setPasscode(e.target.value)}
+    validators={['isPasswordMatch', 'required']}
+    errorMessages={['password mismatch', 'this field is required']}
     />
     <FormControlLabel
     control={<Checkbox value="remember" color="primary" />}
@@ -169,7 +198,7 @@ export default function SignIn() {
     </Link>
     </Grid>
     </Grid>
-    </form>
+    </ValidatorForm>
     </div>
     <Box mt={8}>
     <Copyright />

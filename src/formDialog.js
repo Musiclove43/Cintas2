@@ -13,6 +13,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { useState, useEffect, useCallback, updateState, clearState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -25,12 +27,14 @@ export default function FormDialog() {
   const [pass, setPass] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
-  const [lastError, setLastError] = useState('')
-  const [firstError, setFirstError] = useState('')
-  const [passError, setPassError] = useState('')
-  const [emailError, setEmailError] = useState('')
   const [globalState, globalActions] = useGlobal();
   const [allErr, setErr] = useState('')
+  const [token, setToken] = useGlobal(
+   state => state.token,
+   // state => state.highlighted,
+   // actions => actions.addToCounterA
+ );
+ // console.log(globalState)
   // const errors = []
   // useEffect(() => {
   //        setErr(firstError, passError, emailError, lastError);
@@ -40,51 +44,7 @@ export default function FormDialog() {
   //  ]);
   // console.log(errors)
 
-  const validateForm = e => {
-    e.preventDefault();
-    // if (first==null || first==""){
-    //   setFirstError("Name can't be blank");
-    // } else {
-    //   setFirstError("");
-    // }
-    if (last==null || last==""){
-      setLastError("Name can't be blank");
-    } else {
-      setLastError("");
-    }
-    if(email.length<8){
-      setEmailError("Password must be at least 8 characters long.");
-    } else {
-      setEmailError("");
-    }
-    if(pass.length<8){
-      setPassError("Password must be at least 8 characters long.");
-      // return false;
-    }
-    console.log(firstError)
-
-
-    // console.log("errors" + errors)
-    // errors.forEach(element => console.log(element));
-
-    // var err = 0;
-    //   for (var i = 0; i < errors.length; i++) {
-    // console.log(errors[i])
-    //     //Checks fields in the array making sure they are not empty.
-    //     // if(errors[i] != "") {
-    //     //     // err++;
-    //     //     // setErr(err++)
-    //     //     // console.log(generalErr)
-    //     //     // return false;
-    //     //       console.log(errors[i])
-    //     // }
-    // }
-    handleSubmit()
-  }
-
-  // const forceUpdate = useCallback(() => updateState({}), []);
-
-  const handleSubmit = () => {
+  const handleSubmit = e => {
 
     // console.log(errors)
     // console.log(firstError)
@@ -116,10 +76,13 @@ export default function FormDialog() {
         'Bearer' + token,
       },
       body: JSON.stringify({
-        "username":   "katie",
-        "password": "jdskdjslk",
-        "accessRole": "Basic",
-        "location" : "st.louis"
+        "email":   "katie",
+        "firstName": "jdskdjslk",
+        "lastName": "Basic",
+        "location" : "st.louis",
+        "department": "",
+        "cardID": "827892"
+
       })
     })
 
@@ -193,64 +156,61 @@ export default function FormDialog() {
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <form method="post" id="my-form-id" onSubmit={validateForm}  noValidate>
+    <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
 
-    <TextField
+    <TextValidator
     autoFocus
     margin="dense"
     id="name"
     label="First Name"
     type="email"
-    error={firstError}
-    helperText={firstError}
-
+    validators={['required']}
+    errorMessages={['this field is required']}
     fullWidth
     value={first}
     onChange={e => setFirst(e.target.value)}
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
-    <TextField
+    <TextValidator
     autoFocus
     margin="dense"
     id="name"
     label="Last Name"
-    error={lastError}
-    helperText={lastError}
-
     type="email"
+    validators={['required']}
+    errorMessages={['this field is required']}
+
     fullWidth
     value={last}
     onChange={e => setLast(e.target.value)}
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
-    <TextField
+    <TextValidator
     autoFocus
     margin="dense"
     id="name"
     label="Email Address"
-    error={emailError}
-    helperText={emailError}
-
     type="email"
     fullWidth
     value={email}
+    validators={['required', 'isEmail']}
+    errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setEmail(e.target.value)}
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
-    <TextField
+    <TextValidator
     autoFocus
     margin="dense"
     id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
     label="Password"
-    error={passError}
-    helperText={passError}
-
     type="email"
     fullWidth
     value={pass}
@@ -259,7 +219,7 @@ export default function FormDialog() {
     </Grid>
 
     </Grid>
-    </form>
+    </ValidatorForm>
     </DialogContent>
     <DialogActions>
     <Button onClick={handleClose} color="primary">
