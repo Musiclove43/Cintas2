@@ -30,11 +30,11 @@ export default function FormDialog() {
   const [globalState, globalActions] = useGlobal();
   const [allErr, setErr] = useState('')
   const [token, setToken] = useGlobal(
-   state => state.token,
-   // state => state.highlighted,
-   // actions => actions.addToCounterA
- );
- // console.log(globalState)
+    state => state.token,
+    // state => state.highlighted,
+    // actions => actions.addToCounterA
+  );
+  // console.log(globalState)
   // const errors = []
   // useEffect(() => {
   //        setErr(firstError, passError, emailError, lastError);
@@ -68,21 +68,24 @@ export default function FormDialog() {
 
     const id = Math.floor(Math.random() * Date.now())
     const data = {id, email, last, first, pass}
+    console.log("token" + token)
     fetch( "https://rest.garmentvendor.app/user" , {
       method: 'post',
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer' + token,
+        'Bearer ' + token,
       },
       body: JSON.stringify({
-        "email":   "katie",
-        "firstName": "jdskdjslk",
-        "lastName": "Basic",
-        "location" : "st.louis",
-        "department": "",
-        "cardID": "827892"
-
+        "email": "testuser9@email.com",
+        "firstName": "mike2",
+        "lastName": "holberger2",
+        "location": "testLocation",
+        "department": "fire",
+        "cardID": "000000042",
+        "credits": 0,
+        "withdrawLimit": 0,
+        "expirationDate": "2023-09-01T00:00:00Z"
       })
     })
 
@@ -91,14 +94,31 @@ export default function FormDialog() {
       (result) => {
 
         console.log(result)
-      },
+      }
+    )
+
+      fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
+        method: 'get',
+        contentType: 'application/json',
+        headers: {
+          Authorization:
+          'Bearer ' + token,
+        },
+
+      })
+
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+          console.log(result)
+        },
       // Note: it's important to handle errors here
       // instead of a catch() block so that we don't swallow
       // exceptions from actual bugs in components.
       (error) => {
         console.log(error)
       }
-
     )
     // console.log(this.state.items.result);
 

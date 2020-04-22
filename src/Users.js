@@ -90,7 +90,6 @@ function deleteUser (user) {
           <IconButton
             edge="start"
             color="inherit"
-
             onClick={() => editUser(user)}
           >
             <EditIcon style={{ zIndex:2000}} />

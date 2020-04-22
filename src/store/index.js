@@ -34,6 +34,7 @@ const initialState = {
     }}],
     token:'',
     open:false,
+    highlighted: '',
 
     // setMachine: '',
     value: 0,

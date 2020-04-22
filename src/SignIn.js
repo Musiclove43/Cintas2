@@ -127,7 +127,7 @@ export default function SignIn() {
   // console.log(globalState)
 
       if (access === true) {
-        return <Redirect to='/about/' />
+        return <Redirect to='/about/users' />
       }
   return (
     <Container component="main" maxWidth="xs">

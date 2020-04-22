@@ -20,32 +20,58 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EditDialog() {
-
-  // useEffect(() => {
-  //   setEmail(globalState.highlighted);
-  //    // code to run on component mount
-  //  }, [])
-  // const [open, setOpen] = useGlobal(false);
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('')
-  const [first, setFirst] = useState('')
-  const [last, setLast] = useState('')
-
   const [globalState, globalActions] = useGlobal();
   const [user, setUser] = useGlobal(
    state => state.user,
-   // actions => actions.addToCounterA
  );
 
   const [open, setOpen] = useGlobal(
    state => state.open,
  );
+  const [highlight, setHighlight] = useGlobal(
+   state => state.highlighted
+ //   console.log("handling open"),
+ // setFirst(highlight.first)
+ );
+ const [first, setFirst] = useState('')
+
+ useEffect(() => {
+  // var user = highlight.first
+  // setFirst(user)
+findUser()
+//   var string = toString(clonedObj.first)
+// setHighlight(clonedObj.first)
+// console.log(first)
+    // code to run on component mount
+  })
+  // const [open, setOpen] = useGlobal(false);
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('')
+  const [last, setLast] = useState('')
+
+
+
+
+//
+ function findUser() {
+  if (open) {
+    var clonedOb = Object.assign(highlight);
+    var clonedObj=JSON.parse(JSON.stringify(clonedOb))
+    setFirst(clonedObj.first)
+    console.log("thisis a cloned" + clonedObj.first)
+
+
+  }
+//   // setIsLoading(false)
+}
+
+
 
 //  const [state, setHighlight] = useGlobal(
 //   state => state.open,
 //
 // );
-
+// console.log("highlight" + highlight.id)
 
 
   // const forceUpdate = useCallback(() => updateState({}), []);
@@ -71,7 +97,10 @@ export default function EditDialog() {
 
   const handleClickOpen = () => {
     const open = true
+
     globalActions.openDialog(open);
+
+
     // console.log(globalState);
   };
 
@@ -118,8 +147,13 @@ export default function EditDialog() {
     label="First Name"
     type="email"
     fullWidth
-    value={first}
     onChange={e => setFirst(e.target.value)}
+    value={first}
+    // onChange={event => {
+    //     const { value } = event.target;
+    //     setFirst(event.target.value);
+    //   }}
+
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
