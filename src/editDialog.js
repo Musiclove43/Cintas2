@@ -19,58 +19,106 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditDialog() {
-  const [globalState, globalActions] = useGlobal();
-  const [user, setUser] = useGlobal(
-   state => state.user,
- );
 
-  const [open, setOpen] = useGlobal(
-   state => state.open,
- );
+export default function EditDialog()
+{
+  // we want to pull in the global state
+  const [globalState, globalActions] = useGlobal();
   const [highlight, setHighlight] = useGlobal(
    state => state.highlighted
- //   console.log("handling open"),
- // setFirst(highlight.first)
- );
- const [first, setFirst] = useState('')
-
- useEffect(() => {
-  // var user = highlight.first
-  // setFirst(user)
-findUser()
-//   var string = toString(clonedObj.first)
-// setHighlight(clonedObj.first)
-// console.log(first)
-    // code to run on component mount
-  })
-  // const [open, setOpen] = useGlobal(false);
+  );
+  // set the hook data
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('')
   const [last, setLast] = useState('')
+  const [first, setFirst] = useState('')
+
+  // bring in the highlighted user
+
+
+  const [open, setOpen] = useGlobal(
+   state => state.open,
+  );
+
+  // testing
+  // const _setData = (key, value) => {
+  //   console.log("check state:",data);
+  //   setData({key: value});
+  // };
+
+
+  const [count, setCount] = useState(0);
+
+
+  // var start = true;
+  //
+  //   if(start) {
+  //     // set the data
+  //     const _highlight = {
+  //       first: highlight.first,
+  //       last: highlight.last,
+  //       email: highlight.email,
+  //       pass: highlight.pass
+  //     };
+  //     if(_highlight.first !== undefined &&
+  //      _highlight.last !== undefined &&
+  //      _highlight.email !== undefined &&
+  //      _highlight.pass !== undefined) {
+  //      setData(_highlight);
+  //   }
+  //     // highlight
+  //
+  //     start = false;
+  //   }
 
 
 
+
+  useEffect(() => {
+      // set the data
+console.log(highlight)
+
+let x = JSON.parse(JSON.stringify(highlight));
+// console.log(x.first )
+setFirst(x.first)
+console.log("first" + first)
+
+});
+
+  // useEffect() {
+  //   // set the data
+  //   let dynamicData = {};
+  //   Object.keys(data).forEach(key => {
+  //     dynamicData[key] = highlight[key];
+  //   });
+  //   setData(dynamicData);
+  //
+  //   console.log(dynamicData);
+  //   console.log(highlight);
+  //   console.log(data);
+  // }
 
 //
- function findUser() {
-  if (open) {
-    var clonedOb = Object.assign(highlight);
-    var clonedObj=JSON.parse(JSON.stringify(clonedOb))
-    setFirst(clonedObj.first)
-    console.log("thisis a cloned" + clonedObj.first)
-
-
-  }
-//   // setIsLoading(false)
-}
-
-
-
-//  const [state, setHighlight] = useGlobal(
-//   state => state.open,
+//  function findUser() {
+//   if (open) {
+//     let dynamicData = {};
+//     Object.keys(data).forEach(key => {
+//       dynamicData[key] = highlight[key];
+//     });
+//     setData(dynamicData);
 //
-// );
+//     console.log(dynamicData);
+//     console.log(highlight);
+//     console.log(data);
+//
+//
+//   }
+// //   // setIsLoading(false)
+// }
+
+
+
+
 // console.log("highlight" + highlight.id)
 
 
@@ -78,20 +126,20 @@ findUser()
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("email, last, first, pass")
+    // console.log("email, last, first, pass")
     // const guid = Math.floor(Math.random() * Date.now())
-    const data = {email, last, first, pass}
-    globalActions.updateUsers(data)
+    // const data = {email, last, first, pass}
+    // globalActions.updateUsers(data)
     // console.log(globalState);
     // document.getElementById("my-form-id").reset();
     handleClear();
   };
 
   const handleClear = () => {
-      setEmail('');
-      setPass('')
-      setFirst('')
-      setLast('')
+      // setEmail('');
+      // setPass('')
+      // setFirst('')
+      // setLast('')
     }
 
 
@@ -147,7 +195,7 @@ findUser()
     label="First Name"
     type="email"
     fullWidth
-    onChange={e => setFirst(e.target.value)}
+    onChange={(e) => setFirst(e.target.value)}
     value={first}
     // onChange={event => {
     //     const { value } = event.target;
@@ -164,8 +212,7 @@ findUser()
     label="Last Name"
     type="email"
     fullWidth
-    value={last}
-    onChange={e => setLast(e.target.value)}
+
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
@@ -176,8 +223,7 @@ findUser()
     label="Email Address"
     type="email"
     fullWidth
-    value={email}
-    onChange={e => setEmail(e.target.value)}
+
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
@@ -188,8 +234,7 @@ findUser()
     label="Password"
     type="email"
     fullWidth
-    value={pass}
-    onChange={e => setPass(e.target.value)}
+
     />
     </Grid>
 

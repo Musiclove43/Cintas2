@@ -77,9 +77,9 @@ export default function FormDialog() {
         'Bearer ' + token,
       },
       body: JSON.stringify({
-        "email": "testuser9@email.com",
-        "firstName": "mike2",
-        "lastName": "holberger2",
+        "email": "testuser11@email.com",
+        "firstName": "mike4",
+        "lastName": "holberger1",
         "location": "testLocation",
         "department": "fire",
         "cardID": "000000042",
@@ -120,6 +120,56 @@ export default function FormDialog() {
         console.log(error)
       }
     )
+
+    fetch( "https://rest.garmentvendor.app/user?email=testuser13@email.com" , {
+      method: 'delete',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + token,
+      },
+
+    })
+
+    fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + token,
+      },
+
+    })
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+
+        console.log(result)
+      },
+    // Note: it's important to handle errors here
+    // instead of a catch() block so that we don't swallow
+    // exceptions from actual bugs in components.
+    (error) => {
+      console.log(error)
+    }
+  )
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+
+        console.log(result)
+      },
+    // Note: it's important to handle errors here
+    // instead of a catch() block so that we don't swallow
+    // exceptions from actual bugs in components.
+    (error) => {
+      console.log(error)
+    }
+  )
+
+
     // console.log(this.state.items.result);
 
     globalActions.addToUsers(data)

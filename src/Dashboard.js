@@ -28,6 +28,7 @@ import Users from './Users';
 import LocationReport from './locationReport';
 import Configuration from './Configuration';
 import LocationMachine from './LocationMachine';
+import ScrollableTabsButtonForce from './navigation/appBar2';
 
 import {
   BrowserRouter as Router,
@@ -63,9 +64,9 @@ function Copyright() {
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-  },
+  // root: {
+  //   display: 'flex',
+  // },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
@@ -77,20 +78,21 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    position: "unset",
+    // zIndex: theme.zIndex.drawer + 1,
+    // transition: theme.transitions.create(['width', 'margin'], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
   },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
+  // appBarShift: {
+  //   marginLeft: drawerWidth,
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   transition: theme.transitions.create(['width', 'margin'], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  // },
   menuButton: {
     marginRight: 36,
   },
@@ -159,17 +161,9 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar className={classes.appBar}  >
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
+
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             St. Joseph's Hospital
           </Typography>
@@ -180,24 +174,11 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <MainListItems/>
 
-      </Drawer>
+<ScrollableTabsButtonForce/>
+
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
+        
 
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>

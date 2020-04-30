@@ -15,7 +15,7 @@ export const editUsers = (store, user) =>  {
   var foundIndex =  store.state.user.findIndex(x => x.id == user.id);
   const highlightUser = store.state.user[foundIndex] = user;
   store.setState({ highlighted: highlightUser });
-  console.log(store.state.highlighted)
+  // console.log(store.state.highlighted)
 }
 
 export const updateUsers = (store, data) =>  {

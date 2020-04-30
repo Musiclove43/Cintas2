@@ -65,7 +65,7 @@ function deleteUser (user) {
    const open = true
    globalActions.openDialog(open);
     globalActions.editUsers(user);
-    console.log(globalState);
+    // console.log(globalState);
 
 
 
