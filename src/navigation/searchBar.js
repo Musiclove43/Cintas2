@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
+  dropdown : {
+    minWidth: 300
+  }
 }));
 
 export default function MultilineTextFields() {
@@ -48,6 +51,7 @@ export default function MultilineTextFields() {
           label="Site"
           value={currency}
           onChange={handleChange}
+          className={classes.dropdown}
         >
           {currencies.map((option) => (
             <MenuItem key={option.value} value={option.value}>

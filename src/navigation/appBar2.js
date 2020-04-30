@@ -109,7 +109,7 @@ function handleInvent() {
     <div className={classes.root}>
 
       <AppBar position="unset" color="default" style={{flexDirection: "row", paddingLeft: 25}}>
-      <MultilineTextFields style={{flexGrow: 4, maxWidth: "100%"}} />
+      <MultilineTextFields style={{}} />
         <Tabs
           value={value}
           onChange={handleChange}
