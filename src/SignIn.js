@@ -91,8 +91,9 @@ export default function SignIn() {
       (result) => {
         console.log(result)
         setToken(result.Token)
-        globalActions.addToken(result.Token)
-
+        globalActions.addToken(result)
+        // globalActions.addUserLocation(result.UserData.locationNum)
+        // globalActions.addUserData(result.Token)
       },
       (error) => {
         console.log(error)
@@ -127,7 +128,7 @@ export default function SignIn() {
   // console.log(globalState)
 
       if (access === true) {
-        return <Redirect to='/about/users' />
+        return <Redirect to='/about' />
       }
   return (
     <Container component="main" maxWidth="xs">

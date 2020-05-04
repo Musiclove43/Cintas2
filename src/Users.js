@@ -39,6 +39,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// function longResolve() {
+//   return new Promise(res => {
+//     setTimeout(res, 1000);
+//   });
+// }
 
 export default function Users() {
  //  const [open, setOpen] = useGlobal(
@@ -67,9 +72,33 @@ function deleteUser (user) {
     globalActions.editUsers(user);
     // console.log(globalState);
 
-
-
   };
+
+  useEffect(() => {
+     // longResolve().then(() => {
+        fetch( "https://rest.garmentvendor.app/users?accountNum=" + globalState.account, {
+            method: 'get',
+            contentType: 'application/json',
+                 headers: {
+              Authorization:
+                     'Bearer ' + globalState.token.Token,
+    },
+          })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              console.log(result)
+              // setCurrencies([...result.accounts])
+              // console.log("currency array" + currencies)
+              // setToken(result.Token)
+            },
+            (error) => {
+              console.log(error)
+            }
+          )
+
+  // })
+ }, []);
 
 
 

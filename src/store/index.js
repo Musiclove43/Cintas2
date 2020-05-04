@@ -35,8 +35,8 @@ const initialState = {
     token:'',
     open:false,
     highlighted: '',
-
-    // setMachine: '',
+    // userLocation: '',
+    account: '',
     value: 0,
     userSwipe: 0,
     location: ''

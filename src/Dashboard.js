@@ -142,6 +142,11 @@ const useStyles = makeStyles(theme => ({
     height: 240,
   },
 }));
+function longResolve() {
+  return new Promise(res => {
+    setTimeout(res, 3000);
+  });
+}
 // const useGlobal = globalHook();
 
 export default function Dashboard() {
@@ -156,8 +161,37 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const [count, setCount] = useState("this is a count");
+ //
+ // useEffect(() => {
+ //   longResolve().then(() => {
+ //    alert(globalState.token);
+ //   });
+ // }, []);
 
+//   useEffect(() => {
+//     fetch( "https://rest.garmentvendor.app/accounts?locationNum=0", {
+//         method: 'get',
+//         contentType: 'application/json',
+//              headers: {
+//           Authorization:
+//                  'Bearer' + token,
+// },
+//       })
+//       .then(res => res.json())
+//       .then(
+//         (result) => {
+//           console.log(result)
+//
+//           // setToken(result.Token)
+//         },
+//         (error) => {
+//           console.log(error)
+//         }
+//       )
+//   }, [])
 
+// console.log(userLocation)
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -178,7 +212,7 @@ export default function Dashboard() {
 <ScrollableTabsButtonForce/>
 
       <main className={classes.content}>
-        
+
 
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>

@@ -82,11 +82,23 @@ export const updateInventory = (store, data) =>  {
 export const addToken = (store, token) =>  {
   var index = store.state.token = token;
   store.setState({ token: index });
+  // console.log(store.state)
+}
+
+export const addUserLocation = (store, data) =>  {
+  var index = store.state.userLocation= data;
+  store.setState({ userLocation: index });
+  console.log(store.state.userLocation)
 }
 
 export const addValue= (store, data) =>  {
   var index = store.state.value = data;
   store.setState({ value: index });
+}
+
+export const addAccount= (store, currency) =>  {
+  var index = store.state.account = currency;
+  store.setState({ account: index });
 }
 
 export const swipeUser= (store, value) =>  {
@@ -114,82 +126,18 @@ export const handleLocation= (store, value) =>  {
 }
 
 export const setProduct= (store, mainMachine, newKey, slot, inventory) =>  {
-
   var index = store.state.selectedValue = {[mainMachine]:newKey};
-
   var foundIndex =  store.state.machines.findIndex(x => x.machine == mainMachine.machine);
   const foundMachine = store.state.machines[foundIndex] ;
-  // var obj = foundMachine;
-  // console.log(obj)
-
-
 
   for (var key in foundMachine) {
-    // skip loop if the property is from prototype
     if (!foundMachine.hasOwnProperty(key)) continue;
-
-    // var obj = foundMachine[key];
-    // for (var prop in obj) {
-    //     // skip loop if the property is from prototype
-    //     if (prop == slot) {
-    //        prop = inventory
-    //     }
-    //
-    //     // your code
-    //
-    // }
     Object.keys(foundMachine[key]).forEach(i => {
       if(i == slot) {
-        // you have to do this to affect the actual object :)
         foundMachine[key][i] = inventory;
       }
     });
   }
-
-
-
-  //     var keys = obj[Object.keys(obj)[0]]; //get keys from object as an array
-  //
-  // console.log(keys);
-  //     for (var key in keys) {
-  //       console.log(key, key == slot)
-  //
-  //       if (key == slot) {
-  //         // key.splice
-  //         // obj['New key'] = obj['old key'];
-  //        console.log(key)
-  //        selector[key] = newKey
-  //        console.log(keys)
-  //
-  //       }
-  //     }
-
-
-  //     for (var i = 0; i < keys.length; i++) {
-  //   if (slot == keys[i])
-  //     console.log('match: ', keys[i])
-  // }
-  // getFirstMatching(foundMachine,slot, newKey);
-  // var insertInventory = store.state.selectedValue.machine.slot
-
-  // function getFirstMatching(foundMachine, slot,newKey) {
-  //   console.log(foundMachine, slot)
-  //   let result;
-  //   Object.getOwnPropertyNames(foundMachine).some(key => {
-  //     if (foundMachine[key] === slot) {
-  //       result = key;
-  //       // result = newKey
-  //
-  //       return true; // Stops the loop
-  //
-  //     } else {
-  //       console.log("no match")
-  //     }
-  //
-  //   });
-  //   return result;
-  //     console.log("this a result"+result)
-  // }
 
   console.log(store.state)
 }
