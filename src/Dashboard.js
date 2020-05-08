@@ -29,6 +29,7 @@ import LocationReport from './locationReport';
 import Configuration from './Configuration';
 import LocationMachine from './LocationMachine';
 import ScrollableTabsButtonForce from './navigation/appBar2';
+import CustomizedTables from './UserTables';
 
 import {
   BrowserRouter as Router,
@@ -149,7 +150,8 @@ function longResolve() {
 }
 // const useGlobal = globalHook();
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  // console.log(props)
   const [globalState, globalActions] = useGlobal();
 
   const classes = useStyles();
@@ -216,12 +218,10 @@ export default function Dashboard() {
 
         <Container maxWidth="lg" className={classes.container}>
         <Route exact path="/about" component={Widgets}/>
-        <Route exact path="/about/widget" component={ControlledExpansionPanels}/>
-        <Route exact path="/about/users" component={Users}/>
-        <Route exact path="/about/locations" component={LocationReport}/>
         <Route exact path="/about/configurations" component={TabPanel}/>
-        <Route exact path="/about/swipe" component={TabPanel}/>
-        <Route exact path="/about/truck" component={LocationMachine}/>
+
+             <Route exact path="/about/users"/>
+
 
         </Container>
         <Copyright />

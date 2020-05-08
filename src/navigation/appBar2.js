@@ -17,6 +17,9 @@ import MultilineTextFields from './searchBar'
 import PeopleIcon from '@material-ui/icons/People';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import Container from '@material-ui/core/Container';
+import CustomizedTables from '../UserTables';
+import { useState, useEffect, useContext } from "react";
+
 
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {
@@ -35,11 +38,9 @@ import Users from '../Users';
 import Machine2 from '../MachineOnsite'
 
 
-
-
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  // console.log(props)
 
   return (
     <div
@@ -62,6 +63,7 @@ TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
+
 };
 
 function a11yProps(index) {
@@ -84,13 +86,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ScrollableTabsButtonForce() {
+export default function ScrollableTabsButtonForce(props) {
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [value2, setValue2] = React.useState('');
 
+  let product = {
+    conf: ''
+  };
+ // const {currency} = props
+     // const {value2} = this.props;
+  useEffect(() => {
+    console.log("rerender has occured")
+    product.conf = value2
+
+// do something when startDate updates
+}, [value2]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+
+      function handleChange2(newValue) {
+        // props.onChange(event.target.value);
+        setValue2(newValue);
+        // data={props.data}
+          // console.log(props)
+          // console.log(value2);
+  // props.onChange(newValue);
+
+      }
 
   const history = useHistory();
 
@@ -98,7 +125,7 @@ function handleClick() {
   history.push("/about/users");
 }
 function handleDash() {
-  history.push("/about");
+  history.push({pathname:"/about", propss: value2});
 }
 
 function handleInvent() {
@@ -109,7 +136,7 @@ function handleInvent() {
     <div className={classes.root}>
 
       <AppBar position="unset" color="default" style={{flexDirection: "row", paddingLeft: 25}}>
-      <MultilineTextFields/>
+      <MultilineTextFields  onChange={handleChange2} />
         <Tabs
           value={value}
           onChange={handleChange}
@@ -119,12 +146,22 @@ function handleInvent() {
           textColor="primary"
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Dashboard" onClick={handleDash} icon={<DashboardIcon />} {...a11yProps(0)} />
-          <Tab label="Users" onClick={handleClick} icon={<PeopleIcon />} {...a11yProps(1)} />
-          <Tab label="Inventory" onClick={handleInvent} icon={<AssignmentIcon />} {...a11yProps(2)} />
+          <Tab label="Dashboard" icon={<DashboardIcon />} {...a11yProps(0)} />
+          <Tab label="Users" icon={<PeopleIcon />} {...a11yProps(1)} />
+          <Tab label="Inventory"  icon={<AssignmentIcon />} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
+      <TabPanel value={value} index={0}>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+      <CustomizedTables product={product} />
 
+      </TabPanel>
+
+      <TabPanel {...props}value={value} index={2}>
+      <CustomizedTables {...props} />
+
+      </TabPanel>
 
     </div>
   );

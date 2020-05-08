@@ -4,11 +4,17 @@ export const addToUsers = (store, data) => {
   store.setState({ newUserValue });
 };
 
+export const deleteAllUsers = (store) => {
+  const newUserValue = store.state.user = [];
+  store.setState({ newUserValue });
+};
+
 export const deleteUsers = (store, user) =>  {
   var index = store.state.user.indexOf(user);
   if (index > -1) {
     store.state.user.splice(index, 1);
   }
+  store.setState({ user: store.state.user });
 }
 
 export const editUsers = (store, user) =>  {
