@@ -59,14 +59,14 @@ const useStyles = makeStyles({
 // }
 // var count = 0;
 
-export default function CustomizedTables( {...props}) {
+export default function CustomizedTables( props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [currency2, setCurrency] = useState();
 
   const useForceUpdate = () => useState()[1];
     const [value3, setValue3] = useState(props);
-    console.log({...props})
+    console.log(props)
     console.log(value3)
   // const [profileState, setProfileState] = useState({});
   // console.log(profileState, props)
@@ -98,6 +98,9 @@ export default function CustomizedTables( {...props}) {
 // const [tick, setTick] = useState(0);
 // console.log("account" + account)
 // console.log(globalState)
+useEffect( () => {
+       console.log('counter updated');
+   }, [props])
 
 useEffect(() => {
 console.log("rerender")
@@ -229,7 +232,7 @@ console.log("rerender")
     <StyledTableCell align="right">Date Added</StyledTableCell>
     <StyledTableCell align="right">Added By</StyledTableCell>
     <StyledTableCell align="right">Actions</StyledTableCell>
-    <StyledTableCell align="right">{currency2}</StyledTableCell>
+    <StyledTableCell align="right">{props.product.conf}</StyledTableCell>
 
     </TableRow>
     </TableHead>

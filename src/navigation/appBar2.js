@@ -155,7 +155,6 @@ function handleInvent() {
       </TabPanel>
       <TabPanel value={value} index={1}>
       <CustomizedTables product={product} />
-
       </TabPanel>
 
       <TabPanel {...props}value={value} index={2}>
