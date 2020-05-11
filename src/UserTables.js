@@ -63,17 +63,18 @@ export default function CustomizedTables( props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [currency2, setCurrency] = useState();
+  const [tick, setTick] = useState(0);
 
-  const useForceUpdate = () => useState()[1];
-    const [value3, setValue3] = useState(props);
+  // const useForceUpdate = () => useState()[1];
+    const [value3, setValue3] = useState('');
     console.log(props)
     console.log(value3)
   // const [profileState, setProfileState] = useState({});
   // console.log(profileState, props)
 // console.log("currency", currency2)
 // console.log(props)
-  const [user, setUser] = useGlobal(
-    state => state.user,
+  const [user, setUsers] = useState(
+[]
 
     // state => state.highlighted,
     // actions => actions.addToCounterA
@@ -100,9 +101,12 @@ export default function CustomizedTables( props) {
 // console.log(globalState)
 useEffect( () => {
        console.log('counter updated');
-   }, [props])
+         setUsers([]);
+       callAPI()
+       console.log(tick)
+  }, [props])
 
-useEffect(() => {
+function callAPI () {
 console.log("rerender")
       // setProfileState(props);
 
@@ -119,11 +123,13 @@ console.log("rerender")
   .then(
     (result) => {
       console.log(result)
-      result.forEach(function(entry) {
-        globalActions.addToUsers(entry)
-        console.log(globalState);
-
-      });
+      // result.forEach(function(entry) {
+      //   globalActions.addToUsers(entry)
+      //   console.log(globalState);
+      //
+      // });
+      // setUsers([]);
+        setUsers([...result])
 
       // setCurrencies([...result.accounts])
       // console.log("currency array" + currencies)
@@ -135,7 +141,7 @@ console.log("rerender")
   )
 
   // })
-}, []);
+};
 
 // function useForceUpdate() {
 //   const update = useCallback(() => {
@@ -145,7 +151,7 @@ console.log("rerender")
 // }
 
   // const forceUpdate = useForceUpdate();
-  const forceUpdate = useForceUpdate();
+  // const forceUpdate = useForceUpdate();
 
 // const observe = () => {
 // count++
@@ -232,7 +238,7 @@ console.log("rerender")
     <StyledTableCell align="right">Date Added</StyledTableCell>
     <StyledTableCell align="right">Added By</StyledTableCell>
     <StyledTableCell align="right">Actions</StyledTableCell>
-    <StyledTableCell align="right">{props.product.conf}</StyledTableCell>
+
 
     </TableRow>
     </TableHead>

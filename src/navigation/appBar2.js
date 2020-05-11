@@ -98,7 +98,7 @@ export default function ScrollableTabsButtonForce(props) {
  // const {currency} = props
      // const {value2} = this.props;
   useEffect(() => {
-    console.log("rerender has occured")
+    // console.log("rerender has occured")
     product.conf = value2
 
 // do something when startDate updates
