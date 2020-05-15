@@ -17,10 +17,20 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import SimpleDialog from './productDialog'
 import SubmitDiag from './submitDiag'
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from '@material-ui/core/Select';
+import ReactDOM from "react-dom";
+
 
 
 const useStyles = makeStyles({
@@ -31,30 +41,83 @@ const useStyles = makeStyles({
   },
   spacing:{
     marginRight: 15,
-    flexBasis: "22%",
+    flexBasis: "19%",
     marginTop: 15,
-    padding: 20,
+    // padding: 20,
   },
   header: {
     display: "flex",
     flexDirection: "row",
+
   },
   button:{
     marginLeft: "auto",
-    marginRight: 100,
+    // marginRight: 100,
     marginTop: -5
   },
+  formControl: {
+    // margin: theme.spacing(1),
+    marginLeft: 20,
+    minWidth: 350,
+    marginTop: -13,
+    marginBottom: 50
+  },
+  selectEmpty: {
+    // marginTop: theme.spacing(2),
+  },
 });
+// const machines = []
+const cellsExample = [{inventory: "cell1"},{inventory: "cell2"},{inventory: "cell3"},{inventory: "cell4"},{inventory: "cell5"},{inventory: "cell6"},{inventory: "cell7"}]
 
-export default function Machine() {
+export default function Machine(props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [slot1, setSlot] = useState("slot1")
   const [slot2, setSlot2] = useState("slot2")
   const [slot3, setSlot3] = useState("slot3")
-  const [machine, setMachine] = useState("machine1")
+  // const [machine, setMachine] = useState("machine1")
+  const [radio, setRadio] = useState("Start")
+  const [selectedMachine, setSelected] = React.useState('');
+  const [machines, setMachines] = React.useState([]);
+  const [cells, setCells] = React.useState([]);
 
-  // const forceUpdate = useCallback(() => updateState({}), []);
+  const [account, setAccount] = useGlobal(
+    state => state.account,
+  );
+  // console.log(props)
+
+
+
+  useEffect(() => {
+    console.log('counter updated');
+    setMachines([])
+    callAPI()
+  }, [props])
+
+  function callAPI () {
+    console.log("rerender")
+    fetch( "https://rest.garmentvendor.app/stations?accountNum=" + account, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        // console.log(result)
+        setMachines([...result])
+        // machines.push(...result)
+        console.log(machines)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  };
+
 
   const [inventory, setInventory] = useGlobal(
     state => state.inventory
@@ -76,160 +139,114 @@ export default function Machine() {
     //  console.log(globalState);
   };
 
-function passMachineSlot(slot) {
-  console.log(slot)
-  var data = {machine, slot}
-  globalActions.setMachine(data);
+  function handleRadioChange(radio) {
+    // const open = true
+    // globalActions.openDialog(open);
+    //  globalActions.editUsers(user);
+    //  console.log(globalState);
+  };
 
-}
+  // function handleChange(radio) {
+  //   // const open = true
+  //   // globalActions.openDialog(open);
+  //   //  globalActions.editUsers(user);
+  //   //  console.log(globalState);
+  // };
+  function machineChange(value) {
+    setSelected(value)
+    console.log(selectedMachine)
+    setCells(cellsExample);
+    console.log("cell " + cells[0]);
 
-const submitDiag = () => (event) => {
-  const open = true
-  globalActions.openDialog(open)
-  setTimeout(function(){
+    // console.log(slot)
+    // var data = {machine, slot}
+    // globalActions.setMachine(data);
+
+  }
+
+
+  function passMachineSlot(slot) {
+    // console.log(slot)
+    // var data = {machine, slot}
+    // globalActions.setMachine(data);
+
+  }
+
+  const submitDiag = () => (event) => {
+    const open = true
+    globalActions.openDialog(open)
+    setTimeout(function(){
+      var data = 0;
+      globalActions.addValue(data)
+      globalActions.openDialog(false)
+    }, 2000);
+    console.log(globalState)
+  };
+
+  const handleClick = () => (event) => {
     var data = 0;
-  globalActions.addValue(data)
-globalActions.openDialog(false)
-}, 2000);
-  console.log(globalState)
-};
+    globalActions.addValue(data)
+    console.log(globalState)
+  };
 
-const handleClick = () => (event) => {
-  var data = 0;
-  globalActions.addValue(data)
-  console.log(globalState)
-};
+  const handleChange = (value) => {
+    setSelected(value);
+    // setCells(cellsExample);
+    console.log("cell " + cells[0])
+  };
 
   return (
     <div>
-    <div className={classes.header}>
-    <SubmitDiag style={{display: "none"}}/>
     <Typography gutterBottom variant="h5"  component="h2" >
     MACHINE 1
     </Typography>
-    <ChevronRightIcon/>
-    <Typography gutterBottom variant="h5"  component="h2" >
-    ASSIGN ITEMS
-    </Typography>
+    <div className={classes.header}>
+    <SubmitDiag style={{display: "none"}}/>
+    <FormControl component="fieldset">
+    <RadioGroup row aria-label="position" name="position" defaultValue="top" onChange={handleRadioChange} >
+    <FormControlLabel value="end" control={<Radio color="primary" />} label="Return" />
+    <FormControlLabel value="start" control={<Radio color="primary" />} label="Dispenser" />
+    </RadioGroup>
+    </FormControl>
+    <FormControl className={classes.formControl}>
+    <InputLabel id="demo-simple-select-label">Select Machine</InputLabel>
+    <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={selectedMachine}
+    onChange={e => machineChange(e.target.value)}
+    >
+    {machines.map((option) => (
+      <MenuItem key={option} value={option}>
+      {option.machineDescription}
+      </MenuItem>
+    ))}
+    </Select>
+    </FormControl>
     <div className={classes.button} >
     <Button onClick={handleClick()}  style={{marginRight: 5}} variant="outlined" color="primary" >
     <ArrowBackIcon />
-
     </Button>
     <Button onClick={submitDiag()} variant="outlined" color="primary">
     Apply Changes
     </Button>
-      </div>
+    </div>
     </div>
     <div className={classes.root}>
+    {cells.map((cells, i) => (
+      <Paper key={i} className={classes.spacing} elevation={3} >
+      <div style={{marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
+      <Typography gutterBottom variant="h6"  component="h6" >
+      {cells.inventory}
+      </Typography>
+      </div>
 
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 1
-    </Typography>
+      <div style={{marginLeft: "auto"}}>
+      <SimpleDialog/>
+      </div>
 
-    <Card>
-    <CardActions  onClick={() => passMachineSlot("slot1")} >
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 2
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot2")}>
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 3
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot3")}>
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 4
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot4")} >
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 5
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot5")} >
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 6
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot6")}>
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 7
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot7")} >
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
-    <Paper className={classes.spacing} elevation={3} >
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SLOT 8
-    </Typography>
-    <Card>
-    <CardActions onClick={() => passMachineSlot("slot8")}>
-    <div style={{marginLeft: "auto"}}>
-    <SimpleDialog/>
-    </div>
-    </CardActions>
-    </Card>
-    </Paper>
-
+      </Paper>
+    ))}
 
     </div>
     </div>

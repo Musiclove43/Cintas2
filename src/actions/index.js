@@ -1,6 +1,6 @@
 
 export const addToUsers = (store, data) => {
-  const newUserValue = store.state.user.push(data);
+  const newUserValue = store.state.user = data;
   store.setState({ newUserValue });
 };
 

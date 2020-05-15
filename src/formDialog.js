@@ -74,100 +74,99 @@ export default function FormDialog() {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + token,
+        'Bearer ' + globalState.token.Token,
       },
       body: JSON.stringify({
-        "email": "testuser11@email.com",
-        "firstName": "mike4",
-        "lastName": "holberger1",
-        "location": "testLocation",
-        "department": "fire",
-        "cardID": "000000042",
+        "email": email,
+        "firstName": first,
+        "lastName": last,
+        "accountNum": "0",
+        "department": "",
+        "cardID": "000000045",
         "credits": 0,
         "withdrawLimit": 0,
-        "expirationDate": "2023-09-01T00:00:00Z"
+        "expirationDate": "2123-01-01T00:00:00Z"
       })
     })
 
     .then(res => res.json())
     .then(
       (result) => {
-
         console.log(result)
       }
     )
 
-      fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
-        method: 'get',
-        contentType: 'application/json',
-        headers: {
-          Authorization:
-          'Bearer ' + token,
-        },
+    //   fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
+    //     method: 'get',
+    //     contentType: 'application/json',
+    //     headers: {
+    //       Authorization:
+    //       'Bearer ' + token,
+    //     },
+    //
+    //   })
+    //
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //
+    //       console.log(result)
+    //     },
+    //   // Note: it's important to handle errors here
+    //   // instead of a catch() block so that we don't swallow
+    //   // exceptions from actual bugs in components.
+    //   (error) => {
+    //     console.log(error)
+    //   }
+    // )
 
-      })
+    // fetch( "https://rest.garmentvendor.app/user?email=testuser13@email.com" , {
+    //   method: 'delete',
+    //   contentType: 'application/json',
+    //   headers: {
+    //     Authorization:
+    //     'Bearer ' + token,
+    //   },
+    //
+    // })
 
-      .then(res => res.json())
-      .then(
-        (result) => {
+    //   fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
+    //     method: 'get',
+    //     contentType: 'application/json',
+    //     headers: {
+    //       Authorization:
+    //       'Bearer ' + token,
+    //     },
+    //
+    //   })
+    //
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //
+    //       console.log(result)
+    //     },
+    //   // Note: it's important to handle errors here
+    //   // instead of a catch() block so that we don't swallow
+    //   // exceptions from actual bugs in components.
+    //   (error) => {
+    //     console.log(error)
+    //   }
+    // )
 
-          console.log(result)
-        },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      (error) => {
-        console.log(error)
-      }
-    )
-
-    fetch( "https://rest.garmentvendor.app/user?email=testuser13@email.com" , {
-      method: 'delete',
-      contentType: 'application/json',
-      headers: {
-        Authorization:
-        'Bearer ' + token,
-      },
-
-    })
-
-    fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
-      method: 'get',
-      contentType: 'application/json',
-      headers: {
-        Authorization:
-        'Bearer ' + token,
-      },
-
-    })
-
-    .then(res => res.json())
-    .then(
-      (result) => {
-
-        console.log(result)
-      },
-    // Note: it's important to handle errors here
-    // instead of a catch() block so that we don't swallow
-    // exceptions from actual bugs in components.
-    (error) => {
-      console.log(error)
-    }
-  )
-
-    .then(res => res.json())
-    .then(
-      (result) => {
-
-        console.log(result)
-      },
-    // Note: it's important to handle errors here
-    // instead of a catch() block so that we don't swallow
-    // exceptions from actual bugs in components.
-    (error) => {
-      console.log(error)
-    }
-  )
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //
+    //       console.log(result)
+    //     },
+    //   // Note: it's important to handle errors here
+    //   // instead of a catch() block so that we don't swallow
+    //   // exceptions from actual bugs in components.
+    //   (error) => {
+    //     console.log(error)
+    //   }
+    // )
 
 
     // console.log(this.state.items.result);
@@ -175,6 +174,7 @@ export default function FormDialog() {
     globalActions.addToUsers(data)
     // console.log(globalState);
     // document.getElementById("my-form-id").reset();
+    handleClose()
     handleClear();
   };
 

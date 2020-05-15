@@ -13,6 +13,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { useState, useEffect, useCallback, updateState, clearState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import ReactDOM from "react-dom";
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -20,9 +22,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
-export default function EditDialog()
-{
+export default function EditDialog(props){
+  console.log(props)
   // we want to pull in the global state
+  const [open, setOpen] = useState(false);
   const [globalState, globalActions] = useGlobal();
   const [highlight, setHighlight] = useGlobal(
    state => state.highlighted
@@ -36,9 +39,9 @@ export default function EditDialog()
   // bring in the highlighted user
 
 
-  const [open, setOpen] = useGlobal(
-   state => state.open,
-  );
+  // const [open, setOpen] = useGlobal(
+  //  state => state.open,
+  // );
 
   // testing
   // const _setData = (key, value) => {
@@ -70,18 +73,22 @@ export default function EditDialog()
   //
   //     start = false;
   //   }
-
+  // useEffect(() => {
+  //   console.log('props changes');
+  //   // setUsers([]);
+  //   // callAPI()
+  // }, [props])
 
 
 
   useEffect(() => {
       // set the data
-console.log(highlight)
-
-let x = JSON.parse(JSON.stringify(highlight));
-// console.log(x.first )
-setFirst(x.first)
-console.log("first" + first)
+// console.log(highlight)
+//
+// let x = JSON.parse(JSON.stringify(highlight));
+// // console.log(x.first )
+// setFirst(x.first)
+// console.log("first" + first)
 
 });
 
@@ -125,46 +132,81 @@ console.log("first" + first)
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
+    console.log(globalState.token.Token)
     e.preventDefault();
+    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.userEmail.email , {
+      method: 'Post',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+      body: JSON.stringify({
+        "email": email,
+        "firstName": 'harry',
+        "lastName": 'klien',
+        "accountNum": "0",
+        "department": "",
+        "cardID": "000000045",
+        "credits": 0,
+        "withdrawLimit": 0,
+        "expirationDate": "2123-01-01T00:00:00Z"
+      })
+    })
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+      }
+    )
     // console.log("email, last, first, pass")
     // const guid = Math.floor(Math.random() * Date.now())
     // const data = {email, last, first, pass}
     // globalActions.updateUsers(data)
     // console.log(globalState);
     // document.getElementById("my-form-id").reset();
+    props.callBack(true);
     handleClear();
+
   };
 
   const handleClear = () => {
-      // setEmail('');
-      // setPass('')
-      // setFirst('')
-      // setLast('')
+      setEmail('');
+      setPass('')
+      setFirst('')
+      setLast('')
     }
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
 
+    const handleClose = () => {
+      setOpen(false);
+    };
 
-  const handleClickOpen = () => {
-    const open = true
-
-    globalActions.openDialog(open);
-
-
-    // console.log(globalState);
-  };
-
-  const handleClose = () => {
-    // setOpen(false);
-
-    const open = false
-    globalActions.openDialog(open)
-    // console.log(globalState);
-  };
+  // const handleClickOpen = () => {
+  //   const open = true
+  //
+  //   globalActions.openDialog(open);
+  //
+  //
+  //   // console.log(globalState);
+  // };
+  //
+  // const handleClose = () => {
+  //   // setOpen(false);
+  //
+  //   const open = false
+  //   globalActions.openDialog(open)
+  //   // console.log(globalState);
+  // };
 
   return (
     <div>
     <Grid container spacing={3}>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
-    <Button style={{display: 'none'}}variant="outlined" color="primary" onClick={handleClickOpen}>
+    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
     ADD USER +
     </Button>
     </Grid>
@@ -197,10 +239,9 @@ console.log("first" + first)
     fullWidth
     onChange={(e) => setFirst(e.target.value)}
     value={first}
-    // onChange={event => {
-    //     const { value } = event.target;
-    //     setFirst(event.target.value);
-    //   }}
+    // defaultValue={'hellow'}
+
+      // defaultValue='${props.selectUser.userEmail.email}'
 
     />
     </Grid>
@@ -223,6 +264,8 @@ console.log("first" + first)
     label="Email Address"
     type="email"
     fullWidth
+    onChange={(e) => setEmail(e.target.value)}
+    value={email}
 
     />
     </Grid>

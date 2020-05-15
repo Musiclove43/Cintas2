@@ -19,6 +19,9 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import Container from '@material-ui/core/Container';
 import CustomizedTables from '../UserTables';
 import { useState, useEffect, useContext } from "react";
+import Machine from '../machine';
+
+
 
 
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -26,7 +29,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-NavLink, Redirect,
+  NavLink, Redirect,
   useRouteMatch,
   useParams,
   browserHistory,
@@ -44,17 +47,17 @@ function TabPanel(props) {
 
   return (
     <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`scrollable-force-tabpanel-${index}`}
-      aria-labelledby={`scrollable-force-tab-${index}`}
-      {...other}
+    role="tabpanel"
+    hidden={value !== index}
+    id={`scrollable-force-tabpanel-${index}`}
+    aria-labelledby={`scrollable-force-tab-${index}`}
+    {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+    {value === index && (
+      <Box p={3}>
+      <Typography>{children}</Typography>
+      </Box>
+    )}
     </div>
   );
 }
@@ -81,8 +84,10 @@ const useStyles = makeStyles((theme) => ({
 
   },
   container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    // paddingTop: theme.spacing(2),
+    // paddingBottom: theme.spacing(2),
+    color: "grey",
+    paddingLeft: 30
   },
 }));
 
@@ -95,72 +100,59 @@ export default function ScrollableTabsButtonForce(props) {
   let product = {
     conf: ''
   };
- // const {currency} = props
-     // const {value2} = this.props;
-  useEffect(() => {
-    // console.log("rerender has occured")
-    product.conf = value2
 
-// do something when startDate updates
-}, [value2]);
+  useEffect(() => {
+    product.conf = value2
+  }, [value2]);
+
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-
-
-      function handleChange2(newValue) {
-        // props.onChange(event.target.value);
-        setValue2(newValue);
-        // data={props.data}
-          // console.log(props)
-          // console.log(value2);
-  // props.onChange(newValue);
-
-      }
+  function handleChange2(newValue) {
+    setValue2(newValue);
+  }
 
   const history = useHistory();
 
-function handleClick() {
-  history.push("/about/users");
-}
-function handleDash() {
-  history.push({pathname:"/about", propss: value2});
-}
+  function handleClick() {
+    history.push("/about/users");
+  }
+  function handleDash() {
+    history.push({pathname:"/about", propss: value2});
+  }
 
-function handleInvent() {
-  history.push("/about/configurations");
-}
+  function handleInvent() {
+    history.push("/about/configurations");
+  }
 
   return (
     <div className={classes.root}>
 
-      <AppBar position="unset" color="default" style={{flexDirection: "row", paddingLeft: 25}}>
-      <MultilineTextFields  onChange={handleChange2} />
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="on"
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="scrollable force tabs example"
-        >
-          <Tab label="Dashboard" icon={<DashboardIcon />} {...a11yProps(0)} />
-          <Tab label="Users" icon={<PeopleIcon />} {...a11yProps(1)} />
-          <Tab label="Inventory"  icon={<AssignmentIcon />} {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-      <CustomizedTables product={product} />
-      </TabPanel>
+    <AppBar position="unset" color="default" style={{flexDirection: "row", paddingLeft: 25, zIndex:100}}>
+    <MultilineTextFields  onChange={handleChange2} />
+    <Tabs
+    value={value}
+    onChange={handleChange}
+    variant="scrollable"
+    scrollButtons="on"
+    indicatorColor="primary"
+    textColor="primary"
+    aria-label="scrollable force tabs example"
+    >
+    <Tab label="Dashboard" onClick={handleDash}  icon={<DashboardIcon />} {...a11yProps(0)} />
+    <Tab label="Users" onClick={handleClick} icon={<PeopleIcon />} {...a11yProps(1)} />
+    <Tab label="Inventory"  onClick={handleInvent} icon={<AssignmentIcon />} {...a11yProps(2)} />
+    </Tabs>
+    </AppBar>
 
-      <TabPanel {...props}value={value} index={2}>
-      <CustomizedTables {...props} />
-
-      </TabPanel>
+    <TabPanel value={value} index={1} >
+    <CustomizedTables product={product} />
+    </TabPanel>
+    <TabPanel {...props} value={value} index={2}>
+    <Machine product={product}/>
+    </TabPanel>
 
     </div>
   );

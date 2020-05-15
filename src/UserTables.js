@@ -50,180 +50,116 @@ const useStyles = makeStyles({
 });
 
 
-// export function useForceUpdate() {
-//   const [, setTick] = useState(0);
-//   const update = useCallback(() => {
-//     setTick(tick => tick + 1);
-//   }, [])
-//   return update;
-// }
-// var count = 0;
-
-export default function CustomizedTables( props) {
+export default function CustomizedTables(props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [currency2, setCurrency] = useState();
-  const [tick, setTick] = useState(0);
-
-  // const useForceUpdate = () => useState()[1];
-    const [value3, setValue3] = useState('');
-    console.log(props)
-    console.log(value3)
-  // const [profileState, setProfileState] = useState({});
-  // console.log(profileState, props)
-// console.log("currency", currency2)
-// console.log(props)
-  const [user, setUsers] = useState(
-[]
-
-    // state => state.highlighted,
-    // actions => actions.addToCounterA
-  );
+  const [user, setUsers] = useState([]);
+  // const [user, setUsers] = useGlobal(state => state.user);
+  const [value3, setValue3] = useState('');
+  const [reload, setReload] = useState(false);
 
   const [account, setAccount] = useGlobal(
     state => state.account,
-
-    // state => state.highlighted,
-    // actions => actions.addToCounterA
   );
-  // const [state, actions] = useGlobal(account);
 
-  // someMethod() {
-  //     // Force a render without state change...
-  //     this.forceUpdate();
-//   // }
-// const { account } = globalState;
-// const currency2 = MultilineTextFields(useState(currency));
-// console.log(currency2)
+// console.log(props)
+// useEffect(() => {
+//     // calculate margin. Let call it margin
+//     setReload(reload);
+//  }, []);
 
-// const [tick, setTick] = useState(0);
-// console.log("account" + account)
-// console.log(globalState)
-useEffect( () => {
-       console.log('counter updated');
-         setUsers([]);
-       callAPI()
-       console.log(tick)
+  useEffect(() => {
+    console.log('counter updated');
+    setUsers([]);
+    callAPI()
   }, [props])
 
-function callAPI () {
-console.log("rerender")
-      // setProfileState(props);
-
-  // longResolve().then(() => {
-  fetch( "https://rest.garmentvendor.app/users?accountNum=" + account, {
-    method: 'get',
-    contentType: 'application/json',
-    headers: {
-      Authorization:
-      'Bearer ' + globalState.token.Token,
-    },
-  })
-  .then(res => res.json())
-  .then(
-    (result) => {
-      console.log(result)
-      // result.forEach(function(entry) {
-      //   globalActions.addToUsers(entry)
-      //   console.log(globalState);
-      //
-      // });
-      // setUsers([]);
+  function callAPI () {
+    console.log("rerender")
+    fetch( "https://rest.garmentvendor.app/users?accountNum=" + account, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
         setUsers([...result])
-
-      // setCurrencies([...result.accounts])
-      // console.log("currency array" + currencies)
-      // setToken(result.Token)
-    },
-    (error) => {
-      console.log(error)
-    }
-  )
-
-  // })
-};
-
-// function useForceUpdate() {
-//   const update = useCallback(() => {
-//     setTick(tick => tick + 1);
-//   }, [])
-//   return update;
-// }
-
-  // const forceUpdate = useForceUpdate();
-  // const forceUpdate = useForceUpdate();
-
-// const observe = () => {
-// count++
-// //
-// // count = count + n
-// console.log(count)
-// // if (count > 2) {
-//  // count = 0
-//   // console.log("happened")
-//       // forceUpdate();
-//
-//   // count = 0
-// }
-// };
-
-  //
-  // const [account, setAccount] = useGlobal(
-  //  state => state.account,
-  // );
-
-//  const useForceUpdate (() => {
-// console.log("this is an acount")
-// })
-
-
-// const [accountState, setaccountState] = React.useState(account);
-  // console.log(array)
-
-
- // function useForceUpdate() {
- //
- //    // const update = useCallback(() => {
- //      setaccountState(account);
- //    // }, [])
- //    // return update;
- //  }
- //
-
-  // if (account ) {
-  //   setTick(tick + 1); // force re-render
-  //   console.log(account)
-  // }
-
-
-
-// setaccountState(account)
-
-
-  // const forceUpdate = useCallback(if(account !== accountState) => updateState({}), []);
-
-  // console.log("this is a state" + globalState);
-  function deleteUser (user) {
-    console.log(user)
-    globalActions.deleteUsers(user);
-    console.log(globalState)
-  };
-
-  function editUser (user) {
-    const open = true
-    globalActions.openDialog(open);
-    globalActions.editUsers(user);
-    // console.log(globalState);
-
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   };
 
 
+  function deleteUser(anything) {
+    console.log(anything.email)
+    fetch( "https://rest.garmentvendor.app/user?email=" + anything.email, {
+      method: 'delete',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        callAPI()
+        // setUsers([...result])
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+    // var index = user.indexOf(anything);
+    // if (index > -1) {
+    //   user.splice(index, 1);
+    // }
+    // globalActions.deleteUsers(user);
+    // console.log(globalState)
+  };
 
+  const selectUser = {
+    userEmail: '',
+  //   setReload: function() {
+  //     setReload(true);
+  //     console.log("updated!");
+  // },
+  }
+
+  function editUser (newValue) {
+    selectUser.userEmail = newValue
+    // const open = true
+
+
+        // globalActions.openDialog(open);
+        // console.log(selectUser)
+    // globalActions.editUsers(user);
+  };
+
+  function setReloads(value) {
+    // selectUser.userEmail = newValue
+    // const open = true
+console.log(value)
+setReload(value)
+
+        // globalActions.openDialog(open);
+        // console.log(selectUser)
+    // globalActions.editUsers(user);
+  };
 
   return (
     <div className={classes.root}>
     <FormDialog/>
-    <EditDialog/>
+    <EditDialog selectUser={selectUser} callBack={setReloads}/>
     <TableContainer component={Paper}>
     <Table className={classes.table} aria-label="customized table">
     <TableHead>
@@ -261,7 +197,6 @@ console.log("rerender")
       <IconButton
       edge="start"
       color="inherit"
-
       onClick={() => editUser(user)}
       >
       <EditIcon style={{ zIndex:2000}} />

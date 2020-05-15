@@ -45,25 +45,20 @@ import { useState, useEffect } from "react";
 import useGlobal from "./store";
 import TabPanel from './swipe'
 
-
-
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+    {'Copyright © '}
+    <Link color="inherit" href="https://material-ui.com/">
+    Your Website
+    </Link>{' '}
+    {new Date().getFullYear()}
+    {'.'}
     </Typography>
   );
 }
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles(theme => ({
   // root: {
   //   display: 'flex',
@@ -164,68 +159,59 @@ export default function Dashboard(props) {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const [count, setCount] = useState("this is a count");
- //
- // useEffect(() => {
- //   longResolve().then(() => {
- //    alert(globalState.token);
- //   });
- // }, []);
+  //
+  // useEffect(() => {
+  //   longResolve().then(() => {
+  //    alert(globalState.token);
+  //   });
+  // }, []);
 
-//   useEffect(() => {
-//     fetch( "https://rest.garmentvendor.app/accounts?locationNum=0", {
-//         method: 'get',
-//         contentType: 'application/json',
-//              headers: {
-//           Authorization:
-//                  'Bearer' + token,
-// },
-//       })
-//       .then(res => res.json())
-//       .then(
-//         (result) => {
-//           console.log(result)
-//
-//           // setToken(result.Token)
-//         },
-//         (error) => {
-//           console.log(error)
-//         }
-//       )
-//   }, [])
+  //   useEffect(() => {
+  //     fetch( "https://rest.garmentvendor.app/accounts?locationNum=0", {
+  //         method: 'get',
+  //         contentType: 'application/json',
+  //              headers: {
+  //           Authorization:
+  //                  'Bearer' + token,
+  // },
+  //       })
+  //       .then(res => res.json())
+  //       .then(
+  //         (result) => {
+  //           console.log(result)
+  //
+  //           // setToken(result.Token)
+  //         },
+  //         (error) => {
+  //           console.log(error)
+  //         }
+  //       )
+  //   }, [])
 
-// console.log(userLocation)
+  // console.log(userLocation)
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar className={classes.appBar}  >
-        <Toolbar className={classes.toolbar}>
+    <CssBaseline />
+    <AppBar className={classes.appBar}  >
+    <Toolbar className={classes.toolbar}>
 
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            St. Joseph's Hospital
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-<ScrollableTabsButtonForce/>
-
-      <main className={classes.content}>
-
-
-        <Container maxWidth="lg" className={classes.container}>
-        <Route exact path="/about" component={Widgets}/>
-        <Route exact path="/about/configurations" component={TabPanel}/>
-
-             <Route exact path="/about/users"/>
-
-
-        </Container>
-        <Copyright />
-      </main>
+    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+    St. Joseph's Hospital
+    </Typography>
+    <IconButton color="inherit">
+    <Badge badgeContent={4} color="secondary">
+    <NotificationsIcon />
+    </Badge>
+    </IconButton>
+    </Toolbar>
+    </AppBar>
+    <ScrollableTabsButtonForce/>
+    <main className={classes.content}>
+    <Container maxWidth="lg" className={classes.container}>
+    <Route exact path="/about" component={Widgets}/>
+    </Container>
+    <Copyright />
+    </main>
     </div>
   );
 }
