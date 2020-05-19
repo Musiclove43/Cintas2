@@ -38,7 +38,9 @@ console.log(props)
   const [pass, setPass] = useState('')
   const [last, setLast] = useState('')
   const [first, setFirst] = useState('')
-
+  const [account, setAccount] = useGlobal(
+    state => state.account,
+  );
   // bring in the highlighted user
 // console.log(email)
 
@@ -150,7 +152,7 @@ console.log(props)
         "email": email,
         "firstName": 'Gary',
         "lastName": 'Clark',
-        "accountNum": "0",
+        "accountNum": globalState.account,
         "department": "",
         "cardID": "000000045",
         "credits": 0,

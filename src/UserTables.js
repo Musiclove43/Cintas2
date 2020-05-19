@@ -73,7 +73,7 @@ export default function CustomizedTables(props) {
     setUsers([]);
     callAPI()
     setReload(false)
-  }, [props])
+  }, [props,reload])
 
   function callAPI () {
     setLoading(true)

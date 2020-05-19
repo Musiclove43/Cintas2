@@ -36,6 +36,10 @@ export default function FormDialog() {
     // state => state.highlighted,
     // actions => actions.addToCounterA
   );
+  const [account, setAccount] = useGlobal(
+    state => state.account,
+  );
+
   // console.log(globalState)
   // const errors = []
   // useEffect(() => {
@@ -69,8 +73,8 @@ export default function FormDialog() {
     // }
 
     const id = Math.floor(Math.random() * Date.now())
-    const data = {id, email, last, first, badge, department}
-    console.log("token" + token)
+    const data = {id, email, last, first, badge}
+    console.log("token" + account)
     fetch( "https://rest.garmentvendor.app/user" , {
       method: 'post',
       contentType: 'application/json',
@@ -82,8 +86,8 @@ export default function FormDialog() {
         "email": email,
         "firstName": first,
         "lastName": last,
-        "accountNum": "0",
-        "department": "",
+        "accountNum": globalState.account,
+        "department": department,
         "cardID": "000000045",
         "credits": 0,
         "withdrawLimit": 0,
