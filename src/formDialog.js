@@ -24,9 +24,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('')
+  const [badge, setBadge] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
+  const [department, setDepartment] = useState('')
+  const [phone, setPhone] = useState('')
   const [globalState, globalActions] = useGlobal();
   const [allErr, setErr] = useState('')
   const [token, setToken] = useGlobal(
@@ -67,7 +69,7 @@ export default function FormDialog() {
     // }
 
     const id = Math.floor(Math.random() * Date.now())
-    const data = {id, email, last, first, pass}
+    const data = {id, email, last, first, badge}
     console.log("token" + token)
     fetch( "https://rest.garmentvendor.app/user" , {
       method: 'post',
@@ -81,7 +83,7 @@ export default function FormDialog() {
         "firstName": first,
         "lastName": last,
         "accountNum": "0",
-        "department": "",
+        "department": department,
         "cardID": "000000045",
         "credits": 0,
         "withdrawLimit": 0,
@@ -180,7 +182,7 @@ export default function FormDialog() {
 
   const handleClear = () => {
     setEmail('');
-    setPass('')
+    setBadge('')
     setFirst('')
     setLast('')
   }
@@ -283,8 +285,36 @@ export default function FormDialog() {
     label="Password"
     type="email"
     fullWidth
-    value={pass}
-    onChange={e => setPass(e.target.value)}
+    value={badge}
+    onChange={e => setBadge(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Telephone Number"
+    type="email"
+    fullWidth
+    value={phone}
+    validators={['required', 'isEmail']}
+    errorMessages={['this field is required', 'email is not valid']}
+    onChange={e => setPhone(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    label="Department"
+    type="email"
+    fullWidth
+    value={department}
+    onChange={e => setDepartment(e.target.value)}
     />
     </Grid>
 

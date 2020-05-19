@@ -66,14 +66,15 @@ export default function CustomizedTables(props) {
 // console.log(props)
 // useEffect(() => {
 //     // calculate margin. Let call it margin
-//     setReload(reload);
-//  }, []);
+//     // setReload(reload);
+//  }, [reload]);
 
   useEffect(() => {
     console.log('counter updated');
     setUsers([]);
     callAPI()
-  }, [props])
+    setReload(false)
+  }, [props, reload])
 
   function callAPI () {
     console.log("rerender")
@@ -148,8 +149,9 @@ export default function CustomizedTables(props) {
   function setReloads(value) {
     // selectUser.userEmail = newValue
     // const open = true
-console.log(value)
+console.log(reload)
 setReload(value)
+console.log(reload)
 
         // globalActions.openDialog(open);
         // console.log(selectUser)

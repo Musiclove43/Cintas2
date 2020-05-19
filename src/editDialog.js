@@ -143,8 +143,8 @@ export default function EditDialog(props){
       },
       body: JSON.stringify({
         "email": email,
-        "firstName": 'harry',
-        "lastName": 'klien',
+        "firstName": 'Gary',
+        "lastName": 'Clark',
         "accountNum": "0",
         "department": "",
         "cardID": "000000045",
@@ -185,14 +185,12 @@ export default function EditDialog(props){
       setOpen(false);
     };
 
-  // const handleClickOpen = () => {
-  //   const open = true
-  //
-  //   globalActions.openDialog(open);
-  //
-  //
-  //   // console.log(globalState);
-  // };
+  function onChange2(e){
+setFirst(e.target.value)
+
+
+    // console.log(globalState);
+  };
   //
   // const handleClose = () => {
   //   // setOpen(false);
@@ -237,9 +235,9 @@ export default function EditDialog(props){
     label="First Name"
     type="email"
     fullWidth
-    onChange={(e) => setFirst(e.target.value)}
-    value={first}
-    // defaultValue={'hellow'}
+    onChange={e => onChange2(e)}
+    value={props.selectUser.userEmail.email}
+
 
       // defaultValue='${props.selectUser.userEmail.email}'
 
