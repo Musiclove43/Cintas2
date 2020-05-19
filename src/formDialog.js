@@ -69,7 +69,7 @@ export default function FormDialog() {
     // }
 
     const id = Math.floor(Math.random() * Date.now())
-    const data = {id, email, last, first, badge}
+    const data = {id, email, last, first, badge, department}
     console.log("token" + token)
     fetch( "https://rest.garmentvendor.app/user" , {
       method: 'post',
@@ -83,7 +83,7 @@ export default function FormDialog() {
         "firstName": first,
         "lastName": last,
         "accountNum": "0",
-        "department": department,
+        "department": "",
         "cardID": "000000045",
         "credits": 0,
         "withdrawLimit": 0,

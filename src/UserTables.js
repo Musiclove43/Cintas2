@@ -16,6 +16,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import MultilineTextFields from './navigation/searchBar'
+import CircularIndeterminate from './Circular'
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -37,9 +38,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
-
-
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -58,25 +56,27 @@ export default function CustomizedTables(props) {
   // const [user, setUsers] = useGlobal(state => state.user);
   const [value3, setValue3] = useState('');
   const [reload, setReload] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
 
-// console.log(props)
-// useEffect(() => {
-//     // calculate margin. Let call it margin
-//     // setReload(reload);
-//  }, [reload]);
+  // console.log(props)
+  // useEffect(() => {
+  //     // calculate margin. Let call it margin
+  //     // setReload(reload);
+  //  }, [reload]);
 
   useEffect(() => {
     console.log('counter updated');
     setUsers([]);
     callAPI()
     setReload(false)
-  }, [props, reload])
+  }, [props])
 
   function callAPI () {
+    setLoading(true)
     console.log("rerender")
     fetch( "https://rest.garmentvendor.app/users?accountNum=" + account, {
       method: 'get',
@@ -91,6 +91,7 @@ export default function CustomizedTables(props) {
       (result) => {
         console.log(result)
         setUsers([...result])
+        setLoading(false)
       },
       (error) => {
         console.log(error)
@@ -128,96 +129,77 @@ export default function CustomizedTables(props) {
     // console.log(globalState)
   };
 
-  const selectUser = {
-    userEmail: '',
-  //   setReload: function() {
-  //     setReload(true);
-  //     console.log("updated!");
-  // },
-  }
-
-  function editUser (newValue) {
-    selectUser.userEmail = newValue
-    // const open = true
-
-
-        // globalActions.openDialog(open);
-        // console.log(selectUser)
-    // globalActions.editUsers(user);
-  };
 
   function setReloads(value) {
     // selectUser.userEmail = newValue
     // const open = true
-console.log(reload)
-setReload(value)
-console.log(reload)
+    console.log(reload)
+    setReload(value)
+    console.log(reload)
 
-        // globalActions.openDialog(open);
-        // console.log(selectUser)
+    // globalActions.openDialog(open);
+    // console.log(selectUser)
     // globalActions.editUsers(user);
   };
 
   return (
     <div className={classes.root}>
-    <FormDialog/>
-    <EditDialog selectUser={selectUser} callBack={setReloads}/>
-    <TableContainer component={Paper}>
-    <Table className={classes.table} aria-label="customized table">
-    <TableHead>
-    <TableRow>
-    <StyledTableCell>Last Name</StyledTableCell>
-    <StyledTableCell align="right">First Name</StyledTableCell>
-    <StyledTableCell align="right">ID</StyledTableCell>
-    <StyledTableCell align="right">Email Address</StyledTableCell>
-    <StyledTableCell align="right">Department</StyledTableCell>
-    <StyledTableCell align="right">Limit Group</StyledTableCell>
-    <StyledTableCell align="right">Credit Limit</StyledTableCell>
-    <StyledTableCell align="right">Date Added</StyledTableCell>
-    <StyledTableCell align="right">Added By</StyledTableCell>
-    <StyledTableCell align="right">Actions</StyledTableCell>
+    { loading ?
+      <CircularIndeterminate/>
+      :
+      <React.Fragment>
+      <FormDialog/>
+      <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="customized table">
+      <TableHead>
+      <TableRow>
+      <StyledTableCell>Last Name</StyledTableCell>
+      <StyledTableCell align="right">First Name</StyledTableCell>
+      <StyledTableCell align="right">ID</StyledTableCell>
+      <StyledTableCell align="right">Email Address</StyledTableCell>
+      <StyledTableCell align="right">Department</StyledTableCell>
+      <StyledTableCell align="right">Limit Group</StyledTableCell>
+      <StyledTableCell align="right">Credit Limit</StyledTableCell>
+      <StyledTableCell align="right">Date Added</StyledTableCell>
+      <StyledTableCell align="right">Added By</StyledTableCell>
+      <StyledTableCell align="right">Actions</StyledTableCell>
 
+      </TableRow>
+      </TableHead>
+      <TableBody>
+      {user.map((user, i) => (
+        <StyledTableRow key={i}>
+        <StyledTableCell component="th" scope="row">
+        {user.lastName}
+        </StyledTableCell>
+        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+        <StyledTableCell align="right">{user.lastName}</StyledTableCell>
+        <StyledTableCell align="right">{user.email}</StyledTableCell>
+        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
+        <StyledTableCell align="right">{user.first}</StyledTableCell>
+        <StyledTableCell align="right">
+        <div style={{marginLeft: "auto", display: "flex", flexDirection: "row"}}>
+        <EditDialog selectUser={user} callBack={setReloads} />
 
-    </TableRow>
-    </TableHead>
-    <TableBody>
-    {user.map((user, i) => (
-      <StyledTableRow key={i}>
-      <StyledTableCell component="th" scope="row">
-      {user.lastName}
-      </StyledTableCell>
-      <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-      <StyledTableCell align="right">{user.lastName}</StyledTableCell>
-      <StyledTableCell align="right">{user.email}</StyledTableCell>
-      <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-      <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-      <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-      <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-      <StyledTableCell align="right">{user.first}</StyledTableCell>
-      <StyledTableCell align="right">
-
-      <IconButton
-      edge="start"
-      color="inherit"
-      onClick={() => editUser(user)}
-      >
-      <EditIcon style={{ zIndex:2000}} />
-      </IconButton>
-      <IconButton
-      edge="start"
-      color="inherit"
-
-      onClick={() => deleteUser(user)}
-      >
-      <HighlightOffIcon style={{ zIndex:2000}} />
-      </IconButton>
-
-      </StyledTableCell>
-      </StyledTableRow>
-    ))}
-    </TableBody>
-    </Table>
-    </TableContainer>
+        <IconButton
+        edge="start"
+        color="inherit"
+        onClick={() => deleteUser(user)}
+        >
+        <HighlightOffIcon style={{ zIndex:2000}} />
+        </IconButton>
+        </div>
+        </StyledTableCell>
+        </StyledTableRow>
+      ))}
+      </TableBody>
+      </Table>
+      </TableContainer>
+      </React.Fragment>
+    }
     </div>
   );
 }

@@ -14,6 +14,8 @@ import { useState, useEffect, useCallback, updateState, clearState} from "react"
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import ReactDOM from "react-dom";
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 
@@ -21,23 +23,24 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
+// var somename = "cathy"
 export default function EditDialog(props){
-  console.log(props)
+console.log(props)
   // we want to pull in the global state
+
   const [open, setOpen] = useState(false);
   const [globalState, globalActions] = useGlobal();
   const [highlight, setHighlight] = useGlobal(
-   state => state.highlighted
+    state => state.highlighted
   );
   // set the hook data
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [last, setLast] = useState('')
   const [first, setFirst] = useState('')
 
   // bring in the highlighted user
-
+// console.log(email)
 
   // const [open, setOpen] = useGlobal(
   //  state => state.open,
@@ -81,16 +84,17 @@ export default function EditDialog(props){
 
 
 
-  useEffect(() => {
-      // set the data
-// console.log(highlight)
-//
-// let x = JSON.parse(JSON.stringify(highlight));
-// // console.log(x.first )
-// setFirst(x.first)
-// console.log("first" + first)
-
-});
+  // useEffect(() => {
+  //   // set the data
+  //   // console.log(highlight)
+  //      console.log('props updated');
+  //      // props = {}
+  //   // let x = JSON.parse(JSON.stringify(highlight));
+  //   // // console.log(x.first )
+  //   // setFirst(somename)
+  //   // console.log("first" + first)
+  //
+  // }, [props]);
 
   // useEffect() {
   //   // set the data
@@ -105,36 +109,37 @@ export default function EditDialog(props){
   //   console.log(data);
   // }
 
-//
-//  function findUser() {
-//   if (open) {
-//     let dynamicData = {};
-//     Object.keys(data).forEach(key => {
-//       dynamicData[key] = highlight[key];
-//     });
-//     setData(dynamicData);
-//
-//     console.log(dynamicData);
-//     console.log(highlight);
-//     console.log(data);
-//
-//
-//   }
-// //   // setIsLoading(false)
-// }
+  //
+  //  function findUser() {
+  //   if (open) {
+  //     let dynamicData = {};
+  //     Object.keys(data).forEach(key => {
+  //       dynamicData[key] = highlight[key];
+  //     });
+  //     setData(dynamicData);
+  //
+  //     console.log(dynamicData);
+  //     console.log(highlight);
+  //     console.log(data);
+  //
+  //
+  //   }
+  // //   // setIsLoading(false)
+  // }
 
 
 
 
-// console.log("highlight" + highlight.id)
+  // console.log("highlight" + highlight.id)
 
 
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
+    console.log(props.selectUser.email)
     console.log(globalState.token.Token)
     e.preventDefault();
-    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.userEmail.email , {
+    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email , {
       method: 'Post',
       contentType: 'application/json',
       headers: {
@@ -172,21 +177,25 @@ export default function EditDialog(props){
   };
 
   const handleClear = () => {
-      setEmail('');
-      setPass('')
-      setFirst('')
-      setLast('')
-    }
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+    setEmail('');
+    setPass('')
+    setFirst('')
+    setLast('')
+  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function onChange2(e){
-setFirst(e.target.value)
+
+    // setFirst('')
+  setFirst(e.target.value)
+    console.log(first)
+    // setFirst(e.target.value)
 
 
     // console.log(globalState);
@@ -204,9 +213,14 @@ setFirst(e.target.value)
     <div>
     <Grid container spacing={3}>
     <Grid item xs={1.25} md={1.25} lg={1.25}>
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-    ADD USER +
-    </Button>
+
+    <IconButton
+    edge="start"
+    color="inherit"
+    onClick={handleClickOpen}
+    >
+    <EditIcon style={{ zIndex:2000}} />
+    </IconButton>
     </Grid>
     </Grid>
     <Dialog
@@ -235,12 +249,14 @@ setFirst(e.target.value)
     label="First Name"
     type="email"
     fullWidth
-    onChange={e => onChange2(e)}
-    value={props.selectUser.userEmail.email}
+    // onChange={e => onChange2(e)}
+    // value={props.selectUser.email}
+    // inputProps={props.selectUser.userEmail.email}
+    // onChange={props.editUser(e)}
 
-
-      // defaultValue='${props.selectUser.userEmail.email}'
-
+    // defaultValue='${props.selectUser.userEmail.email}'
+    onChange={(e) => onChange2(e.target.value)}
+    value={first}
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
