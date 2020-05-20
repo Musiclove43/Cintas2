@@ -35,7 +35,7 @@ const initialState = {
     token:'',
     open:false,
     highlighted: '',
-    // userLocation: '',
+    activeEdit: '',
     account: '',
     value: 0,
     userSwipe: 0,

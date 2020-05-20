@@ -24,6 +24,12 @@ export const editUsers = (store, user) =>  {
   // console.log(store.state.highlighted)
 }
 
+export const activeEdit = (store, user) =>  {
+  const newUserValue = store.state.activeEdit = user;
+  store.setState({ newUserValue });
+  // console.log(store.state.highlighted)
+}
+
 export const updateUsers = (store, data) =>  {
   const newEmail = store.state.highlighted.email = data.email;
   const newFirst = store.state.highlighted.first = data.first;

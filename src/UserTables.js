@@ -142,6 +142,17 @@ export default function CustomizedTables(props) {
     // globalActions.editUsers(user);
   };
 
+  function editUser(user) {
+    // selectUser.userEmail = newValue
+    // const open = true
+    // props.user
+console.log("here" + user)
+    // globalActions.openDialog(open);
+    // console.log(selectUser)
+    globalActions.activeEdit(user);
+    console.log(globalState)
+  };
+
   return (
     <div className={classes.root}>
     { loading ?
@@ -149,6 +160,8 @@ export default function CustomizedTables(props) {
       :
       <React.Fragment>
       <FormDialog/>
+      <EditDialog selectUser={selectUser} callBack={setReloads}/>
+
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
       <TableHead>
@@ -182,7 +195,9 @@ export default function CustomizedTables(props) {
         <StyledTableCell align="right">{user.first}</StyledTableCell>
         <StyledTableCell align="right">
         <div style={{marginLeft: "auto", display: "flex", flexDirection: "row"}}>
-        <EditDialog selectUser={user} callBack={setReloads} />
+
+        <EditDialog onClick={(e) => editUser(user)} callBack={setReloads} />
+
 
         <IconButton
         edge="start"

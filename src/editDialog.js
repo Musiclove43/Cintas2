@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // var somename = "cathy"
 export default function EditDialog(props){
-console.log(props)
+// console.log(props)
   // we want to pull in the global state
 
   const [open, setOpen] = useState(false);
@@ -141,7 +141,7 @@ console.log(props)
     console.log(props.selectUser.email)
     console.log(globalState.token.Token)
     e.preventDefault();
-    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email , {
+    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
       method: 'Post',
       contentType: 'application/json',
       headers: {
@@ -255,6 +255,7 @@ console.log(props)
     // value={props.selectUser.email}
     // inputProps={props.selectUser.userEmail.email}
     // onChange={props.editUser(e)}
+    // inputRef={props.selectUser.email}
 
     // defaultValue='${props.selectUser.userEmail.email}'
     onChange={(e) => onChange2(e.target.value)}
