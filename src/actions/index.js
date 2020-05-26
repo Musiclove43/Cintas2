@@ -17,10 +17,12 @@ export const deleteUsers = (store, user) =>  {
   store.setState({ user: store.state.user });
 }
 
-export const editUsers = (store, user) =>  {
-  var foundIndex =  store.state.user.findIndex(x => x.id == user.id);
-  const highlightUser = store.state.user[foundIndex] = user;
-  store.setState({ highlighted: highlightUser });
+export const editUsers = (store, newValue) =>  {
+  // const newUserValue = store.state.highlighted = ne;
+
+  // var foundIndex =  store.state.user.findIndex(x => x.id == user.id);
+  // const highlightUser = user;
+  store.setState({ highlighted: newValue });
   // console.log(store.state.highlighted)
 }
 

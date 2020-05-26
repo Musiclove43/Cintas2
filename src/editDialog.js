@@ -25,14 +25,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 // var somename = "cathy"
 export default function EditDialog(props){
-// console.log(props)
+  console.log(props)
   // we want to pull in the global state
 
   const [open, setOpen] = useState(false);
   const [globalState, globalActions] = useGlobal();
-  const [highlight, setHighlight] = useGlobal(
-    state => state.highlighted
-  );
+  // const [highlight, setHighlight] = useGlobal(
+  //   state => state.highlighted
+  // );
   // set the hook data
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
@@ -42,7 +42,7 @@ export default function EditDialog(props){
     state => state.account,
   );
   // bring in the highlighted user
-// console.log(email)
+  // console.log(email)
 
   // const [open, setOpen] = useGlobal(
   //  state => state.open,
@@ -138,10 +138,10 @@ export default function EditDialog(props){
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
-    console.log(props.selectUser.email)
+    console.log(email)
     console.log(globalState.token.Token)
     e.preventDefault();
-    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
+    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.userEmail.email, {
       method: 'Post',
       contentType: 'application/json',
       headers: {
@@ -195,8 +195,8 @@ export default function EditDialog(props){
   function onChange2(e){
 
     // setFirst('')
-  setFirst(e.target.value)
-    console.log(first)
+    // setFirst(e.target.value)
+    console.log("here we are")
     // setFirst(e.target.value)
 
 
@@ -281,8 +281,10 @@ export default function EditDialog(props){
     label="Email Address"
     type="email"
     fullWidth
-    onChange={(e) => setEmail(e.target.value)}
-    value={email}
+    // onChange={(e) => setEmail(e.target.value)}
+    // value={email}
+    onChange = {(e) => onChange2(e.target.value)}
+    value = {props.selectUser.userEmail.email}
 
     />
     </Grid>

@@ -97,7 +97,6 @@ function SimpleDialog(props) {
           component="img"
           alt="Contemplative Reptile"
           height="100"
-
           image={inventory.file}
           title="Contemplative Reptile"
           />

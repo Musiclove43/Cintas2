@@ -68,6 +68,12 @@ export default function CustomizedTables(props) {
   //     // setReload(reload);
   //  }, [reload]);
 
+  // const areEqual = (prevProps, nextProps) => true;
+  // 
+  // const MyComponent = React.memo(props => {
+  //   console.log("Equal") /*whatever jsx you like */
+  // }, areEqual);
+
   useEffect(() => {
     console.log('counter updated');
     setUsers([]);
@@ -130,6 +136,7 @@ export default function CustomizedTables(props) {
   };
 
 
+
   function setReloads(value) {
     // selectUser.userEmail = newValue
     // const open = true
@@ -142,16 +149,48 @@ export default function CustomizedTables(props) {
     // globalActions.editUsers(user);
   };
 
-  function editUser(user) {
+
+  function onChange2(value) {
     // selectUser.userEmail = newValue
     // const open = true
-    // props.user
-console.log("here" + user)
+    console.log("here we are")
+    // setReload(value)
+    // console.log(reload)
+
     // globalActions.openDialog(open);
     // console.log(selectUser)
-    globalActions.activeEdit(user);
-    console.log(globalState)
+    // globalActions.editUsers(user);
   };
+
+  const selectUser = {
+  userEmail: '',
+//   setReload: function() {
+//     setReload(true);
+//     console.log("updated!");
+// },
+}
+
+function editUser (newValue) {
+  selectUser.userEmail = newValue
+  // const open = true
+
+
+      // globalActions.openDialog(open);
+      console.log("selectUser")
+  globalActions.editUsers(newValue);
+  // console.log(globalState.highlighted)
+};
+
+//   function editUser(user) {
+//     // selectUser.userEmail = newValue
+//     // const open = true
+//     // props.user
+// console.log("here" + user)
+//     // globalActions.openDialog(open);
+//     // console.log(selectUser)
+//     globalActions.activeEdit(user);
+//     console.log(globalState)
+//   };
 
   return (
     <div className={classes.root}>
@@ -160,7 +199,7 @@ console.log("here" + user)
       :
       <React.Fragment>
       <FormDialog/>
-      <EditDialog selectUser={selectUser} callBack={setReloads}/>
+      <EditDialog selectUser={selectUser} callBack={setReloads} />
 
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -196,9 +235,13 @@ console.log("here" + user)
         <StyledTableCell align="right">
         <div style={{marginLeft: "auto", display: "flex", flexDirection: "row"}}>
 
-        <EditDialog onClick={(e) => editUser(user)} callBack={setReloads} />
-
-
+        <IconButton
+        edge="start"
+        color="inherit"
+        onClick={() => editUser(user)}
+        >
+        <EditIcon style={{ zIndex:2000}} />
+        </IconButton>
         <IconButton
         edge="start"
         color="inherit"

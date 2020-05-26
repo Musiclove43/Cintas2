@@ -30,6 +30,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import ReactDOM from "react-dom";
+import AssignItem from './assignItem'
 
 
 
@@ -155,7 +156,7 @@ export default function Machine(props) {
   function machineChange(value) {
     setSelected(value)
     console.log(selectedMachine)
-    setCells(cellsExample);
+    setCells(value.cellData);
     console.log("cell " + cells[0]);
 
     // console.log(slot)
@@ -237,12 +238,35 @@ export default function Machine(props) {
       <Paper key={i} className={classes.spacing} elevation={3} >
       <div style={{marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
       <Typography gutterBottom variant="h6"  component="h6" >
-      {cells.inventory}
+      Cell {cells.cellNum}
       </Typography>
       </div>
 
       <div style={{marginLeft: "auto"}}>
-      <SimpleDialog/>
+
+      <Card button key={i} className={classes.spacing} >
+      <CardActionArea key={i} >
+      <CardMedia
+      key={i}
+      component="img"
+      alt={cells.itemName}
+      height="200"
+      image={cells.imageURL}
+      title={cells.itemName}
+      />
+      <CardContent >
+      <Typography gutterBottom variant="h5"  component="h2" >
+      {cells.itemName}
+      </Typography>
+      <Typography  variant="body2" color="textSecondary" component="p">
+      {cells.size}
+      </Typography>
+      </CardContent>
+
+      </CardActionArea>
+      </Card>
+
+<AssignItem/>
       </div>
 
       </Paper>
