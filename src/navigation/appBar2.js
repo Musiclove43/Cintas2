@@ -89,6 +89,12 @@ const useStyles = makeStyles((theme) => ({
     color: "grey",
     paddingLeft: 30
   },
+  card: {
+    // paddingTop: theme.spacing(2),
+    // paddingBottom: theme.spacing(2),
+    color: "red",
+    // paddingLeft: 30
+  },
 }));
 
 export default function ScrollableTabsButtonForce(props) {
@@ -137,8 +143,8 @@ export default function ScrollableTabsButtonForce(props) {
     onChange={handleChange}
     variant="scrollable"
     scrollButtons="on"
-    indicatorColor="primary"
-    textColor="primary"
+    indicatorColor="secondary"
+    textColor="secondary"
     aria-label="scrollable force tabs example"
     >
     <Tab label="Dashboard" onClick={handleDash}  icon={<DashboardIcon />} {...a11yProps(0)} />

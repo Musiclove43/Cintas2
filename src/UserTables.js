@@ -68,11 +68,11 @@ export default function CustomizedTables(props) {
   //     // setReload(reload);
   //  }, [reload]);
 
-  // const areEqual = (prevProps, nextProps) => true;
-  // 
-  // const MyComponent = React.memo(props => {
-  //   console.log("Equal") /*whatever jsx you like */
-  // }, areEqual);
+  const areEqual = (prevProps, nextProps) => true;
+
+  const MyComponent = React.memo(props => {
+    console.log("Equal") /*whatever jsx you like */
+  }, areEqual);
 
   useEffect(() => {
     console.log('counter updated');
@@ -127,12 +127,6 @@ export default function CustomizedTables(props) {
         console.log(error)
       }
     )
-    // var index = user.indexOf(anything);
-    // if (index > -1) {
-    //   user.splice(index, 1);
-    // }
-    // globalActions.deleteUsers(user);
-    // console.log(globalState)
   };
 
 
@@ -143,6 +137,18 @@ export default function CustomizedTables(props) {
     console.log(reload)
     setReload(value)
     console.log(reload)
+
+    // globalActions.openDialog(open);
+    // console.log(selectUser)
+    // globalActions.editUsers(user);
+  };
+
+  function userChange(e) {
+    selectUser.userEmail = e
+    // const open = true
+    console.log(selectUser)
+    // setReload(value)
+    // console.log(reload)
 
     // globalActions.openDialog(open);
     // console.log(selectUser)
@@ -177,7 +183,7 @@ function editUser (newValue) {
 
       // globalActions.openDialog(open);
       console.log("selectUser")
-  globalActions.editUsers(newValue);
+  // globalActions.editUsers(newValue);
   // console.log(globalState.highlighted)
 };
 
@@ -199,7 +205,7 @@ function editUser (newValue) {
       :
       <React.Fragment>
       <FormDialog/>
-      <EditDialog selectUser={selectUser} callBack={setReloads} />
+      <EditDialog selectUser={selectUser} callBack={setReloads} onChange={userChange} />
 
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -233,8 +239,7 @@ function editUser (newValue) {
         <StyledTableCell align="right">{user.firstName}</StyledTableCell>
         <StyledTableCell align="right">{user.first}</StyledTableCell>
         <StyledTableCell align="right">
-        <div style={{marginLeft: "auto", display: "flex", flexDirection: "row"}}>
-
+        <div>
         <IconButton
         edge="start"
         color="inherit"

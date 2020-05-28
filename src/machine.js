@@ -244,7 +244,7 @@ export default function Machine(props) {
 
       <div style={{marginLeft: "auto"}}>
 
-      <Card button key={i} className={classes.spacing} >
+      <Card button key={i} >
       <CardActionArea key={i} >
       <CardMedia
       key={i}
@@ -261,12 +261,13 @@ export default function Machine(props) {
       <Typography  variant="body2" color="textSecondary" component="p">
       {cells.size}
       </Typography>
+      <AssignItem/>
       </CardContent>
 
       </CardActionArea>
       </Card>
 
-<AssignItem/>
+
       </div>
 
       </Paper>

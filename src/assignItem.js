@@ -38,11 +38,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AssignItem() {
+export default React.memo(function AssignItem(prevProps, nextProps, props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [open, setOpen] = useState(false);
   const [size, setSize] = useState('');
+  const [sizes, setSizes] = useState([]);
+
   const [itemType, setItemType] = useState('')
   const [color, setColor] = useState('')
   const [days, setDays] = useState('')
@@ -50,8 +52,7 @@ export default function AssignItem() {
   const [age, setAge] = useState('')
   const [allErr, setErr] = useState('')
   const [machines, setMachines] = React.useState([]);
-
-
+  const [items, setItems] = useState([])
 
   const [token, setToken] = useGlobal(
     state => state.token,
@@ -59,6 +60,75 @@ export default function AssignItem() {
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
+  // const areEqual = (prevProps, nextProps) => true;
+  //
+  // const MyComponent = React.memo(props => {
+  //   console.log("Equal") /*whatever jsx you like */
+  // }, areEqual);
+
+//   React.memo(function MyComponent (props) {
+// console.log(props.value)
+//     // return <div>{ "My Component " + props.value }</div>;
+//
+//   })
+
+  useEffect(() => {
+    console.log('Loaded');
+
+    // setUsers([]);
+    callGetItems()
+    // setReload(false)
+  }, [])
+
+
+  function callGetItems () {
+    // setLoading(true)
+    console.log("rerender")
+    fetch( "https://rest.garmentvendor.app/items?accountNum=" + account, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        setItems([...result])
+        // setLoading(false)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  };
+
+    function selectedItem(value) {
+      console.log(value)
+      setItemType(value)
+      fetch( "https://rest.garmentvendor.app/items/skus?itemID=" + value.itemID, {
+        method: 'get',
+        contentType: 'application/json',
+        headers: {
+          Authorization:
+          'Bearer ' + globalState.token.Token,
+        },
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          setSizes([...result])
+          // setLoading(false)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    };
+
 
 
 
@@ -116,60 +186,31 @@ export default function AssignItem() {
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           value={itemType}
-          onChange={(e) => setItemType(e.target.value)}
+          onChange={(e) => selectedItem(e.target.value)}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {items.map((option) => (
+          <MenuItem key={option} value={option}>{option.itemDesc}</MenuItem>
+    ))}
         </Select>
       </FormControl>
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
     <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Size</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label">Size/Color</InputLabel>
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           value={size}
           onChange={(e) => setSize(e.target.value)}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Grid>
-    <Grid item xs={6} md={6} lg={6}>
-    <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Color</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+        {sizes.map((option) => (
+          <MenuItem key={option} value={option}>{option.color} {option.size} - {option.sku}</MenuItem>
+        ))}
         </Select>
       </FormControl>
     </Grid>
 
 
-    <Grid item xs={6} md={6} lg={6}>
-    <TextValidator
-    autoFocus
-    margin="dense"
-    id="name"
-    validators={['required']}
-    errorMessages={['this field is required']}
-    label="Days on hand"
-    type="Days on hand"
-    fullWidth
-    value={days}
-    onChange={e => setDays(e.target.value)}
-    />
-    </Grid>
     <Grid item xs={6} md={6} lg={6}>
     <TextValidator
     autoFocus
@@ -199,4 +240,4 @@ export default function AssignItem() {
     </Dialog>
     </div>
   );
-}
+})

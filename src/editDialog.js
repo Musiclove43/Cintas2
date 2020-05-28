@@ -27,14 +27,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function EditDialog(props){
   console.log(props)
   // we want to pull in the global state
-
+  // const areEqual = (prevProps, nextProps) => true;
+  //
+  // const MyComponent = React.memo(props => {
+  //   console.log("Equal") /*whatever jsx you like */
+  // }, areEqual);
   const [open, setOpen] = useState(false);
   const [globalState, globalActions] = useGlobal();
   // const [highlight, setHighlight] = useGlobal(
   //   state => state.highlighted
   // );
   // set the hook data
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(props.selectUser.userEmail.email)
   const [pass, setPass] = useState('')
   const [last, setLast] = useState('')
   const [first, setFirst] = useState('')
@@ -78,11 +82,11 @@ export default function EditDialog(props){
   //
   //     start = false;
   //   }
-  // useEffect(() => {
-  //   console.log('props changes');
-  //   // setUsers([]);
-  //   // callAPI()
-  // }, [props])
+  useEffect(() => {
+    console.log('props changes');
+    // setUsers([]);
+    // callAPI()
+  }, [props])
 
 
 
@@ -197,6 +201,7 @@ export default function EditDialog(props){
     // setFirst('')
     // setFirst(e.target.value)
     console.log("here we are")
+    props.onChange(e)
     // setFirst(e.target.value)
 
 
@@ -284,7 +289,7 @@ export default function EditDialog(props){
     // onChange={(e) => setEmail(e.target.value)}
     // value={email}
     onChange = {(e) => onChange2(e.target.value)}
-    value = {props.selectUser.userEmail.email}
+    value = {email}
 
     />
     </Grid>

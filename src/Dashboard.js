@@ -30,6 +30,7 @@ import Configuration from './Configuration';
 import LocationMachine from './LocationMachine';
 import ScrollableTabsButtonForce from './navigation/appBar2';
 import CustomizedTables from './UserTables';
+import logo from './images/CintasLogo.png';
 
 import {
   BrowserRouter as Router,
@@ -75,6 +76,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     position: "unset",
+    backgroundColor: "#c4c4c4",
     // zIndex: theme.zIndex.drawer + 1,
     // transition: theme.transitions.create(['width', 'margin'], {
     //   easing: theme.transitions.easing.sharp,
@@ -97,6 +99,8 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    color: "#012d6f",
+    marginLeft: 10
   },
   drawerPaper: {
     position: 'relative',
@@ -194,11 +198,11 @@ export default function Dashboard(props) {
     <CssBaseline />
     <AppBar className={classes.appBar}  >
     <Toolbar className={classes.toolbar}>
-
-    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-    St. Joseph's Hospital
+<img src={logo} alt="Logo" />
+    <Typography component="h1" variant="h6"  noWrap className={classes.title}>
+    Garment Machine Manager
     </Typography>
-    <IconButton color="inherit">
+    <IconButton style={{color: "#454545"}}>
     <Badge badgeContent={4} color="secondary">
     <NotificationsIcon />
     </Badge>
