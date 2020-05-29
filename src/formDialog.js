@@ -242,7 +242,7 @@ export default function FormDialog() {
     margin="dense"
     id="name"
     label="First Name"
-    type="email"
+    type="text"
     validators={['required']}
     errorMessages={['this field is required']}
     fullWidth
@@ -256,7 +256,7 @@ export default function FormDialog() {
     margin="dense"
     id="name"
     label="Last Name"
-    type="email"
+    type="text"
     validators={['required']}
     errorMessages={['this field is required']}
 
@@ -287,7 +287,7 @@ export default function FormDialog() {
     validators={['required']}
     errorMessages={['this field is required']}
     label="Password"
-    type="email"
+    type="password"
     fullWidth
     value={badge}
     onChange={e => setBadge(e.target.value)}
@@ -299,11 +299,10 @@ export default function FormDialog() {
     margin="dense"
     id="name"
     label="Telephone Number"
-    type="email"
+    type="tel"
     fullWidth
     value={phone}
-    validators={['required', 'isEmail']}
-    errorMessages={['this field is required', 'email is not valid']}
+    validators={['required']}
     onChange={e => setPhone(e.target.value)}
     />
     </Grid>
@@ -315,7 +314,7 @@ export default function FormDialog() {
     validators={['required']}
     errorMessages={['this field is required']}
     label="Department"
-    type="email"
+    type="text"
     fullWidth
     value={department}
     onChange={e => setDepartment(e.target.value)}

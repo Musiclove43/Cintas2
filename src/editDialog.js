@@ -16,6 +16,7 @@ import useGlobal from "./store";
 import ReactDOM from "react-dom";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 
 
@@ -42,6 +43,8 @@ export default function EditDialog(props){
   const [pass, setPass] = useState('')
   const [last, setLast] = useState('')
   const [first, setFirst] = useState('')
+  const [phone, setPhone] = useState('')
+  const [department, setDepartment] = useState('')
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
@@ -187,6 +190,8 @@ export default function EditDialog(props){
     setPass('')
     setFirst('')
     setLast('')
+    setPhone('')
+    setDepartment('')
   }
   const handleClickOpen = () => {
     setOpen(true);
@@ -244,11 +249,18 @@ export default function EditDialog(props){
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <form method="post" id="my-form" onSubmit={handleSubmit}  noValidate>
 
+
+    
+    
+    
+    
+    
+    
+    {/*
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
-
+    
     <TextField
     autoFocus
     margin="dense"
@@ -306,7 +318,138 @@ export default function EditDialog(props){
     </Grid>
 
     </Grid>
-    </form>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextField
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Telephone Number"
+    type="email"
+    fullWidth
+    value={phone}
+    validators={['required', 'isEmail']}
+    errorMessages={['this field is required', 'email is not valid']}
+    onChange={e => setPhone(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    label="Department"
+    type="email"
+    fullWidth
+    value={department}
+    onChange={e => setDepartment(e.target.value)}
+    />
+    </Grid>
+    */}
+
+
+
+
+
+
+
+    <ValidatorForm method="post" id="my-form" onSubmit={handleSubmit}  noValidate>
+
+    <Grid container spacing={3}>
+    <Grid item xs={6} md={6} lg={6}>
+
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    label="First Name"
+    type="text"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    fullWidth
+    onChange={e => onChange2(e.target.value)}
+    value={first}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Last Name"
+    type="text"
+    validators={['required']}
+    errorMessages={['this field is required']}
+
+    fullWidth
+    onChange={e => onChange2(e.target.value)}
+    value={last}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Email Address"
+    type="email"
+    fullWidth
+    
+    validators={['required', 'isEmail']}
+    errorMessages={['this field is required', 'email is not valid']}
+    onChange={e => onChange2(e.target.value)}
+    value={email}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    label="Password"
+    type="password"
+    fullWidth
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Telephone Number"
+    type="tel"
+    fullWidth
+    value={phone}
+    validators={['required']}
+    onChange={e => onChange2(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    label="Department"
+    type="text"
+    fullWidth
+    value={department}
+    onChange={e => onChange2(e.target.value)}
+    />
+    </Grid>
+    
+    
+    
+    
+    
+
+
+    </Grid>
+    </ValidatorForm>
     </DialogContent>
     <DialogActions>
     <Button onClick={handleClose} color="primary">
