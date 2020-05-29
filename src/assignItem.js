@@ -21,16 +21,16 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      display: 'block',
-      marginTop: theme.spacing(2),
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: "100%",
-    },
-  }),
+createStyles({
+  button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: "100%",
+  },
+}),
 );
 
 
@@ -38,7 +38,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default React.memo(function AssignItem(prevProps, nextProps, props) {
+export default React.memo(function AssignItem(props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [open, setOpen] = useState(false);
@@ -66,11 +66,11 @@ export default React.memo(function AssignItem(prevProps, nextProps, props) {
   //   console.log("Equal") /*whatever jsx you like */
   // }, areEqual);
 
-//   React.memo(function MyComponent (props) {
-// console.log(props.value)
-//     // return <div>{ "My Component " + props.value }</div>;
-//
-//   })
+  //   React.memo(function MyComponent (props) {
+  // console.log(props.value)
+  //     // return <div>{ "My Component " + props.value }</div>;
+  //
+  //   })
 
   useEffect(() => {
     console.log('Loaded');
@@ -105,43 +105,67 @@ export default React.memo(function AssignItem(prevProps, nextProps, props) {
     )
   };
 
-    function selectedItem(value) {
-      console.log(value)
-      setItemType(value)
-      fetch( "https://rest.garmentvendor.app/items/skus?itemID=" + value.itemID, {
-        method: 'get',
-        contentType: 'application/json',
-        headers: {
-          Authorization:
-          'Bearer ' + globalState.token.Token,
-        },
+  function selectedItem(value) {
+    console.log(value)
+    setItemType(value)
+    fetch( "https://rest.garmentvendor.app/items/skus?itemID=" + value.itemID, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        setSizes([...result])
+        // setLoading(false)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  };
+
+
+
+
+  const submitAssign = e => {
+    // const id = Math.floor(Math.random() * Date.now())
+    console.log(itemType, size, cellCap)
+    fetch( "https://rest.garmentvendor.app/station/cell" , {
+      method: 'post',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+      body: JSON.stringify({
+        "stationNum": 5555,
+        "cellNum": 2,
+        "itemSkuID": size.itemSkuID,
+        "maxQty": 43
       })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result)
-          setSizes([...result])
-          // setLoading(false)
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
-    };
+    })
 
-
-
-
-  const handleSubmit = e => {
-    const id = Math.floor(Math.random() * Date.now())
-    console.log("token" + account)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+      }
+    )
+      props.callBack(true);
     // globalActions.addToUsers(data)
     handleClose()
     handleClear();
   };
 
   const handleClear = () => {
-
+setItemType('')
+setSize('')
+setCellCap('')
   }
 
 
@@ -175,39 +199,39 @@ export default React.memo(function AssignItem(prevProps, nextProps, props) {
     <DialogTitle id="alert-dialog-slide-title">{"ASSIGN INVENTORY"}</DialogTitle>
     <DialogContent>
 
-    <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+    <ValidatorForm method="post" id="assign-item" onSubmit={submitAssign} noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
 
     <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Item Type</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          value={itemType}
-          onChange={(e) => selectedItem(e.target.value)}
-        >
-          {items.map((option) => (
-          <MenuItem key={option} value={option}>{option.itemDesc}</MenuItem>
+    <InputLabel id="demo-controlled-open-select-label">Item Type</InputLabel>
+    <Select
+    labelId="demo-controlled-open-select-label"
+    id="demo-controlled-open-select"
+    value={itemType}
+    onChange={(e) => selectedItem(e.target.value)}
+    >
+    {items.map((item) => (
+      <MenuItem key={item} value={item}>{item.itemDesc}</MenuItem>
     ))}
-        </Select>
-      </FormControl>
+    </Select>
+    </FormControl>
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
     <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Size/Color</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          value={size}
-          onChange={(e) => setSize(e.target.value)}
-        >
-        {sizes.map((option) => (
-          <MenuItem key={option} value={option}>{option.color} {option.size} - {option.sku}</MenuItem>
-        ))}
-        </Select>
-      </FormControl>
+    <InputLabel id="demo-controlled-open-select-label">Size/Color</InputLabel>
+    <Select
+    labelId="demo-controlled-open-select-label"
+    id="demo-controlled-open-select"
+    value={size}
+    onChange={(e) => setSize(e.target.value)}
+    >
+    {sizes.map((option2) => (
+      <MenuItem key={option2} value={option2}>{option2.color} {option2.size} - {option2.sku}</MenuItem>
+    ))}
+    </Select>
+    </FormControl>
     </Grid>
 
 
@@ -233,7 +257,7 @@ export default React.memo(function AssignItem(prevProps, nextProps, props) {
     <Button onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button form="my-form-id" type="submit" color="primary">
+    <Button form="assign-item" type="submit" color="primary">
     Assign
     </Button>
     </DialogActions>

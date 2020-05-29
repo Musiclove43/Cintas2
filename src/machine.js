@@ -76,6 +76,8 @@ export default function Machine(props) {
   const [slot1, setSlot] = useState("slot1")
   const [slot2, setSlot2] = useState("slot2")
   const [slot3, setSlot3] = useState("slot3")
+  const [reload, setReload] = useState(false);
+
   // const [machine, setMachine] = useState("machine1")
   const [radio, setRadio] = useState("Start")
   const [selectedMachine, setSelected] = React.useState('');
@@ -90,10 +92,10 @@ export default function Machine(props) {
 
 
   useEffect(() => {
-    console.log('counter updated');
+    console.log('Reloaded');
     setMachines([])
     callAPI()
-  }, [props])
+  }, [props, reload])
 
   function callAPI () {
     console.log("rerender")
@@ -155,7 +157,7 @@ export default function Machine(props) {
   // };
   function machineChange(value) {
     setSelected(value)
-    console.log(selectedMachine)
+    console.log(value)
     setCells(value.cellData);
     console.log("cell " + cells[0]);
 
@@ -196,8 +198,22 @@ export default function Machine(props) {
     console.log("cell " + cells[0])
   };
 
+  function setReloads(value) {
+    // selectUser.userEmail = newValue
+    // const open = true
+    // console.log(reload)
+    // setReload(value)
+    // console.log(reload)
+    setCells([])
+setCells(selectedMachine.cellData)
+    // globalActions.openDialog(open);
+    // console.log(selectUser)
+    // globalActions.editUsers(user);
+  };
+
   return (
     <div>
+        <AssignItem  callBack={setReloads} />
     <Typography gutterBottom variant="h5"  component="h2" >
     MACHINE 1
     </Typography>
@@ -261,15 +277,12 @@ export default function Machine(props) {
       <Typography  variant="body2" color="textSecondary" component="p">
       {cells.size}
       </Typography>
-      <AssignItem/>
+
       </CardContent>
 
       </CardActionArea>
       </Card>
-
-
       </div>
-
       </Paper>
     ))}
 

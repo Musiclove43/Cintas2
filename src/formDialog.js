@@ -232,7 +232,7 @@ export default function FormDialog() {
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit}  noValidate>
+    <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit} noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
