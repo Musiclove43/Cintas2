@@ -7,9 +7,6 @@ import useGlobal from "../store";
 import { useState, useEffect, useContext } from "react";
 import CustomizedTables from "../UserTables";
 
-
-
-
 function longResolve() {
   return new Promise(res => {
     setTimeout(res, 3000);
@@ -34,7 +31,7 @@ export default function MultilineTextFields(props) {
   const classes = useStyles();
   const [currency, setCurrency] = React.useState(props);
   const [currencies, setCurrencies] = React.useState([]);
-
+  
   const handleChange = (event) => {
     setCurrency(event.target.value);
     props.onChange(event.target.value);

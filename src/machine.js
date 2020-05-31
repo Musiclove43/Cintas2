@@ -77,19 +77,13 @@ export default function Machine(props) {
   const [slot2, setSlot2] = useState("slot2")
   const [slot3, setSlot3] = useState("slot3")
   const [reload, setReload] = useState(false);
-
-  // const [machine, setMachine] = useState("machine1")
   const [radio, setRadio] = useState("Start")
   const [selectedMachine, setSelected] = React.useState('');
   const [machines, setMachines] = React.useState([]);
   const [cells, setCells] = React.useState([]);
-
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
-  // console.log(props)
-
-
 
   useEffect(() => {
     console.log('Reloaded');
@@ -201,19 +195,43 @@ export default function Machine(props) {
   function setReloads(value) {
     // selectUser.userEmail = newValue
     // const open = true
-    // console.log(reload)
+    setCells([])
+    console.log("holaaaa")
+    fetch( "https://rest.garmentvendor.app/station/cells?stationNum=5555", {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        // setCells([])
+        // console.log(result)
+        setCells([...result])
+        // machines.push(...result)
+        // console.log(machines)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+
+    console.log(cells)
+  }
     // setReload(value)
     // console.log(reload)
-    setCells([])
-setCells(selectedMachine.cellData)
+    // setCells([])
+    // setCells(selectedMachine.cellData)
     // globalActions.openDialog(open);
     // console.log(selectUser)
     // globalActions.editUsers(user);
-  };
+
 
   return (
     <div>
-        <AssignItem  callBack={setReloads} />
     <Typography gutterBottom variant="h5"  component="h2" >
     MACHINE 1
     </Typography>
@@ -227,6 +245,8 @@ setCells(selectedMachine.cellData)
     </FormControl>
     <FormControl className={classes.formControl}>
     <InputLabel id="demo-simple-select-label">Select Machine</InputLabel>
+
+
     <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
@@ -251,17 +271,17 @@ setCells(selectedMachine.cellData)
     </div>
     <div className={classes.root}>
     {cells.map((cells, i) => (
-      <Paper key={i} className={classes.spacing} elevation={3} >
-      <div style={{marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
-      <Typography gutterBottom variant="h6"  component="h6" >
+      <Paper className={classes.spacing} elevation={3} >
+      <div key={i} style={{marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
+      <Typography  gutterBottom variant="h6"  component="h6" >
       Cell {cells.cellNum}
       </Typography>
       </div>
 
       <div style={{marginLeft: "auto"}}>
 
-      <Card button key={i} >
-      <CardActionArea key={i} >
+      <Card button>
+      <CardActionArea  >
       <CardMedia
       key={i}
       component="img"
@@ -279,12 +299,13 @@ setCells(selectedMachine.cellData)
       </Typography>
 
       </CardContent>
-
       </CardActionArea>
+
       </Card>
       </div>
       </Paper>
     ))}
+  <AssignItem callBack={setReloads} />
 
     </div>
     </div>

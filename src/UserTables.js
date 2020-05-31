@@ -180,7 +180,7 @@ function editUser (newValue) {
   selectUser.userEmail = newValue
   // const open = true
 
-
+console.log(selectUser)
       // globalActions.openDialog(open);
       console.log("selectUser")
   // globalActions.editUsers(newValue);
@@ -205,8 +205,6 @@ function editUser (newValue) {
       :
       <React.Fragment>
       <FormDialog/>
-      <EditDialog selectUser={selectUser} callBack={setReloads} onChange={userChange} />
-
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
       <TableHead>
@@ -239,14 +237,10 @@ function editUser (newValue) {
         <StyledTableCell align="right">{user.firstName}</StyledTableCell>
         <StyledTableCell align="right">{user.first}</StyledTableCell>
         <StyledTableCell align="right">
-        <div>
-        <IconButton
-        edge="start"
-        color="inherit"
-        onClick={() => editUser(user)}
-        >
-        <EditIcon style={{ zIndex:2000}} />
-        </IconButton>
+        <div style={{display:"flex"}}>
+
+        <EditDialog selectUser={user} callBack={setReloads} onChange={userChange} />
+
         <IconButton
         edge="start"
         color="inherit"
