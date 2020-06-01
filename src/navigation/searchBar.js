@@ -12,7 +12,7 @@ import CustomizedTables from "../UserTables";
 
 function longResolve() {
   return new Promise(res => {
-    setTimeout(res, 3000);
+    setTimeout(res, 1000);
   });
 }
 

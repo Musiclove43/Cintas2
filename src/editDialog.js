@@ -26,6 +26,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 // var somename = "cathy"
 export default function EditDialog(props){
   console.log(props)
+  useEffect(() => {
+    // set the data
+    // console.log(highlight)
+       console.log('props updated');
+       // props = {}
+    // let x = JSON.parse(JSON.stringify(highlight));
+    // // console.log(x.first )
+    // setFirst(somename)
+    // console.log("first" + first)
+
+  }, [props]);
   // we want to pull in the global state
   // const areEqual = (prevProps, nextProps) => true;
   //
@@ -38,7 +49,7 @@ export default function EditDialog(props){
   //   state => state.highlighted
   // );
   // set the hook data
-  const [email, setEmail] = useState(props.selectUser.userEmail.email)
+  const [email, setEmail] = useState(props.selectUser.email)
   const [pass, setPass] = useState('')
   const [last, setLast] = useState('')
   const [first, setFirst] = useState('')
@@ -82,25 +93,15 @@ export default function EditDialog(props){
   //
   //     start = false;
   //   }
-  useEffect(() => {
-    console.log('props changes');
-    // setUsers([]);
-    // callAPI()
-  }, [props])
-
-
-
   // useEffect(() => {
-  //   // set the data
-  //   // console.log(highlight)
-  //      console.log('props updated');
-  //      // props = {}
-  //   // let x = JSON.parse(JSON.stringify(highlight));
-  //   // // console.log(x.first )
-  //   // setFirst(somename)
-  //   // console.log("first" + first)
-  //
-  // }, [props]);
+  //   console.log('props changes');
+  //   // setUsers([]);
+  //   // callAPI()
+  // }, [props])
+
+
+
+
 
   // useEffect() {
   //   // set the data
@@ -142,10 +143,11 @@ export default function EditDialog(props){
   // const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleSubmit = e => {
+    console.log(props.selectUser.email)
     console.log(email)
     console.log(globalState.token.Token)
     e.preventDefault();
-    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.userEmail.email, {
+    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
       method: 'Post',
       contentType: 'application/json',
       headers: {
@@ -201,7 +203,7 @@ export default function EditDialog(props){
     // setFirst('')
     // setFirst(e.target.value)
     console.log("here we are")
-    props.onChange(e)
+    // props.onChange(e)
     // setFirst(e.target.value)
 
 
@@ -219,7 +221,7 @@ export default function EditDialog(props){
   return (
     <div>
     <Grid container spacing={3}>
-    <Grid item xs={1.25} md={1.25} lg={1.25}>
+    <Grid item>
 
     <IconButton
     edge="start"
@@ -288,7 +290,7 @@ export default function EditDialog(props){
     fullWidth
     // onChange={(e) => setEmail(e.target.value)}
     // value={email}
-    onChange = {(e) => onChange2(e.target.value)}
+    onChange = {(e) => setEmail(e.target.value)}
     value = {email}
 
     />

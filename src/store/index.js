@@ -39,7 +39,8 @@ const initialState = {
     account: '',
     value: 0,
     userSwipe: 0,
-    location: ''
+    location: '',
+    setmachine: ''
   };
 
   const useGlobal = useGlobalHook(React, initialState, actions);

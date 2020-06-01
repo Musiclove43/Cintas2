@@ -39,11 +39,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default React.memo(function AssignItem(props) {
+console.log(props.cellNum)
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [open, setOpen] = useState(false);
   const [size, setSize] = useState('');
   const [sizes, setSizes] = useState([]);
+  const [propss, setProps] = useState('');
 
   const [itemType, setItemType] = useState('')
   const [color, setColor] = useState('')
@@ -80,6 +82,27 @@ export default React.memo(function AssignItem(props) {
     // setReload(false)
   }, [])
 
+//   function sizeSelect() {
+//   console.log(value)
+//   let newSize = value;
+//     setSize({...size, newSize});
+//
+// }
+
+// useEffect(() => {
+// setcellNum(props)
+// // console.log("assignItem")
+//   // setReload(false)
+// }, [props])
+
+
+const sizeSelect = e => {
+  // let newSize = e.target.value;
+  setSize(e.target.value);
+  console.log(size)
+  globalActions.activeEdit(e.target.value)
+};
+
 
   function callGetItems () {
     // setLoading(true)
@@ -108,6 +131,7 @@ export default React.memo(function AssignItem(props) {
   function selectedItem(value) {
     console.log(value)
     setItemType(value)
+
     fetch( "https://rest.garmentvendor.app/items/skus?itemID=" + value.itemID, {
       method: 'get',
       contentType: 'application/json',
@@ -133,8 +157,10 @@ export default React.memo(function AssignItem(props) {
 
 
   const submitAssign = e => {
+      e.preventDefault();
     // const id = Math.floor(Math.random() * Date.now())
-    console.log(itemType, size, cellCap)
+    // console.log(props.selectmachine);
+      console.log(globalState.setmachine);
     fetch( "https://rest.garmentvendor.app/station/cell" , {
       method: 'post',
       contentType: 'application/json',
@@ -143,9 +169,9 @@ export default React.memo(function AssignItem(props) {
         'Bearer ' + globalState.token.Token,
       },
       body: JSON.stringify({
-        "stationNum": 5555,
-        "cellNum": 2,
-        "itemSkuID": size.itemSkuID,
+        "stationNum": globalState.setmachine.selectmachine,
+        "cellNum": globalState.setmachine.cellNum,
+        "itemSkuID": globalState.activeEdit.itemSkuID,
         "maxQty": 43
       })
     })
@@ -154,23 +180,27 @@ export default React.memo(function AssignItem(props) {
     .then(
       (result) => {
         console.log(result)
+        props.callBack(true);
       }
     )
-      props.callBack(true);
+
     // globalActions.addToUsers(data)
     handleClose()
     handleClear();
   };
 
   const handleClear = () => {
-setItemType('')
-setSize('')
-setCellCap('')
+    setItemType('')
+    setSize('')
+    setCellCap('')
   }
 
 
   const handleClickOpen = () => {
     setOpen(true);
+    setProps(props)
+    console.log(props)
+    globalActions.setMachine(props)
   };
 
   const handleClose = () => {
@@ -199,7 +229,7 @@ setCellCap('')
     <DialogTitle id="alert-dialog-slide-title">{"ASSIGN INVENTORY"}</DialogTitle>
     <DialogContent>
 
-    <ValidatorForm method="post" id="assign-item" onSubmit={submitAssign} noValidate>
+    <form method="post" id="assign-item" onSubmit={submitAssign} noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
@@ -212,8 +242,8 @@ setCellCap('')
     value={itemType}
     onChange={(e) => selectedItem(e.target.value)}
     >
-    {items.map((item) => (
-      <MenuItem key={item} value={item}>{item.itemDesc}</MenuItem>
+    {items.map((item,i) => (
+      <MenuItem key={i} value={item}>{item.itemDesc}</MenuItem>
     ))}
     </Select>
     </FormControl>
@@ -225,10 +255,10 @@ setCellCap('')
     labelId="demo-controlled-open-select-label"
     id="demo-controlled-open-select"
     value={size}
-    onChange={(e) => setSize(e.target.value)}
+    onChange={sizeSelect}
     >
-    {sizes.map((option2) => (
-      <MenuItem key={option2} value={option2}>{option2.color} {option2.size} - {option2.sku}</MenuItem>
+    {sizes.map((option2,i) => (
+      <MenuItem key={i} value={option2}>{option2.color} {option2.size} - {option2.sku}</MenuItem>
     ))}
     </Select>
     </FormControl>
@@ -236,7 +266,7 @@ setCellCap('')
 
 
     <Grid item xs={6} md={6} lg={6}>
-    <TextValidator
+    <TextField
     autoFocus
     margin="dense"
     id="name"
@@ -251,7 +281,7 @@ setCellCap('')
     </Grid>
 
     </Grid>
-    </ValidatorForm>
+    </form>
     </DialogContent>
     <DialogActions>
     <Button onClick={handleClose} color="primary">

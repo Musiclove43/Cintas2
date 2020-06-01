@@ -120,9 +120,11 @@ export const swipeUser= (store, value) =>  {
   store.setState({ swipeUser: index });
 }
 
-export const setMachine= (store, data) =>  {
-  var index = store.state.setMachine = data;
-  store.setState({ setMachine: index });
+export const setMachine= (store, value) =>  {
+  // var index = store.state.setmachine = value;
+  // store.setState({ setmachine: index });
+  const newMachine= store.state.setmachine = value;
+  store.setState({ newMachine });
   console.log(store.state)
 }
 

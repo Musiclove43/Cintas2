@@ -92,7 +92,7 @@ export default function Machine(props) {
 
 
   useEffect(() => {
-    console.log('Reloaded');
+    console.log('Reloaded Machine Component');
     setMachines([])
     callAPI()
   }, [props, reload])
@@ -156,6 +156,7 @@ export default function Machine(props) {
   //   //  console.log(globalState);
   // };
   function machineChange(value) {
+    // globalActions.setMachine(value);
     setSelected(value)
     console.log(value)
     setCells(value.cellData);
@@ -163,7 +164,21 @@ export default function Machine(props) {
 
     // console.log(slot)
     // var data = {machine, slot}
-    // globalActions.setMachine(data);
+
+
+  }
+
+  function sayHello() {
+    console.log("im here")
+    // globalActions.setMachine(value);
+    // setSelected(value)
+    // console.log(value)
+    // setCells(value.cellData);
+    // console.log("cell " + cells[0]);
+
+    // console.log(slot)
+    // var data = {machine, slot}
+
 
   }
 
@@ -204,8 +219,32 @@ export default function Machine(props) {
     // console.log(reload)
     // setReload(value)
     // console.log(reload)
+
     setCells([])
-setCells(selectedMachine.cellData)
+    console.log("holaaaa")
+    fetch( "https://rest.garmentvendor.app/station/cells?stationNum=" + globalState.setmachine.selectmachine, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        // setCells([])
+        // console.log(result)
+        setCells([...result])
+        // machines.push(...result)
+        // console.log(machines)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+
+    // console.log(cells)
     // globalActions.openDialog(open);
     // console.log(selectUser)
     // globalActions.editUsers(user);
@@ -213,7 +252,7 @@ setCells(selectedMachine.cellData)
 
   return (
     <div>
-        <AssignItem  callBack={setReloads} />
+
     <Typography gutterBottom variant="h5"  component="h2" >
     MACHINE 1
     </Typography>
@@ -277,7 +316,7 @@ setCells(selectedMachine.cellData)
       <Typography  variant="body2" color="textSecondary" component="p">
       {cells.size}
       </Typography>
-
+      <AssignItem onClick={sayHello}  key={i}  selectmachine={selectedMachine.stationNum} cellNum={cells.cellNum} callBack={setReloads} />
       </CardContent>
 
       </CardActionArea>
