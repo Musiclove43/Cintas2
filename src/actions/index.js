@@ -18,17 +18,19 @@ export const deleteUsers = (store, user) =>  {
 }
 
 export const editUsers = (store, newValue) =>  {
-  // const newUserValue = store.state.highlighted = ne;
-
-  // var foundIndex =  store.state.user.findIndex(x => x.id == user.id);
-  // const highlightUser = user;
-  store.setState({ highlighted: newValue });
-  // console.log(store.state.highlighted)
+  const newEdit = store.state.user = newValue;
+  store.setState({ newEdit });
 }
 
 export const activeEdit = (store, user) =>  {
   const newUserValue = store.state.activeEdit = user;
   store.setState({ newUserValue });
+  // console.log(store.state.highlighted)
+}
+
+export const cellCapacity = (store, value) =>  {
+  const newCellCap = store.state.cellCap = value;
+  store.setState({ newCellCap });
   // console.log(store.state.highlighted)
 }
 

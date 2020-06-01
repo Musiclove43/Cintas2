@@ -103,6 +103,13 @@ const sizeSelect = e => {
   globalActions.activeEdit(e.target.value)
 };
 
+// const cellCapacity = e => {
+//   // let newSize = e.target.value;
+//   setCellCap(e);
+//   globalActions.cellCapacity(cellCap)
+//   console.log(globalState)
+// };
+
 
   function callGetItems () {
     // setLoading(true)
@@ -158,8 +165,6 @@ const sizeSelect = e => {
 
   const submitAssign = e => {
       e.preventDefault();
-    // const id = Math.floor(Math.random() * Date.now())
-    // console.log(props.selectmachine);
       console.log(globalState.setmachine);
     fetch( "https://rest.garmentvendor.app/station/cell" , {
       method: 'post',
@@ -192,7 +197,7 @@ const sizeSelect = e => {
   const handleClear = () => {
     setItemType('')
     setSize('')
-    setCellCap('')
+    // setCellCap('')
   }
 
 

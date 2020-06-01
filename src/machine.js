@@ -30,8 +30,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import ReactDOM from "react-dom";
-import AssignItem from './assignItem'
-
+import AssignItem from './assignItem';
+import ClearIcon from '@material-ui/icons/Clear';
 
 
 const useStyles = makeStyles({
@@ -249,6 +249,32 @@ export default function Machine(props) {
     // console.log(selectUser)
     // globalActions.editUsers(user);
   };
+  const deleteUser = () => {
+
+    console.log(cells);
+  fetch( "https://rest.garmentvendor.app/station/cell" , {
+    method: 'post',
+    contentType: 'application/json',
+    headers: {
+      Authorization:
+      'Bearer ' + globalState.token.Token,
+    },
+    body: JSON.stringify({
+      "stationNum": 5555,
+      "cellNum": 3,
+      "itemSkuID": 0,
+        "maxQty": 43
+    })
+  })
+
+  .then(res => res.json())
+  .then(
+    (result) => {
+      console.log(result)
+    setReloads()
+    }
+  )
+  };
 
   return (
     <div>
@@ -291,10 +317,18 @@ export default function Machine(props) {
     <div className={classes.root}>
     {cells.map((cells, i) => (
       <Paper key={i} className={classes.spacing} elevation={3} >
-      <div style={{marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
+      <div style={{display:"flex", justifyContent:"space-between", marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
       <Typography gutterBottom variant="h6"  component="h6" >
       Cell {cells.cellNum}
       </Typography>
+      <IconButton
+      edge="start"
+      color="inherit"
+      onClick={() => deleteUser(cells.cellNum)}
+      style={{ zIndex:2000,marginTop:"-10px",}}
+      >
+      <ClearIcon style={{ zIndex:2000}} />
+      </IconButton>
       </div>
 
       <div style={{marginLeft: "auto"}}>

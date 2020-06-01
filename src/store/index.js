@@ -40,7 +40,8 @@ const initialState = {
     value: 0,
     userSwipe: 0,
     location: '',
-    setmachine: ''
+    setmachine: '',
+    cellCap: ''
   };
 
   const useGlobal = useGlobalHook(React, initialState, actions);

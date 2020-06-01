@@ -24,19 +24,19 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 // var somename = "cathy"
-export default function EditDialog(props){
+export default React.memo(function EditDialog(props){
   console.log(props)
-  useEffect(() => {
-    // set the data
-    // console.log(highlight)
-       console.log('props updated');
-       // props = {}
-    // let x = JSON.parse(JSON.stringify(highlight));
-    // // console.log(x.first )
-    // setFirst(somename)
-    // console.log("first" + first)
-
-  }, [props]);
+  // useEffect(() => {
+  //   // set the data
+  //   // console.log(highlight)
+  //      console.log('props updated');
+  //      // props = {}
+  //   // let x = JSON.parse(JSON.stringify(highlight));
+  //   // // console.log(x.first )
+  //   // setFirst(somename)
+  //   // console.log("first" + first)
+  //
+  // }, [props]);
   // we want to pull in the global state
   // const areEqual = (prevProps, nextProps) => true;
   //
@@ -192,6 +192,8 @@ export default function EditDialog(props){
   }
   const handleClickOpen = () => {
     setOpen(true);
+    // globalActions.editUsers(props);
+    console.log('opened')
   };
 
   const handleClose = () => {
@@ -321,4 +323,4 @@ export default function EditDialog(props){
     </Dialog>
     </div>
   );
-}
+})
