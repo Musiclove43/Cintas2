@@ -217,7 +217,7 @@ export default function FormDialog() {
     <Grid item>
     <TextField
     style={{marginTop: -10}}
-    label="With normal TextField"
+    label="Search"
     InputProps={{
       endAdornment: (
         <InputAdornment>

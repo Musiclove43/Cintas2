@@ -63,7 +63,7 @@ export default function Transactions() {
     <TableContainer component={Paper}>
     <TextField
     style={{marginTop: 5, marginBottom: 20 }}
-    label="With normal TextField"
+    label="Search"
     InputProps={{
       endAdornment: (
         <InputAdornment>
