@@ -7,6 +7,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import SearchBar from 'material-ui-search-bar'
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from '@material-ui/core/TextField';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -53,7 +58,22 @@ export default function Transactions() {
   const classes = useStyles();
 
   return (
+
+
     <TableContainer component={Paper}>
+    <TextField
+    style={{marginTop: 10, marginBottom: 20 }}
+    label="With normal TextField"
+    InputProps={{
+      endAdornment: (
+        <InputAdornment>
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+        </InputAdornment>
+      )
+    }}
+  />
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>

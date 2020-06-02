@@ -352,10 +352,10 @@ export default function Machine(props) {
       <Typography  variant="body2" color="textSecondary" component="p">
       {cells.size}
       </Typography>
-      <AssignItem onClick={sayHello}  key={i}  selectmachine={selectedMachine.stationNum} cellNum={cells.cellNum} callBack={setReloads} />
       </CardContent>
-
       </CardActionArea>
+      <AssignItem onClick={sayHello}  key={i}  selectmachine={selectedMachine.stationNum} cellNum={cells.cellNum} callBack={setReloads} />
+
       </Card>
       </div>
       </Paper>

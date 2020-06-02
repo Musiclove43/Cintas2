@@ -19,7 +19,7 @@ export default function SubmitDiag() {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClickOpen = () => {
-    const open = true
+    const open = false
     globalActions.openDialog(open);
   };
 

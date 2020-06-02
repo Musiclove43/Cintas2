@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
+import logo from './images/CintasLogo.png';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {
   BrowserRouter as Router,
@@ -134,12 +135,13 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
     <CssBaseline />
     <div className={classes.paper}>
-    <Avatar className={classes.avatar}>
-    <LockOutlinedIcon />
-    </Avatar>
-    <Typography component="h1" variant="h5">
+
+    <img style={{marginBottom: 15}} src={logo} alt="Logo" />
+
+
+  {/*  <Typography component="h1" variant="h5">
     Sign in
-    </Typography>
+    </Typography> */}
     <ValidatorForm id="signin-form" onSubmit={handleSubmit} className={classes.form} noValidate>
     <TextValidator
     variant="outlined"

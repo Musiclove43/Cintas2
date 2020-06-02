@@ -199,7 +199,7 @@ export default function Dashboard(props) {
     <CssBaseline />
     <AppBar className={classes.appBar}  >
     <Toolbar className={classes.toolbar}>
-<img src={logo} alt="Logo" />
+    <img src={logo} alt="Logo" />
     <Typography component="h1" variant="h6"  noWrap className={classes.title}>
     Garment Machine Manager
     </Typography>
@@ -208,9 +208,9 @@ export default function Dashboard(props) {
     <NotificationsIcon />
     </Badge>
     </IconButton>
-      <IconButton style={{color: "#454545"}}>
+    <IconButton style={{color: "#454545"}}>
     <AccountCircleIcon/>
-        </IconButton>
+    </IconButton>
     </Toolbar>
     </AppBar>
     <ScrollableTabsButtonForce/>
