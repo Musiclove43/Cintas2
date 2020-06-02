@@ -79,7 +79,7 @@ export default function CustomizedTables(props) {
     setUsers([]);
     callAPI()
     setReload(false)
-  }, [props])
+  }, [props, reload])
 
   function callAPI () {
     setLoading(true)
@@ -229,17 +229,17 @@ console.log(selectUser)
         {user.lastName}
         </StyledTableCell>
         <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-        <StyledTableCell align="right">{user.lastName}</StyledTableCell>
+        <StyledTableCell align="right">{user.userID}</StyledTableCell>
         <StyledTableCell align="right">{user.email}</StyledTableCell>
-        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-        <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-        <StyledTableCell align="right">{user.first}</StyledTableCell>
+        <StyledTableCell align="right">Harvard Medical</StyledTableCell>
+        <StyledTableCell align="right">Basic</StyledTableCell>
+        <StyledTableCell align="right">{user.credits}</StyledTableCell>
+        <StyledTableCell align="right">8/29/19</StyledTableCell>
+        <StyledTableCell align="right">Mike H.</StyledTableCell>
         <StyledTableCell align="right">
-        <div style={{display:"flex"}}>
+        <div style={{display:"flex", justifyContent: "flex-end"}}>
 
-        <EditDialog selectUser={user} callBack={setReloads} onChange={userChange} />
+        <EditDialog  selectUser={user} callBack={setReloads} onChange={userChange} />
 
         <IconButton
         edge="start"

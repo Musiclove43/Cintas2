@@ -89,7 +89,7 @@ export default function FormDialog() {
         "accountNum": globalState.account,
         "department": department,
         "cardID": "000000045",
-        "credits": 0,
+        "credits": 12,
         "withdrawLimit": 0,
         "expirationDate": "2123-01-01T00:00:00Z"
       })
@@ -284,25 +284,11 @@ export default function FormDialog() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
-    errorMessages={['this field is required']}
-    label="Password"
-    type="email"
-    fullWidth
-    value={badge}
-    onChange={e => setBadge(e.target.value)}
-    />
-    </Grid>
-    <Grid item xs={6} md={6} lg={6}>
-    <TextValidator
-    autoFocus
-    margin="dense"
-    id="name"
     label="Telephone Number"
     type="email"
     fullWidth
     value={phone}
-    validators={['required', 'isEmail']}
+    validators={['required']}
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setPhone(e.target.value)}
     />

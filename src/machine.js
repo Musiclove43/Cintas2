@@ -93,8 +93,14 @@ export default function Machine(props) {
 
   useEffect(() => {
     console.log('Reloaded Machine Component');
-    setMachines([])
+    // setMachines([])
     callAPI()
+  }, [])
+
+  useEffect(() => {
+    console.log('Reloaded Machine Component');
+    // setMachines([])
+
   }, [props, reload])
 
   function callAPI () {
@@ -222,7 +228,7 @@ export default function Machine(props) {
 
     setCells([])
     console.log("holaaaa")
-    fetch( "https://rest.garmentvendor.app/station/cells?stationNum=" + globalState.setmachine.selectmachine, {
+    fetch( "https://rest.garmentvendor.app/station/cells?stationNum=" + selectedMachine.stationNum, {
       method: 'get',
       contentType: 'application/json',
       headers: {
@@ -249,9 +255,9 @@ export default function Machine(props) {
     // console.log(selectUser)
     // globalActions.editUsers(user);
   };
-  const deleteUser = () => {
-
-    console.log(cells);
+  const deleteUser = (value) => {
+    console.log(selectedMachine);
+    console.log(value);
   fetch( "https://rest.garmentvendor.app/station/cell" , {
     method: 'post',
     contentType: 'application/json',
@@ -260,10 +266,8 @@ export default function Machine(props) {
       'Bearer ' + globalState.token.Token,
     },
     body: JSON.stringify({
-      "stationNum": 5555,
-      "cellNum": 3,
-      "itemSkuID": 0,
-        "maxQty": 43
+      "stationNum": selectedMachine.stationNum,
+      "cellNum": value,
     })
   })
 
@@ -271,7 +275,7 @@ export default function Machine(props) {
   .then(
     (result) => {
       console.log(result)
-    setReloads()
+    setReloads(true)
     }
   )
   };
@@ -285,9 +289,9 @@ export default function Machine(props) {
     <div className={classes.header}>
     <SubmitDiag style={{display: "none"}}/>
     <FormControl component="fieldset">
-    <RadioGroup row aria-label="position" name="position" defaultValue="top" onChange={handleRadioChange} >
-    <FormControlLabel value="end" control={<Radio color="primary" />} label="Return" />
-    <FormControlLabel value="start" control={<Radio color="primary" />} label="Dispenser" />
+    <RadioGroup row aria-label="position" name="position" defaultValue="dispenser" onChange={handleRadioChange} >
+    <FormControlLabel value="return" control={<Radio color="primary" />} label="Return" />
+    <FormControlLabel value="dispenser" control={<Radio color="primary" />} label="Dispenser" />
     </RadioGroup>
     </FormControl>
     <FormControl className={classes.formControl}>

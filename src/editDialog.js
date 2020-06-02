@@ -19,10 +19,18 @@ import EditIcon from '@material-ui/icons/Edit';
 
 
 
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const areEqual = (prevProps, nextProps) => {
+  if (prevProps === nextProps) {
+    return true;
+  } else {
+    return false;
+  }
+};
 // var somename = "cathy"
 export default React.memo(function EditDialog(props){
   console.log(props)
@@ -50,12 +58,16 @@ export default React.memo(function EditDialog(props){
   // );
   // set the hook data
   const [email, setEmail] = useState(props.selectUser.email)
-  const [pass, setPass] = useState('')
-  const [last, setLast] = useState('')
-  const [first, setFirst] = useState('')
+  const [pass, setPass] = useState(props.selectUser.email)
+  const [last, setLast] = useState(props.selectUser.lastName)
+  const [first, setFirst] = useState(props.selectUser.firstName)
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
+  useEffect(() => {
+    console.log('props Update');
+console.log(props);
+  }, [props])
   // bring in the highlighted user
   // console.log(email)
 
@@ -142,11 +154,13 @@ export default React.memo(function EditDialog(props){
 
   // const forceUpdate = useCallback(() => updateState({}), []);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
+    // e.defaultValue()
+      e.preventDefault();
     console.log(props.selectUser.email)
     console.log(email)
     console.log(globalState.token.Token)
-    e.preventDefault();
+
     fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
       method: 'Post',
       contentType: 'application/json',
@@ -156,8 +170,8 @@ export default React.memo(function EditDialog(props){
       },
       body: JSON.stringify({
         "email": email,
-        "firstName": 'Gary',
-        "lastName": 'Clark',
+        "firstName": first,
+        "lastName": last,
         "accountNum": globalState.account,
         "department": "",
         "cardID": "000000045",
@@ -248,7 +262,7 @@ export default React.memo(function EditDialog(props){
     Let Google help apps determine location. This means sending anonymous location data to
     Google, even when no apps are running.
     </DialogContentText>
-    <form method="post" id="my-form" onSubmit={handleSubmit}  noValidate>
+    <form id="my-form" onSubmit={handleSubmit}  noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
@@ -267,7 +281,7 @@ export default React.memo(function EditDialog(props){
     // inputRef={props.selectUser.email}
 
     // defaultValue='${props.selectUser.userEmail.email}'
-    onChange={(e) => onChange2(e.target.value)}
+    onChange={(e) => setFirst(e.target.value)}
     value={first}
     />
     </Grid>
@@ -279,7 +293,8 @@ export default React.memo(function EditDialog(props){
     label="Last Name"
     type="email"
     fullWidth
-
+    onChange={(e) => setLast(e.target.value)}
+    value={last}
     />
     </Grid>
     <Grid item xs={6} md={6} lg={6}>
@@ -302,12 +317,24 @@ export default React.memo(function EditDialog(props){
     autoFocus
     margin="dense"
     id="name"
-    label="Password"
+    label="Telephone"
     type="email"
     fullWidth
 
     />
     </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextField
+    autoFocus
+    margin="dense"
+    id="name"
+    label="Department"
+    type="email"
+    fullWidth
+
+    />
+    </Grid>
+
 
     </Grid>
     </form>
@@ -323,4 +350,4 @@ export default React.memo(function EditDialog(props){
     </Dialog>
     </div>
   );
-})
+}, areEqual)
