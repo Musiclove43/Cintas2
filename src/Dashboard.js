@@ -31,6 +31,7 @@ import LocationMachine from './LocationMachine';
 import ScrollableTabsButtonForce from './navigation/appBar2';
 import CustomizedTables from './UserTables';
 import logo from './images/CintasLogo.png';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import {
   BrowserRouter as Router,
@@ -207,6 +208,9 @@ export default function Dashboard(props) {
     <NotificationsIcon />
     </Badge>
     </IconButton>
+      <IconButton style={{color: "#454545"}}>
+    <AccountCircleIcon/>
+        </IconButton>
     </Toolbar>
     </AppBar>
     <ScrollableTabsButtonForce/>

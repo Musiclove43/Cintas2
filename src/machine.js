@@ -311,9 +311,9 @@ export default function Machine(props) {
     </Select>
     </FormControl>
     <div className={classes.button} >
-{  /*  <Button onClick={submitDiag()} variant="outlined" color="primary">
-    Apply Changes
-    </Button> */}
+  <Button onClick={submitDiag()} variant="outlined" color="secondary">
+    Machine Details
+    </Button>
     </div>
     </div>
     <div className={classes.root}>

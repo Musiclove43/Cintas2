@@ -14,7 +14,10 @@ import { useState, useEffect, useCallback, updateState, clearState} from "react"
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-// import SearchBar from 'material-ui-search-bar'
+import SearchBar from 'material-ui-search-bar'
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 
 
@@ -33,7 +36,8 @@ export default function FormDialog() {
   const [department, setDepartment] = useState('')
   const [phone, setPhone] = useState('')
   const [globalState, globalActions] = useGlobal();
-  const [allErr, setErr] = useState('')
+  const [allErr, setErr] = useState('');
+  const [search, setSearch] = useState('')
   const [token, setToken] = useGlobal(
     state => state.token,
     // state => state.highlighted,
@@ -211,19 +215,34 @@ export default function FormDialog() {
     <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >USERS</Typography>
     </Grid>
     <Grid item>
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-    ADD USER +
-    </Button>
+    <TextField
+    style={{marginTop: -10}}
+    label="With normal TextField"
+    InputProps={{
+      endAdornment: (
+        <InputAdornment>
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+        </InputAdornment>
+      )
+    }}
+  />
+
     </Grid>
     <Grid style={{marginLeft: "auto"}} item >
     <Grid style={{marginLeft: "auto"}} item >
-
-    <Button   style={{ marginRight: 5}} variant="outlined" color="secondary" >
+    <div style={{display: "flex", }}>
+    <Button variant="contained"  color="secondary" onClick={handleClickOpen}>
+    ADD USER +
+    </Button>
+    <Button   style={{ marginRight: 5, marginLeft: 5}} variant="outlined" color="secondary" >
     Import CSV
     </Button>
     <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
     Manage Limit groups
     </Button>
+      </div>
     </Grid>
     </Grid>
     </Grid>
