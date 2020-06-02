@@ -21,7 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FormDialog() {
+export default function FormDialog2() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('')
@@ -91,12 +91,12 @@ export default function FormDialog() {
     </Button>
     </Grid>
     <Grid style={{marginLeft: "auto"}} item >
-    <Button onClick={handleClick()}  style={{ marginRight: 5}} variant="outlined" color="primary" >
-    <ArrowBackIcon style={{ marginRight: 7, fontSize: 20}}/>
-    Back
+    <Button onClick={handleClick()}  style={{ marginRight: 5}} variant="outlined" color="secondary" >
+
+  Import CSV
     </Button>
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-    Import CSV
+    <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+  Manage Limit groups
     </Button>
     </Grid>
     </Grid>

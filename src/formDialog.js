@@ -14,6 +14,7 @@ import { useState, useEffect, useCallback, updateState, clearState} from "react"
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+// import SearchBar from 'material-ui-search-bar'
 
 
 
@@ -27,6 +28,8 @@ export default function FormDialog() {
   const [badge, setBadge] = useState('')
   const [first, setFirst] = useState('')
   const [last, setLast] = useState('')
+  const [identification, setID] = useState('')
+  const [credits, setCredit] = useState(0)
   const [department, setDepartment] = useState('')
   const [phone, setPhone] = useState('')
   const [globalState, globalActions] = useGlobal();
@@ -213,9 +216,15 @@ export default function FormDialog() {
     </Button>
     </Grid>
     <Grid style={{marginLeft: "auto"}} item >
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <Grid style={{marginLeft: "auto"}} item >
+
+    <Button   style={{ marginRight: 5}} variant="outlined" color="secondary" >
     Import CSV
     </Button>
+    <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+    Manage Limit groups
+    </Button>
+    </Grid>
     </Grid>
     </Grid>
     <Dialog
@@ -228,10 +237,6 @@ export default function FormDialog() {
     >
     <DialogTitle id="alert-dialog-slide-title">{"CREATE USER"}</DialogTitle>
     <DialogContent>
-    <DialogContentText id="alert-dialog-slide-description">
-    Let Google help apps determine location. This means sending anonymous location data to
-    Google, even when no apps are running.
-    </DialogContentText>
     <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit} noValidate>
 
     <Grid container spacing={3}>
@@ -307,6 +312,36 @@ export default function FormDialog() {
     onChange={e => setDepartment(e.target.value)}
     />
     </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    label="ID"
+    type="email"
+    fullWidth
+    value={identification}
+    onChange={e => setID(e.target.value)}
+    />
+    </Grid>
+    <Grid item xs={6} md={6} lg={6}>
+    <TextValidator
+    autoFocus
+    margin="dense"
+    id="name"
+    validators={['required']}
+    errorMessages={['this field is required']}
+    label="Credits"
+    type="email"
+    fullWidth
+    value={credits}
+    onChange={e => setCredit(e.target.value)}
+    />
+    </Grid>
+
+
 
     </Grid>
     </ValidatorForm>

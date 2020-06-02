@@ -291,8 +291,8 @@ export default function Machine(props) {
     <SubmitDiag style={{display: "none"}}/>
     <FormControl component="fieldset">
     <RadioGroup row aria-label="position" name="position" defaultValue="dispenser" onChange={handleRadioChange} >
-    <FormControlLabel value="return" control={<Radio color="primary" />} label="Return" />
     <FormControlLabel value="dispenser" control={<Radio color="primary" />} label="Dispenser" />
+    <FormControlLabel value="return" control={<Radio color="primary" />} label="Return" />
     </RadioGroup>
     </FormControl>
     <FormControl className={classes.formControl}>
@@ -327,9 +327,9 @@ export default function Machine(props) {
       edge="start"
       color="inherit"
       onClick={() => deleteUser(cells.cellNum)}
-      style={{ zIndex:2000,marginTop:"-10px",}}
+      style={{marginTop:"-10px"}}
       >
-      <ClearIcon style={{ zIndex:2000}} />
+      <ClearIcon />
       </IconButton>
       </div>
 

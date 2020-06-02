@@ -20,6 +20,8 @@ import Container from '@material-ui/core/Container';
 import CustomizedTables from '../UserTables';
 import { useState, useEffect, useContext } from "react";
 import Machine from '../machine';
+import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
+import Transactions from '../Transactions';
 
 
 
@@ -150,6 +152,8 @@ export default function ScrollableTabsButtonForce(props) {
     <Tab label="Dashboard" onClick={handleDash}  icon={<DashboardIcon />} {...a11yProps(0)} />
     <Tab label="Users" onClick={handleClick} icon={<PeopleIcon />} {...a11yProps(1)} />
     <Tab label="Inventory"  onClick={handleInvent} icon={<AssignmentIcon />} {...a11yProps(2)} />
+    <Tab label="Transactions"  onClick={handleInvent} icon={<CompareArrowsIcon />} {...a11yProps(3)} />
+
     </Tabs>
     </AppBar>
 
@@ -158,6 +162,9 @@ export default function ScrollableTabsButtonForce(props) {
     </TabPanel>
     <TabPanel {...props} value={value} index={2}>
     <Machine product={product}/>
+    </TabPanel>
+    <TabPanel {...props} value={value} index={3}>
+    <Transactions product={product}/>
     </TabPanel>
 
     </div>

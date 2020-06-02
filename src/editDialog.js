@@ -33,7 +33,7 @@ const areEqual = (prevProps, nextProps) => {
 };
 // var somename = "cathy"
 export default React.memo(function EditDialog(props){
-  console.log(props)
+  // console.log(props)
   // useEffect(() => {
   //   // set the data
   //   // console.log(highlight)
@@ -57,6 +57,8 @@ export default React.memo(function EditDialog(props){
   //   state => state.highlighted
   // );
   // set the hook data
+  const [propss, setProps] = useState('')
+
   const [email, setEmail] = useState(props.selectUser.email)
   const [pass, setPass] = useState(props.selectUser.email)
   const [last, setLast] = useState(props.selectUser.lastName)
@@ -64,10 +66,10 @@ export default React.memo(function EditDialog(props){
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
-  useEffect(() => {
-    console.log('props Update');
-console.log(props);
-  }, [props])
+//   useEffect(() => {
+//     console.log('props Update');
+// console.log(props);
+//   }, [props])
   // bring in the highlighted user
   // console.log(email)
 
@@ -206,8 +208,9 @@ console.log(props);
   }
   const handleClickOpen = () => {
     setOpen(true);
+    setProps(props)
     // globalActions.editUsers(props);
-    console.log('opened')
+    console.log(propss)
   };
 
   const handleClose = () => {

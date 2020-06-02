@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import FormDialog from './formDialog';
+import FormDialog2 from './formDialog2';
+
 import EditDialog from './editDialog';
 import { useState, useEffect, useCallback, updateState, useContext } from "react";
 import globalHook from 'use-global-hook'
@@ -17,6 +19,8 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import MultilineTextFields from './navigation/searchBar'
 import CircularIndeterminate from './Circular'
+import SearchBar from 'material-ui-search-bar'
+
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -76,7 +80,7 @@ export default function CustomizedTables(props) {
 
   useEffect(() => {
     console.log('counter updated');
-    setUsers([]);
+    // setUsers([]);
     callAPI()
     setReload(false)
   }, [props, reload])
@@ -205,6 +209,7 @@ console.log(selectUser)
       :
       <React.Fragment>
       <FormDialog/>
+
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
       <TableHead>
