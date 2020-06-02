@@ -93,17 +93,18 @@ export default function Machine(props) {
 
   useEffect(() => {
     console.log('Reloaded Machine Component');
-    // setMachines([])
+  setMachines([])
     callAPI()
-  }, [])
+  }, [props])
 
   useEffect(() => {
-    console.log('Reloaded Machine Component');
+    console.log('Reloaded Machine Component2');
     // setMachines([])
 
-  }, [props, reload])
+  }, [reload])
 
   function callAPI () {
+
     console.log("rerender")
     fetch( "https://rest.garmentvendor.app/stations?accountNum=" + account, {
       method: 'get',
@@ -284,7 +285,7 @@ export default function Machine(props) {
     <div>
 
     <Typography gutterBottom variant="h5"  component="h2" >
-    MACHINE 1
+    SELECT MACHINE
     </Typography>
     <div className={classes.header}>
     <SubmitDiag style={{display: "none"}}/>
@@ -310,12 +311,9 @@ export default function Machine(props) {
     </Select>
     </FormControl>
     <div className={classes.button} >
-    <Button onClick={handleClick()}  style={{marginRight: 5}} variant="outlined" color="primary" >
-    <ArrowBackIcon />
-    </Button>
-    <Button onClick={submitDiag()} variant="outlined" color="primary">
+{  /*  <Button onClick={submitDiag()} variant="outlined" color="primary">
     Apply Changes
-    </Button>
+    </Button> */}
     </div>
     </div>
     <div className={classes.root}>
