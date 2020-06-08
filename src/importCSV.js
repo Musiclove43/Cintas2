@@ -185,10 +185,10 @@ const  handleChange = (file)=> {
     </form>
     </DialogContent>
     <DialogActions>
-    <Button onClick={handleClose} color="primary">
+    <Button variant="outlined" color="secondary" onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button onClick={handleClose} form="my-form" type="submit" color="primary">
+    <Button variant="outlined" color="secondary" onClick={handleClose} form="my-form" type="submit" color="primary">
     Import CSV
     </Button>
     </DialogActions>
