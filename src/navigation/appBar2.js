@@ -38,7 +38,6 @@ import {
   useHistory
 } from "react-router-dom";
 import Widgets from '../Widget';
-import Users from '../Users';
 
 import Machine2 from '../MachineOnsite'
 

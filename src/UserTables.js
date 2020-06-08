@@ -147,17 +147,17 @@ export default function CustomizedTables(props) {
     // globalActions.editUsers(user);
   };
 
-  function userChange(e) {
-    selectUser.userEmail = e
-    // const open = true
-    console.log(selectUser)
-    // setReload(value)
-    // console.log(reload)
-
-    // globalActions.openDialog(open);
-    // console.log(selectUser)
-    // globalActions.editUsers(user);
-  };
+  // function userChange(e) {
+  //   selectUser.userEmail = e
+  //   // const open = true
+  //   console.log(selectUser)
+  //   // setReload(value)
+  //   // console.log(reload)
+  //
+  //   // globalActions.openDialog(open);
+  //   // console.log(selectUser)
+  //   // globalActions.editUsers(user);
+  // };
 
 
   function onChange2(value) {
@@ -244,7 +244,7 @@ console.log(selectUser)
         <StyledTableCell align="right">
         <div style={{display:"flex", justifyContent: "flex-end"}}>
 
-        <EditDialog  selectUser={user} callBack={setReloads} onChange={userChange} />
+        <EditDialog  selectUser={user} callBack={setReloads} />
 
         <IconButton
         edge="start"

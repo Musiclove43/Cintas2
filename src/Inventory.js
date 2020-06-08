@@ -63,15 +63,15 @@ export default function Inventory() {
   };
 
   const handleClear = () => {
-      setTitle('');
-      setQty('')
-      setCredits('')
-      setSku('')
-      setFile('')
-      setSize('')
-      setTopic(topic + 1)
+    setTitle('');
+    setQty('')
+    setCredits('')
+    setSku('')
+    setFile('')
+    setSize('')
+    setTopic(topic + 1)
 
-    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -86,36 +86,36 @@ export default function Inventory() {
     reader.readAsDataURL(file2);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
-});
-//
-//   const imageUpload = (file) => {
-//     console.log(file)
-//     // const file = e.target.value[0];
-//     const file = new FormData();
-//             file.append('file', file);
-//             console.log(file)
-//   getBase64(file).then(base64 => {
-//     localStorage["fileBase64"] = base64;
-//     console.debug("file stored",base64);
-//   });
-//
-//
+  });
+  //
+  //   const imageUpload = (file) => {
+  //     console.log(file)
+  //     // const file = e.target.value[0];
+  //     const file = new FormData();
+  //             file.append('file', file);
+  //             console.log(file)
+  //   getBase64(file).then(base64 => {
+  //     localStorage["fileBase64"] = base64;
+  //     console.debug("file stored",base64);
+  //   });
+  //
+  //
 
-// };
-const  handleChange = (file)=> {
+  // };
+  const  handleChange = (file)=> {
 
-  var file2 = file[0]
-  if (file2 == undefined){
-    console.log("nothing here")
-  } else {
-    getBase64(file2).then(base64 => {
-      localStorage["fileBase64"] = base64;
-      console.debug("file stored",base64);
-      setFile(localStorage.fileBase64)
-    })
+    var file2 = file[0]
+    if (file2 == undefined){
+      console.log("nothing here")
+    } else {
+      getBase64(file2).then(base64 => {
+        localStorage["fileBase64"] = base64;
+        console.debug("file stored",base64);
+        setFile(localStorage.fileBase64)
+      })
+    }
+    console.log(file2)
   }
-  console.log(file2)
-}
 
   return (
     <div>
@@ -193,25 +193,25 @@ const  handleChange = (file)=> {
     <Grid item xs={6} md={6} lg={6}>
     <DropzoneArea
     showPreviews={true}
-            filesLimit={1}
-            key={topic}
-           onChange={handleChange.bind(this)}
-           />
+    filesLimit={1}
+    key={topic}
+    onChange={handleChange.bind(this)}
+    />
     </Grid>
     <Grid item >
     <FormControl className={classes.formControl}>
-         <InputLabel id="demo-simple-select-label">Size</InputLabel>
-         <Select
-           labelId="demo-simple-select-label"
-           id="demo-simple-select"
-           value={size}
-           onChange={e => setSize(e.target.value)}
-         >
-           <MenuItem value={"Small"}>Small</MenuItem>
-           <MenuItem value={"Medium"}>Medium</MenuItem>
-           <MenuItem value={"Large"}>Large</MenuItem>
-         </Select>
-       </FormControl>
+    <InputLabel id="demo-simple-select-label">Size</InputLabel>
+    <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={size}
+    onChange={e => setSize(e.target.value)}
+    >
+    <MenuItem value={"Small"}>Small</MenuItem>
+    <MenuItem value={"Medium"}>Medium</MenuItem>
+    <MenuItem value={"Large"}>Large</MenuItem>
+    </Select>
+    </FormControl>
     </Grid>
     </Grid>
     </form>

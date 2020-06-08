@@ -93,7 +93,7 @@ export default function Machine(props) {
 
   useEffect(() => {
     console.log('Reloaded Machine Component');
-  setMachines([])
+    setMachines([])
     callAPI()
   }, [props])
 
@@ -200,11 +200,11 @@ export default function Machine(props) {
   const submitDiag = () => (event) => {
     const open = true
     globalActions.openDialog(open)
-    setTimeout(function(){
-      var data = 0;
-      globalActions.addValue(data)
-      globalActions.openDialog(false)
-    }, 2000);
+    // setTimeout(function(){
+    //   var data = 0;
+    //   globalActions.addValue(data)
+    //   globalActions.openDialog(false)
+    // }, 2000);
     console.log(globalState)
   };
 
@@ -259,26 +259,26 @@ export default function Machine(props) {
   const deleteUser = (value) => {
     console.log(selectedMachine);
     console.log(value);
-  fetch( "https://rest.garmentvendor.app/station/cell" , {
-    method: 'post',
-    contentType: 'application/json',
-    headers: {
-      Authorization:
-      'Bearer ' + globalState.token.Token,
-    },
-    body: JSON.stringify({
-      "stationNum": selectedMachine.stationNum,
-      "cellNum": value,
+    fetch( "https://rest.garmentvendor.app/station/cell" , {
+      method: 'post',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + globalState.token.Token,
+      },
+      body: JSON.stringify({
+        "stationNum": selectedMachine.stationNum,
+        "cellNum": value,
+      })
     })
-  })
 
-  .then(res => res.json())
-  .then(
-    (result) => {
-      console.log(result)
-    setReloads(true)
-    }
-  )
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        setReloads(true)
+      }
+    )
   };
 
   return (
@@ -311,8 +311,11 @@ export default function Machine(props) {
     </Select>
     </FormControl>
     <div className={classes.button} >
-  <Button onClick={submitDiag()} variant="outlined" color="secondary">
+    <Button onClick={submitDiag()} Style={{marginRight: 10}} variant="outlined" color="secondary">
     Machine Details
+    </Button>
+    <Button onClick={submitDiag()} Style={{marginLeft: 10}} variant="contained" color="secondary">
+    + ADD MACHINE
     </Button>
     </div>
     </div>

@@ -34,7 +34,6 @@ export default function MultilineTextFields(props) {
   const classes = useStyles();
   const [currency, setCurrency] = React.useState(props);
   const [currencies, setCurrencies] = React.useState([]);
-
   const handleChange = (event) => {
     setCurrency(event.target.value);
     props.onChange(event.target.value);

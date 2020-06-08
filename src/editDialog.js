@@ -33,7 +33,7 @@ const areEqual = (prevProps, nextProps) => {
 };
 // var somename = "cathy"
 export default React.memo(function EditDialog(props){
-  // console.log(props)
+  // console.log(props.selectUSER)
   // useEffect(() => {
   //   // set the data
   //   // console.log(highlight)
@@ -58,6 +58,7 @@ export default React.memo(function EditDialog(props){
   // );
   // set the hook data
   const [propss, setProps] = useState('')
+  const [select, setSelect] = useState('')
 
   const [email, setEmail] = useState(props.selectUser.email)
   const [pass, setPass] = useState(props.selectUser.email)
@@ -67,8 +68,9 @@ export default React.memo(function EditDialog(props){
     state => state.account,
   );
 //   useEffect(() => {
-//     console.log('props Update');
-// console.log(props);
+//     // console.log('props Update');
+//     console.log(props.selectUser)
+// // console.log(props);
 //   }, [props])
   // bring in the highlighted user
   // console.log(email)
@@ -107,10 +109,11 @@ export default React.memo(function EditDialog(props){
   //
   //     start = false;
   //   }
-  // useEffect(() => {
-  //   console.log('props changes');
-  //   // setUsers([]);
-  //   // callAPI()
+  // useEffect((nextProps, nextState) => {
+  //   // if (props !== nextProps) {
+  //     return false;
+  //     console.log("this is happeneing")
+  //
   // }, [props])
 
 
@@ -208,9 +211,9 @@ export default React.memo(function EditDialog(props){
   }
   const handleClickOpen = () => {
     setOpen(true);
-    setProps(props)
-    // globalActions.editUsers(props);
-    console.log(propss)
+      console.log(props.selectUser, "SelectedUser")
+        setSelect(props.selectUser)
+        globalActions.editUsers(props.selectUser);
   };
 
   const handleClose = () => {
@@ -261,10 +264,7 @@ export default React.memo(function EditDialog(props){
     >
     <DialogTitle id="alert-dialog-slide-title">{"EDIT USER"}</DialogTitle>
     <DialogContent>
-    <DialogContentText id="alert-dialog-slide-description">
-    Let Google help apps determine location. This means sending anonymous location data to
-    Google, even when no apps are running.
-    </DialogContentText>
+
     <form id="my-form" onSubmit={handleSubmit}  noValidate>
 
     <Grid container spacing={3}>
@@ -273,7 +273,7 @@ export default React.memo(function EditDialog(props){
     <TextField
     autoFocus
     margin="dense"
-    id="name"
+
     label="First Name"
     type="email"
     fullWidth
@@ -292,7 +292,7 @@ export default React.memo(function EditDialog(props){
     <TextField
     autoFocus
     margin="dense"
-    id="name"
+
     label="Last Name"
     type="email"
     fullWidth
@@ -304,7 +304,7 @@ export default React.memo(function EditDialog(props){
     <TextField
     autoFocus
     margin="dense"
-    id="name"
+
     label="Email Address"
     type="email"
     fullWidth
@@ -319,7 +319,7 @@ export default React.memo(function EditDialog(props){
     <TextField
     autoFocus
     margin="dense"
-    id="name"
+
     label="Telephone"
     type="email"
     fullWidth
@@ -330,7 +330,7 @@ export default React.memo(function EditDialog(props){
     <TextField
     autoFocus
     margin="dense"
-    id="name"
+
     label="Department"
     type="email"
     fullWidth

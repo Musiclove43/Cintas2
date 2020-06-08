@@ -24,7 +24,6 @@ import Orders from './Orders';
 import Widgets from './Widget';
 import Inventory from './Inventory';
 import ControlledExpansionPanels from './InventoryCreate'
-import Users from './Users';
 import LocationReport from './locationReport';
 import Configuration from './Configuration';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
@@ -117,7 +116,7 @@ export default function Dashboard2() {
       </Typography>
       <ChevronRightIcon style={{ marginRight: 5}} />
 
-      
+
       {swipeUser === 0 ? (
         <Typography style={{ paddingBottom: 20}} component="h2" variant="h5" >REPORTING</Typography>
       ) : (

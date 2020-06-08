@@ -14,7 +14,6 @@ import { useState, useEffect, useCallback, updateState} from "react";
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import Widgets from './Widget';
-import Users from './Users.js'
 import Location2 from './Location2';
 
 

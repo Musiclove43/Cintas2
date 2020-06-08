@@ -18,8 +18,8 @@ import SearchBar from 'material-ui-search-bar'
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-
-
+import LimitGroups from "./limitGroups"
+import ImportCSV from "./importCSV"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -40,45 +40,14 @@ export default function FormDialog() {
   const [search, setSearch] = useState('')
   const [token, setToken] = useGlobal(
     state => state.token,
-    // state => state.highlighted,
-    // actions => actions.addToCounterA
+
   );
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
 
-  // console.log(globalState)
-  // const errors = []
-  // useEffect(() => {
-  //        setErr(firstError, passError, emailError, lastError);
-  //        console.log(allErr)
-  //  }, [
-  //     firstError//here you could pass dependencies, or leave it empty to call this effect only on first render
-  //  ]);
-  // console.log(errors)
 
   const handleSubmit = e => {
-
-    // console.log(errors)
-    // console.log(firstError)
-    //
-    // if (first==null || first==""){
-    //   setFirstError("Name can't be blank");
-    //
-    // }
-    // if (last==null || last==""){
-    //   setLastError("Name can't be blank");
-    //
-    // }
-    // if(email.length<8){
-    //   setEmailError("Password must be at least 8 characters long.");
-    //
-    // }
-    // if(pass.length<8){
-    //   setPassError("Password must be at least 8 characters long.");
-    //
-    // }
-
     const id = Math.floor(Math.random() * Date.now())
     const data = {id, email, last, first, badge}
     console.log("token" + account)
@@ -108,85 +77,7 @@ export default function FormDialog() {
         console.log(result)
       }
     )
-
-    //   fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
-    //     method: 'get',
-    //     contentType: 'application/json',
-    //     headers: {
-    //       Authorization:
-    //       'Bearer ' + token,
-    //     },
-    //
-    //   })
-    //
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //
-    //       console.log(result)
-    //     },
-    //   // Note: it's important to handle errors here
-    //   // instead of a catch() block so that we don't swallow
-    //   // exceptions from actual bugs in components.
-    //   (error) => {
-    //     console.log(error)
-    //   }
-    // )
-
-    // fetch( "https://rest.garmentvendor.app/user?email=testuser13@email.com" , {
-    //   method: 'delete',
-    //   contentType: 'application/json',
-    //   headers: {
-    //     Authorization:
-    //     'Bearer ' + token,
-    //   },
-    //
-    // })
-
-    //   fetch( "https://rest.garmentvendor.app/users?location=testLocation" , {
-    //     method: 'get',
-    //     contentType: 'application/json',
-    //     headers: {
-    //       Authorization:
-    //       'Bearer ' + token,
-    //     },
-    //
-    //   })
-    //
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //
-    //       console.log(result)
-    //     },
-    //   // Note: it's important to handle errors here
-    //   // instead of a catch() block so that we don't swallow
-    //   // exceptions from actual bugs in components.
-    //   (error) => {
-    //     console.log(error)
-    //   }
-    // )
-
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //
-    //       console.log(result)
-    //     },
-    //   // Note: it's important to handle errors here
-    //   // instead of a catch() block so that we don't swallow
-    //   // exceptions from actual bugs in components.
-    //   (error) => {
-    //     console.log(error)
-    //   }
-    // )
-
-
-    // console.log(this.state.items.result);
-
     globalActions.addToUsers(data)
-    // console.log(globalState);
-    // document.getElementById("my-form-id").reset();
     handleClose()
     handleClear();
   };
@@ -212,7 +103,7 @@ export default function FormDialog() {
     <Grid container spacing={3}>
     <Grid item>
 
-    <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5" >USERS</Typography>
+    <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5">USERS</Typography>
     </Grid>
     <Grid item>
     <TextField
@@ -236,12 +127,8 @@ export default function FormDialog() {
     <Button variant="contained"  color="secondary" onClick={handleClickOpen}>
     ADD USER +
     </Button>
-    <Button   style={{ marginRight: 5, marginLeft: 5}} variant="outlined" color="secondary" >
-    Import CSV
-    </Button>
-    <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-    Manage Limit groups
-    </Button>
+    <ImportCSV/>
+    <LimitGroups />
       </div>
     </Grid>
     </Grid>
@@ -264,7 +151,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     label="First Name"
     type="email"
     validators={['required']}
@@ -278,7 +164,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     label="Last Name"
     type="email"
     validators={['required']}
@@ -293,7 +178,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     label="Email Address"
     type="email"
     fullWidth
@@ -307,7 +191,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     label="Telephone Number"
     type="email"
     fullWidth
@@ -321,7 +204,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     validators={['required']}
     errorMessages={['this field is required']}
     label="Department"
@@ -335,7 +217,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     validators={['required']}
     errorMessages={['this field is required']}
     label="ID"
@@ -349,7 +230,6 @@ export default function FormDialog() {
     <TextValidator
     autoFocus
     margin="dense"
-    id="name"
     validators={['required']}
     errorMessages={['this field is required']}
     label="Credits"

@@ -24,7 +24,7 @@ import Orders from './Orders';
 import Widgets from './Widget';
 import Inventory from './Inventory';
 import ControlledExpansionPanels from './InventoryCreate'
-import Users from './Users';
+
 import LocationReport from './locationReport';
 import Configuration from './Configuration';
 import LocationMachine from './LocationMachine';
