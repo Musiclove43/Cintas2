@@ -24,6 +24,13 @@ import Title from './Title';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import Orders from './Orders';
+import Dispensers from './DashboardDispensersTable'
+import MachineHealth from './DashboardMachineHealthTable'
+import ReturnUnits from './DashboardReturnUnitsTable'
+import TableHeader from './DasboardTableHeader'
+import Users from './DashboardUserTable'
+import { Table } from '@material-ui/core';
+import Box from '@material-ui/core/Box'
 
 function Copyright() {
   return (
@@ -124,7 +131,10 @@ const useStyles = makeStyles(theme => ({
   depositContext: {
     flex: 1,
   },
+
 }));
+
+
 
 export default function Widgets() {
   const classes = useStyles();
@@ -137,22 +147,27 @@ export default function Widgets() {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+
   return (
 
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row"
+          justify="space-between"
+          alignItems="center">
             {/* Chart */}
+            {/*
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Chart />
               </Paper>
-            </Grid>
+            </Grid> 
+            */}
             {/* Recent Deposits */}
-            <Grid item xs={6} md={4} lg={3}>
+            <Grid item xs={6} md={4} lg={2}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={3}>
+            <Grid item xs={6} md={3} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 2</Title>
@@ -173,7 +188,7 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={3}>
+            <Grid item xs={6} md={3} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 3</Title>
@@ -194,7 +209,7 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={3}>
+            <Grid item xs={6} md={3} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 4</Title>
@@ -215,7 +230,7 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={3}>
+            <Grid item xs={6} md={3} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 5</Title>
@@ -237,11 +252,54 @@ export default function Widgets() {
               </Paper>
             </Grid>
             {/* Recent Orders */}
+            {/*
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
               </Paper>
             </Grid>
+            */}
+
+
+            {/*Tables*/}
+            
+            <Grid item xs={8}>
+              <Paper className={classes.paper, classes.dispensers}>
+              <TableHeader> Dispensers </TableHeader>
+              <Box p={2}>
+                <Dispensers />
+              </Box>
+              </Paper>
+            </Grid>
+            
+            <Grid item xs={4}>
+              <Paper className={classes.paper, classes.returnUnits}>
+              <TableHeader> Return Units </TableHeader>
+              <Box p={2}>
+                <ReturnUnits />
+              </Box>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={8}>
+              <Paper className={classes.paper, classes.machineHealth}>
+              <TableHeader> Machine Health </TableHeader>
+              <Box p={2}>
+                <MachineHealth />
+              </Box>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Paper className={classes.paper, classes.returnUnits}>
+              <TableHeader> Users </TableHeader>
+              <Box p={2}>
+                <Users />
+              </Box>
+              </Paper>
+            </Grid>
+
+
           </Grid>
 
   );

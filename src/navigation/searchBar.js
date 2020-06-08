@@ -42,7 +42,7 @@ export default function MultilineTextFields(props) {
     globalActions.addAccount(event.target.value);
     console.log(globalState);
   };
-
+/*
   useEffect(() => {
     longResolve().then(() => {
       console.log(globalState.account);
@@ -70,7 +70,7 @@ export default function MultilineTextFields(props) {
     })
   }, []);
 
-
+*/
   return (
     <form className={classes.root} noValidate autoComplete="off">
     <div>
