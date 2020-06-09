@@ -162,12 +162,12 @@ export default function Widgets() {
             </Grid> 
             */}
             {/* Recent Deposits */}
-            <Grid item xs={6} md={4} lg={2}>
+            <Grid item xs={6} md={2} lg={2}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={2}>
+            <Grid item xs={6} md={2} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 2</Title>
@@ -188,7 +188,7 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={2}>
+            <Grid item xs={6} md={2} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 3</Title>
@@ -209,7 +209,7 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={2}>
+            <Grid item xs={6} md={2} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 4</Title>
@@ -230,7 +230,7 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
-            <Grid item xs={6} md={3} lg={2}>
+            <Grid item xs={6} md={2} lg={2}>
               <Paper className={fixedHeightPaper}>
               <React.Fragment>
                 <Title>Machine 5</Title>
