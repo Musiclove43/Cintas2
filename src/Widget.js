@@ -120,9 +120,14 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  fixedHeight2: {
+    height: 240,
   },
   fixedHeight: {
-    height: 240,
+    height: 120,
   },
   direction: {
     display: "flex",
@@ -146,7 +151,7 @@ export default function Widgets() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+  const fixedHeight2Paper = clsx(classes.paper, classes.fixedHeight2);
 
   return (
 
@@ -161,14 +166,96 @@ export default function Widgets() {
               </Paper>
             </Grid> 
             */}
-            {/* Recent Deposits */}
+
+
             <Grid item xs={6} md={2} lg={2}>
               <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Typography component="h4" variant="subtitle1"  gutterBottom>
+                  Machines Online
+                </Typography>
+                <Typography component="p" variant="h4">
+                  100%
+                </Typography>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6} md={2} lg={2}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Typography component="h4" variant="subtitle1"  gutterBottom>
+                  Total Active Users
+                </Typography>
+                <Typography component="p" variant="h4">
+                  150
+                </Typography>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6} md={2} lg={2}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Typography component="h4" variant="subtitle1"  gutterBottom>
+                  Delinquent Users
+                </Typography>
+                <Typography component="p" variant="h4">
+                  20
+                </Typography>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6} md={2} lg={2}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Typography component="h4" variant="subtitle1"  gutterBottom>
+                  Garments Out
+                </Typography>
+                <Typography component="p" variant="h4">
+                  300
+                </Typography>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6} md={2} lg={2}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Typography component="h4" variant="subtitle1"  gutterBottom>
+                  Uptime
+                </Typography>
+                <Typography component="p" variant="h4">
+                  100%
+                </Typography>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6} md={2} lg={2}>
+              <Paper className={fixedHeightPaper}>
+              <React.Fragment>
+                <Typography component="h4" variant="subtitle1"  gutterBottom>
+                  User Success
+                </Typography>
+                <Typography component="p" variant="h4">
+                  67%
+                </Typography>
+              </React.Fragment>
+              </Paper>
+            </Grid>
+
+
+            {/* Recent Deposits */}
+            {/*
+            <Grid item xs={6} md={2} lg={2}>
+              <Paper className={fixedHeight2Paper}>
                 <Deposits />
               </Paper>
             </Grid>
             <Grid item xs={6} md={2} lg={2}>
-              <Paper className={fixedHeightPaper}>
+              <Paper className={fixedHeight2Paper}>
               <React.Fragment>
                 <Title>Machine 2</Title>
                 <div className={classes.direction}>
@@ -189,7 +276,7 @@ export default function Widgets() {
               </Paper>
             </Grid>
             <Grid item xs={6} md={2} lg={2}>
-              <Paper className={fixedHeightPaper}>
+              <Paper className={fixedHeight2Paper}>
               <React.Fragment>
                 <Title>Machine 3</Title>
                 <div className={classes.direction}>
@@ -210,7 +297,7 @@ export default function Widgets() {
               </Paper>
             </Grid>
             <Grid item xs={6} md={2} lg={2}>
-              <Paper className={fixedHeightPaper}>
+              <Paper className={fixedHeight2Paper}>
               <React.Fragment>
                 <Title>Machine 4</Title>
                 <div className={classes.direction}>
@@ -231,7 +318,7 @@ export default function Widgets() {
               </Paper>
             </Grid>
             <Grid item xs={6} md={2} lg={2}>
-              <Paper className={fixedHeightPaper}>
+              <Paper className={fixedHeight2Paper}>
               <React.Fragment>
                 <Title>Machine 5</Title>
                 <div className={classes.direction}>
@@ -251,6 +338,8 @@ export default function Widgets() {
               </React.Fragment>
               </Paper>
             </Grid>
+
+            */}
             {/* Recent Orders */}
             {/*
             <Grid item xs={12}>
