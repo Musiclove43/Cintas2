@@ -63,7 +63,12 @@ export default function CustomizedTables(props) {
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isPreviewShown, setPreviewShown] = useState(false);
-
+  const [highlighted, setHighlighted] = useGlobal(
+    state => state.highlighted,
+  );
+  const [open, setOpen] = useGlobal(
+    state => state.open,
+  );
 
   const [account, setAccount] = useGlobal(
     state => state.account,
@@ -193,12 +198,14 @@ export default function CustomizedTables(props) {
     console.log(selectUser)
     // const open = true
     // handleClickOpen(true)
-    handlePreview()
+    // handlePreview()
     // console.log(selectUser)
     // // globalActions.openDialog(open);
     // console.log("selectUser")
-    // globalActions.editUsers(newValue);
-    // console.log(globalState.highlighted)
+    const open = true
+    globalActions.editUsers(newValue);
+    globalActions.openDialog(open)
+    console.log(globalState)
   };
 
   function handlePreview() {
@@ -224,7 +231,7 @@ export default function CustomizedTables(props) {
       :
       <React.Fragment>
       <FormDialog/>
-       {isPreviewShown && <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />}
+      <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />
 
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">

@@ -18,7 +18,7 @@ export const deleteUsers = (store, user) =>  {
 }
 
 export const editUsers = (store, newValue) =>  {
-  const newEdit = store.state.user = newValue;
+  const newEdit = store.state.highlighted = newValue;
   store.setState({ newEdit });
 }
 

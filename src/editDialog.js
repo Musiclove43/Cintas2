@@ -51,7 +51,7 @@ export default React.memo(function EditDialog(props){
   // const MyComponent = React.memo(props => {
   //   console.log("Equal") /*whatever jsx you like */
   // }, areEqual);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [globalState, globalActions] = useGlobal();
   // const [highlight, setHighlight] = useGlobal(
   //   state => state.highlighted
@@ -59,10 +59,13 @@ export default React.memo(function EditDialog(props){
   // set the hook data
   const [propss, setProps] = useState('')
 
-  const [email, setEmail] = useState(props.selectUser.email)
-  const [pass, setPass] = useState(props.selectUser.email)
-  const [last, setLast] = useState(globalState.account)
-  const [first, setFirst] = useState(props.selectUser.firstName)
+  const [email, setEmail] = useState(globalState.highlighted.email)
+  const [pass, setPass] = useState(globalState.highlighted.email)
+  const [last, setLast] = useState(globalState.highlighted.lastName)
+  const [first, setFirst] = useState(globalState.highlighted.firstName)
+  const [open, setOpen] = useGlobal(
+   state => state.open,
+ );
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
@@ -159,11 +162,12 @@ export default React.memo(function EditDialog(props){
   const handleSubmit = (e) => {
     // e.defaultValue()
       e.preventDefault();
-    console.log(props.selectUser.email)
+    // console.log(props.selectUser.email)
     console.log(email)
+    console.log(first)
     console.log(globalState.token.Token)
 
-    fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
+    fetch( "https://rest.garmentvendor.app/user/" + globalState.highlighted.email, {
       method: 'Post',
       contentType: 'application/json',
       headers: {
@@ -197,6 +201,7 @@ export default React.memo(function EditDialog(props){
     // document.getElementById("my-form-id").reset();
     props.callBack(true);
     handleClear();
+    handleClose()
 
   };
 
@@ -206,22 +211,31 @@ export default React.memo(function EditDialog(props){
     setFirst('')
     setLast('')
   }
-  const handleClickOpen = () => {
-    setOpen(true);
-    setProps(props)
-    // globalActions.editUsers(props);
-    console.log(propss)
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  //   setProps(props)
+  //   // globalActions.editUsers(props);
+  //   console.log(propss)
+  // };
+
+
+
+    const handleClickOpen = () => {
+      const open = false
+      globalActions.openDialog(open);
+    };
 
   const handleClose = () => {
-    setOpen(false);
+    // setOpen(false);
+    const open = false
+    globalActions.openDialog(open)
   };
 
   function onChange2(e){
-
+setFirst(e)
     // setFirst('')
     // setFirst(e.target.value)
-    console.log("here we are")
+    console.log(first)
     // props.onChange(e)
     // setFirst(e.target.value)
 
@@ -242,13 +256,7 @@ export default React.memo(function EditDialog(props){
     <Grid container spacing={3}>
     <Grid item>
 
-    <IconButton
-    edge="start"
-    color="inherit"
-    onClick={handleClickOpen}
-    >
-    <EditIcon style={{ zIndex:2000}} />
-    </IconButton>
+
     </Grid>
     </Grid>
     <Dialog
@@ -284,7 +292,7 @@ export default React.memo(function EditDialog(props){
     // inputRef={props.selectUser.email}
 
     // defaultValue='${props.selectUser.userEmail.email}'
-    onChange={(e) => setFirst(e.target.value)}
+    onChange={(e) => onChange2(e.target.value)}
     value={first}
     />
     </Grid>
@@ -346,7 +354,7 @@ export default React.memo(function EditDialog(props){
     <Button onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button onClick={handleClose} form="my-form" type="submit" color="primary">
+    <Button  form="my-form" type="submit" color="primary">
     Update User
     </Button>
     </DialogActions>
