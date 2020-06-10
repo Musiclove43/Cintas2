@@ -112,13 +112,13 @@ export default function FormDialog() {
     InputProps={{
       endAdornment: (
         <InputAdornment>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
+        <IconButton>
+        <SearchIcon />
+        </IconButton>
         </InputAdornment>
       )
     }}
-  />
+    />
 
     </Grid>
     <Grid style={{marginLeft: "auto"}} item >
@@ -129,7 +129,7 @@ export default function FormDialog() {
     </Button>
     <ImportCSV/>
     <LimitGroups />
-      </div>
+    </div>
     </Grid>
     </Grid>
     </Grid>
@@ -144,10 +144,8 @@ export default function FormDialog() {
     <DialogTitle id="alert-dialog-slide-title">{"CREATE USER"}</DialogTitle>
     <DialogContent>
     <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit} noValidate>
-
     <Grid container spacing={3}>
     <Grid item xs={6} md={6} lg={6}>
-
     <TextValidator
     autoFocus
     margin="dense"

@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -20,7 +22,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import MultilineTextFields from './navigation/searchBar'
 import CircularIndeterminate from './Circular'
 import SearchBar from 'material-ui-search-bar'
-
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -61,6 +62,8 @@ export default function CustomizedTables(props) {
   const [value3, setValue3] = useState('');
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isPreviewShown, setPreviewShown] = useState(false);
+
 
   const [account, setAccount] = useGlobal(
     state => state.account,
@@ -136,28 +139,33 @@ export default function CustomizedTables(props) {
 
 
   function setReloads(value) {
-    // selectUser.userEmail = newValue
     // const open = true
     console.log(reload)
     setReload(value)
     console.log(reload)
+    setPreviewShown(false)
+
 
     // globalActions.openDialog(open);
     // console.log(selectUser)
     // globalActions.editUsers(user);
   };
 
-  // function userChange(e) {
-  //   selectUser.userEmail = e
-  //   // const open = true
-  //   console.log(selectUser)
-  //   // setReload(value)
-  //   // console.log(reload)
-  //
-  //   // globalActions.openDialog(open);
-  //   // console.log(selectUser)
-  //   // globalActions.editUsers(user);
-  // };
+  function onClose(value) {
+    setPreviewShown(value)
+  };
+
+  function userChange(e) {
+    selectUser.userEmail = e
+    // const open = true
+    console.log(selectUser)
+    // setReload(value)
+    // console.log(reload)
+
+    // globalActions.openDialog(open);
+    // console.log(selectUser)
+    // globalActions.editUsers(user);
+  };
 
 
   function onChange2(value) {
@@ -173,34 +181,41 @@ export default function CustomizedTables(props) {
   };
 
   const selectUser = {
-  userEmail: '',
-//   setReload: function() {
-//     setReload(true);
-//     console.log("updated!");
-// },
-}
+    userEmail: '',
+    //   setReload: function() {
+    //     setReload(true);
+    //     console.log("updated!");
+    // },
+  }
 
-function editUser (newValue) {
-  selectUser.userEmail = newValue
-  // const open = true
+  function editUser (newValue) {
+    selectUser.userEmail = newValue
+    console.log(selectUser)
+    // const open = true
+    // handleClickOpen(true)
+    handlePreview()
+    // console.log(selectUser)
+    // // globalActions.openDialog(open);
+    // console.log("selectUser")
+    // globalActions.editUsers(newValue);
+    // console.log(globalState.highlighted)
+  };
 
-console.log(selectUser)
-      // globalActions.openDialog(open);
-      console.log("selectUser")
-  // globalActions.editUsers(newValue);
-  // console.log(globalState.highlighted)
-};
+  function handlePreview() {
+      // e.preventDefault();
 
-//   function editUser(user) {
-//     // selectUser.userEmail = newValue
-//     // const open = true
-//     // props.user
-// console.log("here" + user)
-//     // globalActions.openDialog(open);
-//     // console.log(selectUser)
-//     globalActions.activeEdit(user);
-//     console.log(globalState)
-//   };
+      setPreviewShown(true); // Here we change state
+  }
+  //   function editUser(user) {
+  //     // selectUser.userEmail = newValue
+  //     // const open = true
+  //     // props.user
+  // console.log("here" + user)
+  //     // globalActions.openDialog(open);
+  //     // console.log(selectUser)
+  //     globalActions.activeEdit(user);
+  //     console.log(globalState)
+  //   };
 
   return (
     <div className={classes.root}>
@@ -209,6 +224,7 @@ console.log(selectUser)
       :
       <React.Fragment>
       <FormDialog/>
+       {isPreviewShown && <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />}
 
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -244,8 +260,15 @@ console.log(selectUser)
         <StyledTableCell align="right">
         <div style={{display:"flex", justifyContent: "flex-end"}}>
 
-        <EditDialog  selectUser={user} callBack={setReloads} />
 
+        <IconButton
+        edge="start"
+        color="inherit"
+        onClick={() => editUser(user)}
+        >
+
+        <EditIcon style={{ zIndex:2000}} />
+        </IconButton>
         <IconButton
         edge="start"
         color="inherit"

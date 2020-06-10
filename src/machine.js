@@ -311,10 +311,10 @@ export default function Machine(props) {
     </Select>
     </FormControl>
     <div className={classes.button} >
-    <Button onClick={submitDiag()} Style={{marginRight: 10}} variant="outlined" color="secondary">
+    <Button onClick={submitDiag()}  variant="outlined" color="secondary">
     Machine Details
     </Button>
-    <Button onClick={submitDiag()} Style={{marginLeft: 10}} variant="contained" color="secondary">
+    <Button onClick={submitDiag()} Style={{paddingLeft: 10}} variant="contained" color="secondary">
     + ADD MACHINE
     </Button>
     </div>
