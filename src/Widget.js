@@ -450,7 +450,7 @@ export default function Widgets() {
           <StyledTableCell>Machine</StyledTableCell>
           <StyledTableCell align="right">Availability</StyledTableCell>
           <StyledTableCell align="right">Capacity</StyledTableCell>
-          <StyledTableCell align="right">Days To Depletion</StyledTableCell>
+          <StyledTableCell align="right">Days To Deplete</StyledTableCell>
 
           </TableRow>
           </TableHead>
@@ -522,9 +522,9 @@ export default function Widgets() {
           <Table className={classes.table} aria-label="customized table">
           <TableHead>
           <TableRow>
-          <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-          <StyledTableCell align="right">Calories</StyledTableCell>
-          <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
+          <StyledTableCell>Department</StyledTableCell>
+          <StyledTableCell align="right">Return Rate</StyledTableCell>
+          <StyledTableCell align="right">Last Activity Date</StyledTableCell>
 
           </TableRow>
           </TableHead>
