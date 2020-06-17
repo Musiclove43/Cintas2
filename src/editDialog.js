@@ -183,7 +183,8 @@ export default React.memo(function EditDialog(props){
         "cardID": "000000045",
         "credits": 0,
         "withdrawLimit": 0,
-        "expirationDate": "2123-01-01T00:00:00Z"
+        "expirationDate": "2123-01-01T00:00:00Z",
+        "limitGroupID": 2
       })
     })
 

@@ -41,6 +41,7 @@ const initialState = {
     userSwipe: 0,
     location: '',
     setmachine: '',
+    setCells: [{cellNum: "cell1"},{inventory: "cell2"},{inventory: "cell3"},{inventory: "cell4"},{inventory: "cell5"},{inventory: "cell6"},{inventory: "cell7"}],
     cellCap: ''
   };
 

@@ -22,8 +22,7 @@ import { useState, useEffect, useContext } from "react";
 import Machine from '../machine';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import Transactions from '../Transactions';
-
-
+import MachineNav from '../machineNav'
 
 
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -124,14 +123,14 @@ export default function ScrollableTabsButtonForce(props) {
   const history = useHistory();
 
   function handleClick() {
-    history.push("/about/users");
+    history.push("/dashboard/users");
   }
   function handleDash() {
-    history.push({pathname:"/about", propss: value2});
+    history.push({pathname:"/dashboard", propss: value2});
   }
 
   function handleInvent() {
-    history.push("/about/configurations");
+    history.push("/dashboard/configurations");
   }
 
   return (
@@ -160,6 +159,7 @@ export default function ScrollableTabsButtonForce(props) {
     <CustomizedTables product={product} />
     </TabPanel>
     <TabPanel {...props} value={value} index={2}>
+  {/*  <MachineNav>  */}
     <Machine product={product}/>
     </TabPanel>
     <TabPanel {...props} value={value} index={3}>

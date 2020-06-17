@@ -67,7 +67,8 @@ export default function FormDialog() {
         "cardID": "000000045",
         "credits": 12,
         "withdrawLimit": 0,
-        "expirationDate": "2123-01-01T00:00:00Z"
+        "expirationDate": "2123-01-01T00:00:00Z",
+        "limitGroupID": 2
       })
     })
 
@@ -127,8 +128,8 @@ export default function FormDialog() {
     <Button variant="contained"  color="secondary" onClick={handleClickOpen}>
     ADD USER +
     </Button>
-    {/*    <ImportCSV/>
-      <LimitGroups /> */}
+    <ImportCSV/>
+    <LimitGroups />
     </div>
     </Grid>
     </Grid>

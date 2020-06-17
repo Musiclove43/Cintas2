@@ -24,7 +24,6 @@ import Orders from './Orders';
 import Widgets from './Widget';
 import Inventory from './Inventory';
 import ControlledExpansionPanels from './InventoryCreate'
-
 import LocationReport from './locationReport';
 import Configuration from './Configuration';
 import LocationMachine from './LocationMachine';
@@ -215,8 +214,8 @@ export default function Dashboard(props) {
     </AppBar>
     <ScrollableTabsButtonForce/>
     <main className={classes.content}>
-    <Container maxWidth="lg" className={classes.container}>
-    <Route exact path="/about" component={Widgets}/>
+    <Container maxWidth="85%" className={classes.container}>
+    <Route exact path="/dashboard" component={Widgets}/>
     </Container>
     <Copyright />
     </main>

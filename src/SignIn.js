@@ -65,9 +65,23 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [passcode, setPasscode] = useState('')
   const [token, setToken] = useState('')
+  const [redirectToReferrer, setRedirect] = useState(false)
+
   const [access, setAccess] = useState(false)
   const classes = useStyles();
+
+
+//
+// function login () {
+//   console.log("I ran")
+//   fakeAuth.authenticate(() => {
+//     setRedirect(true)
+//   }
+// }
+
+
   useEffect(() => {
+    // login()
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
             if (value !== "12345678") {
                 return false;
@@ -92,7 +106,7 @@ export default function SignIn() {
       (result) => {
         console.log(result)
         setToken(result.Token)
-        globalActions.addToken(result)
+        globalActions.addToken(result, passcode)
         // globalActions.addUserLocation(result.UserData.locationNum)
         // globalActions.addUserData(result.Token)
       },
@@ -129,7 +143,7 @@ export default function SignIn() {
   // console.log(globalState)
 
       if (access === true) {
-        return <Redirect to='/about' />
+        return <Redirect to='/dashboard' />
       }
   return (
     <Container component="main" maxWidth="xs">

@@ -130,6 +130,14 @@ export const setMachine= (store, value) =>  {
   console.log(store.state)
 }
 
+export const setCells= (store, value) =>  {
+  // var index = store.state.setmachine = value;
+  // store.setState({ setmachine: index });
+  const newMachine= store.state.setcells = value;
+  store.setState({ newMachine });
+  console.log(store.state)
+}
+
 export const globalMachine= (store, data) =>  {
   var index = store.state.globalMachine = data;
   store.setState({ globalMachine: index });

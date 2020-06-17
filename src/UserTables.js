@@ -230,8 +230,9 @@ export default function CustomizedTables(props) {
       <CircularIndeterminate/>
       :
       <React.Fragment>
+        <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />
       <FormDialog/>
-      <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />
+
 
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">

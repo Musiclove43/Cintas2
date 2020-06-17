@@ -68,9 +68,8 @@ const useStyles = makeStyles({
   },
 });
 // const machines = []
-const cellsExample = [{inventory: "cell1"},{inventory: "cell2"},{inventory: "cell3"},{inventory: "cell4"},{inventory: "cell5"},{inventory: "cell6"},{inventory: "cell7"}]
 
-export default function Machine(props) {
+export default function MachineNav(props) {
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [slot1, setSlot] = useState("slot1")
@@ -80,7 +79,7 @@ export default function Machine(props) {
 
   // const [machine, setMachine] = useState("machine1")
   const [radio, setRadio] = useState("Start")
-  const [selectedMachine, setSelected] = React.useState('');
+  const [selectedMachine, setSelected] = React.useState(props);
   const [machines, setMachines] = React.useState([]);
   const [cells, setCells] = React.useState([]);
 
@@ -94,15 +93,14 @@ export default function Machine(props) {
   useEffect(() => {
     console.log('Reloaded Machine Component');
     setMachines([])
-    // setCells([])
     callAPI()
   }, [props])
-
-  useEffect(() => {
-    console.log('Reloaded Machine Component2');
-    // setMachines([])
-
-  }, [reload])
+  //
+  // useEffect(() => {
+  //   console.log('Reloaded Machine Component2');
+  //   // setMachines([])
+  //
+  // }, [reload])
 
   function callAPI () {
 
@@ -163,13 +161,14 @@ export default function Machine(props) {
   //   //  globalActions.editUsers(user);
   //   //  console.log(globalState);
   // };
-  function machineChange(value) {
+    const machineChange = (event) => {
     // globalActions.setMachine(value);
-    setSelected(value)
-    console.log(value)
-    setCells(value.cellData);
-    console.log("cell " + cells[0]);
-
+    setSelected(event.target.value);
+    // props.onChange(event.target.value)
+    // console.log(value)
+    // setCells(value.cellData);
+    // console.log("cell " + cells[0]);
+    // globalActions.setMachine(event.target.value);
     // console.log(slot)
     // var data = {machine, slot}
 
@@ -217,8 +216,10 @@ export default function Machine(props) {
 
   const handleChange = (value) => {
     setSelected(value);
+    globalActions.setMachine(value);
+
     // setCells(cellsExample);
-    console.log("cell " + cells[0])
+    // console.log("cell " + cells[0])
   };
 
   function setReloads(value) {
@@ -282,90 +283,47 @@ export default function Machine(props) {
     )
   };
 
+
+
   return (
-    <div>
 
-    <Typography gutterBottom variant="h5"  component="h2" >
-    SELECT MACHINE
-    </Typography>
-    <div className={classes.header}>
-    <SubmitDiag style={{display: "none"}}/>
-    <FormControl component="fieldset">
-    <RadioGroup row aria-label="position" name="position" defaultValue="dispenser" onChange={handleRadioChange} >
-    <FormControlLabel value="dispenser" control={<Radio color="primary" />} label="Dispenser" />
-    <FormControlLabel value="return" control={<Radio color="primary" />} label="Return" />
-    </RadioGroup>
-    </FormControl>
-    <FormControl className={classes.formControl}>
-    <InputLabel id="demo-simple-select-label">Select Machine</InputLabel>
-    <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={selectedMachine}
-    onChange={e => machineChange(e.target.value)}
-    >
-    {machines.map((option) => (
-      <MenuItem key={option} value={option}>
-      {option.machineDescription}
-      </MenuItem>
-    ))}
-    </Select>
-    </FormControl>
-    <div className={classes.button} >
-    <Button onClick={submitDiag()}  variant="outlined" color="secondary">
-    Machine Details
-    </Button>
-    <Button onClick={submitDiag()} Style={{paddingLeft: 10}} variant="contained" color="secondary">
-    + ADD MACHINE
-    </Button>
-    </div>
-    </div>
-    <div className={classes.root}>
-    {cells.map((cells, i) => (
-      <Paper key={i} className={classes.spacing} elevation={3} >
-      <div style={{display:"flex", justifyContent:"space-between", marginLeft: "auto", backgroundColor: "#002C6F", borderRadius: 2, color: "white", paddingLeft: 10, paddingTop: 5, paddingBottom: 1}}>
-      <Typography gutterBottom variant="h6"  component="h6" >
-      Cell {cells.cellNum}
-      </Typography>
-      <IconButton
-      edge="start"
-      color="inherit"
-      onClick={() => deleteUser(cells.cellNum)}
-      style={{marginTop:"-10px"}}
-      >
-      <ClearIcon />
-      </IconButton>
-      </div>
+<div>
+<Typography gutterBottom variant="h5"  component="h2" >
+SELECT MACHINE
+</Typography>
+<div className={classes.header}>
+<SubmitDiag style={{display: "none"}}/>
+<FormControl component="fieldset">
+<RadioGroup row aria-label="position" name="position" defaultValue="dispenser" onChange={handleRadioChange} >
+<FormControlLabel value="dispenser" control={<Radio color="primary" />} label="Dispenser" />
+<FormControlLabel value="return" control={<Radio color="primary" />} label="Return" />
+</RadioGroup>
+</FormControl>
+<FormControl className={classes.formControl}>
+<InputLabel id="demo-simple-select-label">Select Machine</InputLabel>
+<Select
+labelId="demo-simple-select-label"
+id="demo-simple-select"
+value={props.selectedMachine}
+onChange={machineChange}
+>
+{machines.map((option) => (
+  <MenuItem key={option} value={option}>
+  {option.machineDescription}
+  </MenuItem>
+))}
+</Select>
+</FormControl>
+<div className={classes.button} >
+<Button onClick={submitDiag()}  variant="outlined" color="secondary">
+Machine Details
+</Button>
+<Button onClick={submitDiag()} Style={{paddingLeft: 10}} variant="contained" color="secondary">
++ ADD MACHINE
+</Button>
+</div>
+</div>
+</div>
 
-      <div style={{marginLeft: "auto"}}>
-
-      <Card button key={i} >
-      <CardActionArea key={i} >
-      <CardMedia
-      key={i}
-      component="img"
-      alt={cells.itemName}
-      height="200"
-      image={cells.imageURL}
-      title={cells.itemName}
-      />
-      <CardContent >
-      <Typography gutterBottom variant="h5"  component="h2" >
-      {cells.itemName}
-      </Typography>
-      <Typography  variant="body2" color="textSecondary" component="p">
-      {cells.size}
-      </Typography>
-      </CardContent>
-      </CardActionArea>
-      <AssignItem onClick={sayHello}  key={i}  selectmachine={selectedMachine.stationNum} cellNum={cells.cellNum} callBack={setReloads} />
-
-      </Card>
-      </div>
-      </Paper>
-    ))}
-
-    </div>
-    </div>
-  );
+);
 }

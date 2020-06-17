@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   dropdown : {
-    minWidth: 300
+    minWidth: 301
   }
 }));
 
@@ -45,7 +45,7 @@ export default function MultilineTextFields(props) {
   useEffect(() => {
     longResolve().then(() => {
       console.log(globalState.account);
-      fetch( "https://rest.garmentvendor.app/accounts?locationNum=" + globalState.token.UserData.locationNum, {
+      fetch( "https://rest.garmentvendor.app/accounts?locationCode=" + globalState.token.UserData.locationCode, {
         method: 'get',
         contentType: 'application/json',
         headers: {
