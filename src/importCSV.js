@@ -17,7 +17,7 @@ import ReactDOM from "react-dom";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import {DropzoneArea} from 'material-ui-dropzone';
-
+import ProtectedStore from './protected-store/index';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -61,14 +61,14 @@ export default React.memo(function ImportCSV(){
       e.preventDefault();
     // console.log(props.selectUser.email)
     // console.log(email)
-    console.log(globalState.token.Token)
+    console.log(ProtectedStore.get('user').Token)
 
     // fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
     //   method: 'Post',
     //   contentType: 'application/json',
     //   headers: {
     //     Authorization:
-    //     'Bearer ' + globalState.token.Token,
+    //     'Bearer ' + ProtectedStore.get('user').Token,
     //   },
     //   body: JSON.stringify({
     //     "email": email,

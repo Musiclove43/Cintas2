@@ -20,12 +20,32 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import LimitGroups from "./limitGroups"
 import ImportCSV from "./importCSV"
+import ProtectedStore from './protected-store/index';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const useStyles = makeStyles((theme: Theme) =>
+createStyles({
+
+  formControl: {
+    marginTop: 5,
+    minWidth: "100%",
+  },
+}),
+);
+
+
+
 export default function FormDialog() {
+    const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [badge, setBadge] = useState('')
@@ -38,6 +58,30 @@ export default function FormDialog() {
   const [globalState, globalActions] = useGlobal();
   const [allErr, setErr] = useState('');
   const [search, setSearch] = useState('')
+  const [limitGroups, setLimitGroups] = useState([
+      {
+          "limitGroupID": 1,
+          "limitGroupTitle": "Generic LimitGroup",
+          "creditLimit": 10
+      },
+      {
+          "limitGroupID": 2,
+          "limitGroupTitle": "LimitGroup2",
+          "creditLimit": 10
+      },
+      {
+          "limitGroupID": 4,
+          "limitGroupTitle": "LimitGroup3",
+          "creditLimit": 25
+      },
+      {
+          "limitGroupID": 7,
+          "limitGroupTitle": "LimitGroup4",
+          "creditLimit": 26
+      }
+  ])
+  const [limitGroup, setLimit] = useState('')
+
   const [token, setToken] = useGlobal(
     state => state.token,
 
@@ -46,6 +90,30 @@ export default function FormDialog() {
     state => state.account,
   );
 
+
+  function callGetItems () {
+    // setLoading(true)
+    console.log("rerender")
+    fetch( "https://rest.garmentvendor.app/limitGroups?accountNum=" + account, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + ProtectedStore.get('user').Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        setLimitGroups([...result])
+        // setLoading(false)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  };
 
   const handleSubmit = e => {
     const id = Math.floor(Math.random() * Date.now())
@@ -56,7 +124,7 @@ export default function FormDialog() {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
       body: JSON.stringify({
         "email": email,
@@ -93,6 +161,7 @@ export default function FormDialog() {
 
   const handleClickOpen = () => {
     setOpen(true);
+    callGetItems ()
   };
 
   const handleClose = () => {
@@ -102,26 +171,26 @@ export default function FormDialog() {
   return (
     <div>
     <Grid container spacing={3}>
-    <Grid item>
+   <Grid item>
 
     <Typography style={{paddingTop: 5, paddingBottom: 20}} component="h2" variant="h5">USERS</Typography>
-    </Grid>
-    <Grid item>
+    </Grid> 
+{/*    <Grid item>
     <TextField
     style={{marginTop: -10}}
     label="Search"
     InputProps={{
-      endAdornment: (
-        <InputAdornment>
-        <IconButton>
-        <SearchIcon />
-        </IconButton>
-        </InputAdornment>
-      )
+    endAdornment: (
+    <InputAdornment>
+    <IconButton>
+    <SearchIcon />
+    </IconButton>
+    </InputAdornment>
+    )
     }}
     />
 
-    </Grid>
+    </Grid>*/}
     <Grid style={{marginLeft: "auto"}} item >
     <Grid style={{marginLeft: "auto"}} item >
     <div style={{display: "flex", }}>
@@ -238,8 +307,22 @@ export default function FormDialog() {
     onChange={e => setCredit(e.target.value)}
     />
     </Grid>
+    <Grid item xs={6} md={6} lg={6}>
 
-
+    <FormControl className={classes.formControl} >
+    <InputLabel id="demo-controlled-open-select-label">Limit Group</InputLabel>
+    <Select
+    labelId="demo-controlled-open-select-label"
+    id="demo-controlled-open-select"
+    value={limitGroup}
+    onChange={(e) => setLimit(e.target.value)}
+    >
+    {limitGroups.map((limitGroups,i) => (
+      <MenuItem key={i} value={limitGroups}>{limitGroups.limitGroupTitle}</MenuItem>
+    ))}
+    </Select>
+    </FormControl>
+  </Grid>
 
     </Grid>
     </ValidatorForm>

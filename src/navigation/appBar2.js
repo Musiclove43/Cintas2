@@ -22,7 +22,9 @@ import { useState, useEffect, useContext } from "react";
 import Machine from '../machine';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import Transactions from '../Transactions';
-import MachineNav from '../machineNav'
+import MachineNav from '../machineNav';
+import {MachineContainer} from "../machine-page/MachineContainer";
+import useGlobal from "../store";
 
 
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -102,13 +104,14 @@ export default function ScrollableTabsButtonForce(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [value2, setValue2] = React.useState('');
+  const [globalState, globalActions] = useGlobal();
 
   let product = {
     conf: ''
   };
 
   useEffect(() => {
-    product.conf = value2
+    setValue2(value2)
   }, [value2]);
 
 
@@ -117,6 +120,7 @@ export default function ScrollableTabsButtonForce(props) {
   };
 
   function handleChange2(newValue) {
+    console.log(newValue)
     setValue2(newValue);
   }
 
@@ -159,8 +163,9 @@ export default function ScrollableTabsButtonForce(props) {
     <CustomizedTables product={product} />
     </TabPanel>
     <TabPanel {...props} value={value} index={2}>
-  {/*  <MachineNav>  */}
-    <Machine product={product}/>
+   {/*<MachineNav/> */}
+  {/*  <MachineContainer account={value2} station={globalState.station}/> */}
+<Machine product={product}/>
     </TabPanel>
     <TabPanel {...props} value={value} index={3}>
     <Transactions product={product}/>

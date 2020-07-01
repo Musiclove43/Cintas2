@@ -6,9 +6,7 @@ import globalHook from 'use-global-hook';
 import useGlobal from "../store";
 import { useState, useEffect, useContext } from "react";
 import CustomizedTables from "../UserTables";
-
-
-
+import ProtectedStore from '../protected-store/index';
 
 function longResolve() {
   return new Promise(res => {
@@ -39,18 +37,22 @@ export default function MultilineTextFields(props) {
     props.onChange(event.target.value);
     globalActions.deleteAllUsers();
     globalActions.addAccount(event.target.value);
-    console.log(globalState);
+    // window._appEvents.dispatchEvent('site-changed', { site: event.target.value });
+    // console.log('why is this not working?');
+    // console.log(window._appEvents);
+    // ProtectedStore.set('account', event.target.value);
+
   };
 
   useEffect(() => {
     longResolve().then(() => {
       console.log(globalState.account);
-      fetch( "https://rest.garmentvendor.app/accounts?locationCode=" + globalState.token.UserData.locationCode, {
+      fetch( "https://rest.garmentvendor.app/accounts?locationCode=" + ProtectedStore.get('user').UserData.locationCode, {
         method: 'get',
         contentType: 'application/json',
         headers: {
           Authorization:
-          'Bearer ' + globalState.token.Token,
+          'Bearer ' + ProtectedStore.get('user').Token,
         },
       })
       .then(res => res.json())

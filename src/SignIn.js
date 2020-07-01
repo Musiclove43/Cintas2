@@ -17,6 +17,7 @@ import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 import logo from './images/CintasLogo.png';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import ProtectedStore from './protected-store/index';
 import {
   BrowserRouter as Router,
   Switch,
@@ -104,9 +105,11 @@ export default function SignIn() {
     .then(res => res.json())
     .then(
       (result) => {
-        console.log(result)
-        setToken(result.Token)
-        globalActions.addToken(result, passcode)
+        if(result.IsSuccess) {
+          ProtectedStore.set('user',result);
+          // todo: get rid of this..
+          globalActions.addToken(result, passcode)
+        }
         // globalActions.addUserLocation(result.UserData.locationNum)
         // globalActions.addUserData(result.Token)
       },

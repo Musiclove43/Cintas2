@@ -32,7 +32,7 @@ import Select from '@material-ui/core/Select';
 import ReactDOM from "react-dom";
 import AssignItem from './assignItem';
 import ClearIcon from '@material-ui/icons/Clear';
-
+import ProtectedStore from './protected-store/index';
 
 const useStyles = makeStyles({
   root: {
@@ -89,12 +89,9 @@ export default function Machine(props) {
   );
   // console.log(props)
 
-
-
   useEffect(() => {
     console.log('Reloaded Machine Component');
     setMachines([])
-    // setCells([])
     callAPI()
   }, [props])
 
@@ -112,7 +109,7 @@ export default function Machine(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -121,7 +118,7 @@ export default function Machine(props) {
         // console.log(result)
         setMachines([...result])
         // machines.push(...result)
-        console.log(machines)
+        console.log(result)
       },
       (error) => {
         console.log(error)
@@ -166,7 +163,7 @@ export default function Machine(props) {
   function machineChange(value) {
     // globalActions.setMachine(value);
     setSelected(value)
-    console.log(value)
+    console.log("cell data: ",value.cellData);
     setCells(value.cellData);
     console.log("cell " + cells[0]);
 
@@ -199,14 +196,14 @@ export default function Machine(props) {
   }
 
   const submitDiag = () => (event) => {
-    const open = true
-    globalActions.openDialog(open)
-    // setTimeout(function(){
-    //   var data = 0;
-    //   globalActions.addValue(data)
-    //   globalActions.openDialog(false)
-    // }, 2000);
-    console.log(globalState)
+    // const open = true
+    // globalActions.openDialog(open)
+    // // setTimeout(function(){
+    // //   var data = 0;
+    // //   globalActions.addValue(data)
+    // //   globalActions.openDialog(false)
+    // // }, 2000);
+    // console.log(globalState)
   };
 
   const handleClick = () => (event) => {
@@ -230,12 +227,12 @@ export default function Machine(props) {
 
     setCells([])
     console.log("holaaaa")
-    fetch( "https://rest.garmentvendor.app/station/cells?stationNum=" + selectedMachine.stationNum, {
+    fetch( "https://rest.garmentvendor.app/station/cells?stationID=" + selectedMachine.stationID, {
       method: 'get',
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -245,7 +242,7 @@ export default function Machine(props) {
         // console.log(result)
         setCells([...result])
         // machines.push(...result)
-        // console.log(machines)
+        console.log(machines)
       },
       (error) => {
         console.log(error)
@@ -265,10 +262,10 @@ export default function Machine(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
       body: JSON.stringify({
-        "stationNum": selectedMachine.stationNum,
+        "stationID": selectedMachine.stationID,
         "cellNum": value,
       })
     })
@@ -284,12 +281,11 @@ export default function Machine(props) {
 
   return (
     <div>
-
     <Typography gutterBottom variant="h5"  component="h2" >
     SELECT MACHINE
     </Typography>
     <div className={classes.header}>
-    <SubmitDiag style={{display: "none"}}/>
+
     <FormControl component="fieldset">
     <RadioGroup row aria-label="position" name="position" defaultValue="dispenser" onChange={handleRadioChange} >
     <FormControlLabel value="dispenser" control={<Radio color="primary" />} label="Dispenser" />
@@ -312,12 +308,13 @@ export default function Machine(props) {
     </Select>
     </FormControl>
     <div className={classes.button} >
-    <Button onClick={submitDiag()}  variant="outlined" color="secondary">
+   {/*  <Button onClick={submitDiag()}  variant="outlined" color="secondary">
     Machine Details
-    </Button>
-    <Button onClick={submitDiag()} Style={{paddingLeft: 10}} variant="contained" color="secondary">
+    </Button>  */}
+  {/*  <Button onClick={submitDiag()} Style={{paddingLeft: 10}} variant="contained" color="secondary">
     + ADD MACHINE
-    </Button>
+    </Button> */}
+    <SubmitDiag/>
     </div>
     </div>
     <div className={classes.root}>
@@ -358,7 +355,7 @@ export default function Machine(props) {
       </Typography>
       </CardContent>
       </CardActionArea>
-      <AssignItem onClick={sayHello}  key={i}  selectmachine={selectedMachine.stationNum} cellNum={cells.cellNum} callBack={setReloads} />
+  <AssignItem onClick={sayHello}  key={i}  selectmachine={selectedMachine.stationID} cellNum={cells.cellNum} callBack={setReloads} />
 
       </Card>
       </div>

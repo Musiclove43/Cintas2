@@ -32,7 +32,7 @@ import Select from '@material-ui/core/Select';
 import ReactDOM from "react-dom";
 import AssignItem from './assignItem';
 import ClearIcon from '@material-ui/icons/Clear';
-
+import ProtectedStore from './protected-store/index';
 
 const useStyles = makeStyles({
   root: {
@@ -110,7 +110,7 @@ export default function MachineNav(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -236,7 +236,7 @@ export default function MachineNav(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -266,7 +266,7 @@ export default function MachineNav(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
       body: JSON.stringify({
         "stationNum": selectedMachine.stationNum,

@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import FormDialog from './formDialog';
 import FormDialog2 from './formDialog2';
-
+import LimitGroups from "./limitGroups"
 import EditDialog from './editDialog';
 import { useState, useEffect, useCallback, updateState, useContext } from "react";
 import globalHook from 'use-global-hook'
@@ -22,6 +22,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import MultilineTextFields from './navigation/searchBar'
 import CircularIndeterminate from './Circular'
 import SearchBar from 'material-ui-search-bar'
+import ProtectedStore from './protected-store/index';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from '@material-ui/core/TextField';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -63,6 +67,8 @@ export default function CustomizedTables(props) {
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isPreviewShown, setPreviewShown] = useState(false);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
   const [highlighted, setHighlighted] = useGlobal(
     state => state.highlighted,
   );
@@ -101,7 +107,7 @@ export default function CustomizedTables(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -109,6 +115,7 @@ export default function CustomizedTables(props) {
       (result) => {
         console.log(result)
         setUsers([...result])
+        setSearchResults([...result])
         setLoading(false)
       },
       (error) => {
@@ -125,7 +132,7 @@ export default function CustomizedTables(props) {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -224,16 +231,49 @@ export default function CustomizedTables(props) {
   //     console.log(globalState)
   //   };
 
+  const handleSearchChange = e => {
+    setSearchTerm(e.target.value);
+  };
+  React.useEffect(() => {
+    // const keys = user.keys(user[0])
+    // const results = user.filter(person =>
+    //   person.firstName.toString().toLowerCase().includes(searchTerm)
+    // );
+    var results = user.filter(function(o) {
+    return Object.keys(o).some(function(k) {
+      return o[k].toString().toLowerCase().indexOf(searchTerm) != -1;
+    })
+  })
+    setSearchResults(results);
+    console.log(results)
+  }, [searchTerm]);
+
+
   return (
     <div className={classes.root}>
     { loading ?
       <CircularIndeterminate/>
       :
       <React.Fragment>
-        <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />
+      <div style={{display: "flex", flexDirection: "row-reverse"}}>
+     <TextField
+     style={{marginTop: -10}}
+     label="Search"
+     value={searchTerm}
+     onChange={handleSearchChange}
+     InputProps={{
+       endAdornment: (
+         <InputAdornment>
+         <IconButton>
+         <SearchIcon />
+         </IconButton>
+         </InputAdornment>
+       )
+     }}
+     />
+     </div>
+      <EditDialog selectUser={selectUser} callBack={setReloads} callbackClose={onClose} onChange={userChange} />
       <FormDialog/>
-
-
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
       <TableHead>
@@ -252,7 +292,7 @@ export default function CustomizedTables(props) {
       </TableRow>
       </TableHead>
       <TableBody>
-      {user.map((user, i) => (
+      {searchResults.map((user, i) => (
         <StyledTableRow key={i}>
         <StyledTableCell component="th" scope="row">
         {user.lastName}

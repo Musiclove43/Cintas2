@@ -19,6 +19,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import ProtectedStore from './protected-store/index';
+
 
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
@@ -39,7 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default React.memo(function AssignItem(props) {
-console.log(props.cellNum)
+// console.log(props.cellNum)
   const classes = useStyles();
   const [globalState, globalActions] = useGlobal();
   const [open, setOpen] = useState(false);
@@ -119,7 +121,7 @@ const sizeSelect = e => {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -144,7 +146,7 @@ const sizeSelect = e => {
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
     })
     .then(res => res.json())
@@ -165,16 +167,16 @@ const sizeSelect = e => {
 
   const submitAssign = e => {
       e.preventDefault();
-      console.log(globalState.setmachine);
+      console.log(globalState);
     fetch( "https://rest.garmentvendor.app/station/cell" , {
       method: 'post',
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
       body: JSON.stringify({
-        "stationNum": globalState.setmachine.selectmachine,
+        "stationID": parseInt(globalState.setmachine.selectmachine),
         "cellNum": globalState.setmachine.cellNum,
         "itemSkuID": globalState.activeEdit.itemSkuID,
         "maxQty": 43
@@ -206,6 +208,7 @@ const sizeSelect = e => {
     setProps(props)
     console.log(props)
     globalActions.setMachine(props)
+    console.log(globalState)
   };
 
   const handleClose = () => {

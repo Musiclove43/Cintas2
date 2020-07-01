@@ -12,6 +12,10 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
+import ProtectedStore from './protected-store/index';
+import { useState, useEffect, useCallback, updateState, useContext } from "react";
+import globalHook from 'use-global-hook'
+import useGlobal from "./store";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -54,31 +58,93 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Transactions() {
+export default function Transactions(props) {
   const classes = useStyles();
+  const [globalState, globalActions] = useGlobal();
+  const [transactions, setTransactions] = useState([]);
+  const [searchTerms, setSearchTerm] = React.useState("");
+  const [searchResult, setSearch] = React.useState([]);
+  const [account, setAccount] = useGlobal(
+    state => state.account,
+  );
+
+
+  useEffect(() => {
+    console.log('counter updated');
+    // setUsers([]);
+    callTransactions()
+    // setReload(false)
+  }, [props])
+
+  function callTransactions () {
+    // setLoading(true)
+    console.log("rerender")
+    fetch( "https://rest.garmentvendor.app/txDispense?accountNum=" + account, {
+      method: 'get',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + ProtectedStore.get('user').Token,
+      },
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+        setTransactions([...result])
+        setSearch([...result])
+        // setLoading(false)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  };
+
+
+  const handleSearchChanges = e => {
+  setSearchTerm(e.target.value);
+  };
+  React.useEffect(() => {
+    // const keys = user.keys(user[0])
+    // const results = user.filter(person =>
+    //   person.firstName.toString().toLowerCase().includes(searchTerm)
+    // );
+    var results = transactions.filter(function(o) {
+    return Object.keys(o).some(function(k) {
+      return o[k].toString().toLowerCase().indexOf(searchTerms) != -1;
+    })
+  })
+    setSearch(results);
+    console.log(results)
+  }, [searchTerms]);
+
+
 
   return (
-
-
-    <TableContainer component={Paper}>
+      <React.Fragment>
     <TextField
-    style={{marginTop: 5, marginBottom: 20 }}
+    style={{marginTop: -10, marginBottom: 20}}
     label="Search"
+    value={searchTerms}
+    onChange={handleSearchChanges}
     InputProps={{
       endAdornment: (
         <InputAdornment>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
+        <IconButton>
+        <SearchIcon />
+        </IconButton>
         </InputAdornment>
       )
     }}
-  />
+    />
+
+    <TableContainer component={Paper}>
+
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Transaction Date</StyledTableCell>
-            <StyledTableCell align="right">Timestamp</StyledTableCell>
+            <StyledTableCell>Timestamp</StyledTableCell>
             <StyledTableCell align="right">User</StyledTableCell>
             <StyledTableCell align="right">Outstanding Credits</StyledTableCell>
             <StyledTableCell align="right">Item Type</StyledTableCell>
@@ -87,21 +153,21 @@ export default function Transactions() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {searchResult.map((transaction, i) => (
+            <StyledTableRow key={i} >
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {transaction.timestamp}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{transaction.firstName} {transaction.lastName}</StyledTableCell>
+              <StyledTableCell align="right">{transaction.userID}</StyledTableCell>
+              <StyledTableCell align="right">{transaction.itemSKU}</StyledTableCell>
+              <StyledTableCell align="right">{transaction.userID}</StyledTableCell>
+              <StyledTableCell align="right">Blue</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+      </React.Fragment>
   );
 }

@@ -16,7 +16,7 @@ import useGlobal from "./store";
 import ReactDOM from "react-dom";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-
+import ProtectedStore from './protected-store/index';
 
 
 
@@ -165,14 +165,14 @@ export default React.memo(function EditDialog(props){
     // console.log(props.selectUser.email)
     console.log(email)
     console.log(first)
-    console.log(globalState.token.Token)
+    console.log(ProtectedStore.get('user').Token)
 
     fetch( "https://rest.garmentvendor.app/user/" + globalState.highlighted.email, {
       method: 'Post',
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
       body: JSON.stringify({
         "email": email,

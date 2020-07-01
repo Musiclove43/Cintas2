@@ -17,6 +17,7 @@ import ReactDOM from "react-dom";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ProtectedStore from './protected-store/index';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -45,18 +46,25 @@ export default React.memo(function LimitGroups(){
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
-  const [fields, setFields] = useState([{ value: null,  }]);
+  const [fields, setFields] = useState([{limitGroupTitle: null, creditLimit: null}]);
 
   function handleChange(i, event) {
     const values = [...fields];
-    values[i].value = event.target.value;
+    values[i].limitGroupTitle = event.target.value;
+    setFields(values);
+    console.log(fields)
+  }
+
+  function handleChange2(i, event) {
+    const values = [...fields];
+    values[i].creditLimit = parseInt(event.target.value);
     setFields(values);
     console.log(fields)
   }
 
   function handleAdd() {
     const values = [...fields];
-    values.push({ value: null });
+    values.push({limitGroupTitle: null, creditLimit: null});
     setFields(values);
   }
 
@@ -73,39 +81,47 @@ export default React.memo(function LimitGroups(){
 
   const [count, setCount] = useState(0);
 
-  const handleSubmit = (e) => {
+
+
+
+  const handleSubmitLimit = (e) => {
     // e.defaultValue()
     e.preventDefault();
-    // console.log(props.selectUser.email)
-    // console.log(email)
-    console.log(globalState.token.Token)
+delete Array.prototype.toJSON;
+    function replacer(key, value) {
+      // Filtering out properties
+      if (typeof value === 'number') {
+      console.log("we found numbr")
+      }
+      return value;
+    }
+    let fields2 = JSON.stringify(fields)
 
-    // fetch( "https://rest.garmentvendor.app/user/" + props.selectUser.email, {
-    //   method: 'Post',
-    //   contentType: 'application/json',
-    //   headers: {
-    //     Authorization:
-    //     'Bearer ' + globalState.token.Token,
-    //   },
-    //   body: JSON.stringify({
-    //     "email": email,
-    //     "firstName": first,
-    //     "lastName": last,
-    //     "accountNum": globalState.account,
-    //     "department": "",
-    //     "cardID": "000000045",
-    //     "credits": 0,
-    //     "withdrawLimit": 0,
-    //     "expirationDate": "2123-01-01T00:00:00Z"
-    //   })
-    // })
-    //
-    // .then(res => res.json())
-    // .then(
-    //   (result) => {
-    //     console.log(result)
-    //   }
-    // )
+    console.log(JSON.stringify(fields))
+    // console.log(props.selectUser.email)
+    console.log(JSON.stringify(fields))
+
+    console.log(ProtectedStore.get('user').Token)
+
+    fetch( "https://rest.garmentvendor.app/limitGroups" , {
+      method: 'Post',
+      contentType: 'application/json',
+      headers: {
+        Authorization:
+        'Bearer ' + ProtectedStore.get('user').Token,
+      },
+    body: JSON.stringify({
+      "accountNum": account,
+      "limitGroups": fields
+    })
+    })
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result)
+      }
+    )
     // props.callBack(true);
     handleClear();
   };
@@ -151,7 +167,7 @@ export default React.memo(function LimitGroups(){
     >
     <DialogTitle id="alert-dialog-slide-title">{"LIMIT GROUPS"}</DialogTitle>
     <DialogContent>
-    <form id="my-form" onSubmit={handleSubmit}  noValidate>
+    <form id="my-limitform" onSubmit={handleSubmitLimit}  noValidate>
     {  /*  <Grid container spacing={4}>
     <Grid item xs={6} md={6} lg={6}>
     <TextField
@@ -209,7 +225,7 @@ export default React.memo(function LimitGroups(){
         fullWidth
         type="text"
         placeholder="Enter text"
-        onChange={e => handleChange(idx, e)}
+        onChange={e => handleChange2(idx, e)}
         />
         </Grid>
         <Grid style={{paddingTop: 25}} item xs={2} md={2} lg={2}>
@@ -236,7 +252,7 @@ export default React.memo(function LimitGroups(){
     <Button variant="outlined" color="secondary" onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button variant="outlined" color="secondary" onClick={handleClose} form="my-form" type="submit" color="primary">
+    <Button variant="outlined" color="secondary" onClick={handleClose} form="my-limitform" type="submit" color="primary">
     Update Groups
     </Button>
     </DialogActions>

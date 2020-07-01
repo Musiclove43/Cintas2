@@ -22,6 +22,10 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import ProtectedStore from './protected-store/index';
+//
+// import DateFnsUtils from "@date-io/date-fns";
+// import { MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -33,7 +37,6 @@ export default function SubmitDiag() {
   const [modelNumber, setModel] = useState('')
   const [serialNumber, setSerial] = useState('')
   const [assetNumber, setAsset] = useState('')
-
   const [ipAddress, setIP] = useState('')
   const [macAddress, setMac] = useState('')
   const [subnet, setSubnet] = useState('')
@@ -47,37 +50,53 @@ export default function SubmitDiag() {
   const [installDate, setInstall] = useState('');
   const [floor, setFloor] = useState('')
   const [location, setLocation] = useState('')
+  const [machineDesc, setmachineDesc] = useState('')
+  const [cellNum, setcellNum] = useState('')
+
   const [token, setToken] = useGlobal(
     state => state.token,
-
   );
   const [account, setAccount] = useGlobal(
     state => state.account,
   );
+  const [selectedDate, setSelectedDate] = React.useState(
+  '2014-08-18T21:11:54'
+  )
 
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
 
   const handleSubmit = e => {
     const id = Math.floor(Math.random() * Date.now())
-    // const data = {id, email, last, first, badge}
+    console.log(machineDesc)
     console.log("token" + account)
-    fetch( "https://rest.garmentvendor.app/user" , {
+    fetch( "https://rest.garmentvendor.app/station" , {
       method: 'post',
       contentType: 'application/json',
       headers: {
         Authorization:
-        'Bearer ' + globalState.token.Token,
+        'Bearer ' + ProtectedStore.get('user').Token,
       },
-      body: JSON.stringify({
-        "email": "",
-        "firstName": "",
-        "lastName": "",
-        "accountNum": globalState.account,
-        "department": "",
-        "cardID": "000000045",
-        "credits": 12,
-        "withdrawLimit": 0,
-        "expirationDate": "2123-01-01T00:00:00Z"
-      })
+      body: JSON.stringify(
+        {
+        "stationNum": serialNumber,
+        "stationTypeID": 2,
+        "stationModelID": 100,
+        "appVersion": "2.0.14.35",
+        "macAddress": "00:1B:44:11:3A:B7",
+        "ipAddress": "10.2.3.150",
+        "cellColumns": 8,
+        "cellRows": 2,
+        "machineType": "Dispenser",
+        "accountNum": account,
+        "locationDescription": "Lobby",
+        "floor": 1,
+        "machineDescription": machineDesc,
+        "statusCode": 100,
+        "building": "Hospital"
+     }
+    )
     })
 
     .then(res => res.json())
@@ -105,24 +124,26 @@ export default function SubmitDiag() {
     //  console.log(globalState);
   };
 
-  const [open, setOpen] = useGlobal(
-   state => state.open,
+  const [open, setOpen] = useState(
+   false
  );
 
 
   const handleClickOpen = () => {
-    const open = false
-    globalActions.openDialog(open);
+    setOpen(true);
+    // globalActions.openDialog(open);
   };
 
   const handleClose = () => {
-    const open = false
-    globalActions.openDialog(open)
+    setOpen(false);
+    // globalActions.openDialog(open)
   };
 
   return (
     <div>
-
+    <Button onClick={handleClickOpen} Style={{paddingLeft: 10}} variant="contained" color="secondary">
+    + ADD MACHINE
+    </Button>
     <Dialog
     open={open}
     TransitionComponent={Transition}
@@ -133,7 +154,7 @@ export default function SubmitDiag() {
     >
     <DialogTitle id="alert-dialog-slide-title">{"MACHINE CONFIGURTION"}</DialogTitle>
     <DialogContent>
-    <ValidatorForm method="post" id="my-form-id" onSubmit={handleSubmit} noValidate>
+    <ValidatorForm method="post" id="my-machine" onSubmit={handleSubmit} noValidate>
 
     <Grid container spacing={3}>
     <Grid item xs={6} md={12} lg={12}>
@@ -152,7 +173,7 @@ export default function SubmitDiag() {
     id="name"
     label="Manufacturer"
     type="email"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     fullWidth
     value={manufacturer}
@@ -166,7 +187,7 @@ export default function SubmitDiag() {
     id="name"
     label="Model Number"
     type="email"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     fullWidth
     value={modelNumber}
@@ -182,7 +203,7 @@ export default function SubmitDiag() {
     type="email"
     fullWidth
     value={serialNumber}
-    validators={['required']}
+
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setSerial(e.target.value)}
     />
@@ -196,7 +217,7 @@ export default function SubmitDiag() {
     type="email"
     fullWidth
     value={assetNumber}
-    validators={['required']}
+
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setAsset(e.target.value)}
     />
@@ -206,7 +227,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="IP Address"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="IP Address"
     type="email"
@@ -220,7 +241,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="Mac Address"
     type="email"
@@ -238,7 +259,7 @@ export default function SubmitDiag() {
     type="email"
     fullWidth
     value={subnet}
-    validators={['required']}
+
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setSubnet(e.target.value)}
     />
@@ -252,7 +273,7 @@ export default function SubmitDiag() {
     type="email"
     fullWidth
     value={gateway}
-    validators={['required']}
+
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setGateway(e.target.value)}
     />
@@ -262,7 +283,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="PLC Software Version"
     type="email"
@@ -276,7 +297,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="Controller Version"
     type="email"
@@ -294,7 +315,7 @@ export default function SubmitDiag() {
     type="email"
     fullWidth
     value={firmware}
-    validators={['required']}
+
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setFirm(e.target.value)}
     />
@@ -304,7 +325,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="Building"
     type="email"
@@ -318,7 +339,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="Department"
     type="email"
@@ -336,7 +357,7 @@ export default function SubmitDiag() {
     type="email"
     fullWidth
     value={floor}
-    validators={['required']}
+
     errorMessages={['this field is required', 'email is not valid']}
     onChange={e => setFloor(e.target.value)}
     />
@@ -346,7 +367,7 @@ export default function SubmitDiag() {
     autoFocus
     margin="dense"
     id="name"
-    validators={['required']}
+
     errorMessages={['this field is required']}
     label="Location"
     type="email"
@@ -357,19 +378,48 @@ export default function SubmitDiag() {
     </Grid>
 
     <Grid item xs={6} md={4} lg={4}>
-    <TextValidator
-    autoFocus
-    margin="dense"
-    id="Install Date"
-    validators={['required']}
-    errorMessages={['this field is required']}
-    label="Credits"
-    type="email"
-    fullWidth
-    value={installDate}
-    onChange={e => setInstall(e.target.value)}
-    />
-    </Grid>
+       {/*  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <KeyboardDatePicker
+         disableToolbar
+         variant="inline"
+         format="MM/dd/yyyy"
+         margin="normal"
+         id="date-picker-inline"
+         label="Date picker inline"
+         value={selectedDate}
+         onChange={handleDateChange}
+         KeyboardButtonProps={{
+           'aria-label': 'change date',
+         }}
+        />
+          </MuiPickersUtilsProvider> */}
+
+          <TextValidator
+          autoFocus
+          margin="dense"
+          id="name"
+          errorMessages={['this field is required']}
+          label="Machine Description"
+          type="email"
+          fullWidth
+          value={machineDesc}
+          onChange={e => setmachineDesc(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={6} md={4} lg={4}>
+
+        <TextValidator
+        autoFocus
+        margin="dense"
+        id="name"
+        errorMessages={['this field is required']}
+        label="CellNum"
+        type="email"
+        fullWidth
+        value={cellNum}
+        onChange={e => setcellNum(e.target.value)}
+        />
+      </Grid>
 
 
 
@@ -380,7 +430,7 @@ export default function SubmitDiag() {
     <Button onClick={handleClose} color="primary">
     Cancel
     </Button>
-    <Button form="my-form-id" type="submit" color="primary">
+    <Button form="my-machine" type="submit" color="primary">
     Update
     </Button>
     </DialogActions>

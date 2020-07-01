@@ -22,6 +22,9 @@ import {createBrowserHistory} from 'history';
 import globalHook from 'use-global-hook';
 import useGlobal from "./store";
 
+import ProtectedStore from "./protected-store";
+import EventBus from "./event-bus";
+
 
 
 
@@ -76,44 +79,37 @@ export default function App() {
 
   const browserHistory = createBrowserHistory();
 
-  // const [globalState, globalActions] = useGlobal();
-
-  // useTracking('UA-USE-YOURS-HERE')
-
-  // const history = createHistory();
   browserHistory.listen( location =>  {
-   console.log("router change")
-   authenticate()
+   console.log("the new location: ", location);
   });
 
-  function authenticate() {
-    // console.log()
-//     fetch( "https://rest.garmentvendor.app/auth" , {
-//         method: 'post',
-//         contentType: 'application/json',
-//              headers: {
-//           Authorization:
-//                  'Bearer' + globalState.token.Token,
-// },
-//         body: JSON.stringify({
-//           "email": globalState.token.UserData.email,
-//           "password": 12345678
-//
-//         })
-//       })
-//       .then(res => res.json())
-//       .then(
-//         (result) => {
-//           console.log(result)
-//
-//           // setToken(result.Token)
-//         },
-//         (error) => {
-//           console.log(error)
-//         }
-//       )
-
+  /**
+   * run this to make system juicy
+   */
+  function eventSystemMiddleware()
+  {
+    if(!window._appEvents) {
+      window._appEvents = new EventBus();
+    }
   }
+
+  /**
+   * user auth middleware
+   */
+  function userAuthMiddleware() {
+    // todo: test out localStorage to see if our authentication token exists.
+    const user = () => ProtectedStore.get('user');
+
+    if(!user()) {
+      console.log('we are not logged in... ish');
+      browserHistory.push('/');
+    } else {
+      console.log('here is the current user: ', user());
+    }
+  }
+
+  userAuthMiddleware();
+  eventSystemMiddleware();
 
   return (
     <MuiThemeProvider theme={theme}>
